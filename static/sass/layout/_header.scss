@@ -1,0 +1,36 @@
+.header{
+    margin-top: -3rem;
+    //margin-bottom: 3rem;
+    padding-top: 0;
+    //padding-bottom: -3rem;
+    height: 100vh;
+    background-image: linear-gradient(
+        to bottom right,
+        rgba($color-primary-light, 0.644),
+        rgba($color-primary-dark, 0.658) );
+    //url("../img/front\ page\ 3.JPG");
+    background-size: cover;
+    background-position: top;
+    position: relative;
+    //clip-path: polygon(0 0,100% 0,100%  100%, 0 100%);
+    clip-path: polygon(50% 0%, 100% 0, 100% 93%, 50% 100%, 0 93%, 0 0);
+
+
+    &__logo-box{
+        position: absolute;
+        top: 3.0rem;
+        left: 3.0rem;
+    
+    
+    }
+    &__logo{
+        height: 12.0rem;
+    }
+    &__text-box{
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%,-20%);
+        text-align: center;
+    }
+}

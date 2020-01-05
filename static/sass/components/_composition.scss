@@ -1,0 +1,51 @@
+.composition{
+    position: relative;
+
+    &__photo{
+        width: 55%;
+        box-shadow: 0 1.5rem 4rem rgba($color-black,.4);
+        border-radius: .2rem;
+        position: absolute;
+        outline-offset: 2rem;
+        transition: all .2s;
+        z-index: 10;
+        ////*******For adventure to do in nepal************//
+        &--p1{
+            top: -2rem;
+            left: 0;
+        }
+        &--p2{
+            right: 0;
+            top: 2rem;
+        }
+        &--p3{
+            left: 20%;
+            top: 10rem;
+        }
+        ///*****for Places to Visit in Nepal*********///
+        &--p4{
+            top: 8rem;
+            left: 0;
+        }
+        &--p5{
+            right: 0;
+            top: 13rem;
+        }
+        &--p6{
+            left: 20%;
+            top: 22rem;
+        }
+        &:hover{
+            outline: 1.5rem solid $color-primary;
+            transform: scale(1.05) translateY(-.2rem);
+            box-shadow: 0 2.5rem 4rem rgba($color-black,.6);
+            z-index: 20;
+
+        }
+    }
+    &:hover &__photo:not(:hover){
+        transform: scale(0.9);
+    }
+    
+
+}

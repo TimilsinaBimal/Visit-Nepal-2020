@@ -1,0 +1,122 @@
+.section-news{
+    padding: 25rem 0;
+    //background-image: linear-gradient($color-primary-light,$color-primary-dark);
+    background-color: $color-grey-light-1;
+    margin-top: -20vh;
+    //background-image: linear-gradient($color-white,$color-primary-dark);
+    font-family: inherit;
+}
+.news{
+    height: 50rem;
+    background-image:linear-gradient(105deg,transparent 40%,rgba($color-white,.9) 20%) ,
+                    url(../../img/news-events.jpg);
+    background-size: cover;
+    border-radius: .3rem;
+    box-shadow: 0 4rem 4rem rgba($color-black,.5);
+    //font-size: 50rem;
+}
+.section-features{
+    padding: 15rem 0;
+    background-image: linear-gradient(
+        to right bottom,
+        rgba($color-tertiary-light, 0.7),
+        rgba($color-primary-light, 0.7) ),
+    url("../img/feature-section.jpg");
+    background-size: cover;
+    margin-top: -10rem;
+    transform: skewY(-7deg);
+    & > *{
+        transform: skewY(7deg);
+    }
+}
+.section-about{
+    background-color: $color-grey-light-1;
+    padding: 25rem 0 15rem 0;
+    margin-top: -20vh;
+    //background-image: linear-gradient($color-tertiary-light,$color-primary-dark);
+}
+
+
+.section-hotels{
+        //background-color: $color-grey-dark-2;
+        background-image: linear-gradient($color-tertiary-light,$color-primary-light);
+        padding: 15rem 0 15rem 0;
+        margin-top: -10rem;
+        transform: skewY(-7deg);
+        & > *{
+        transform: skewY(7deg);
+        }
+}
+.section-places{
+    background-color: $color-grey-light-1;
+    padding: 25rem 0 15rem 0;
+    margin-top: -20vh;
+}
+
+.section-tours{
+    //background-color: $color-grey-dark-2;
+    background-image: linear-gradient($color-tertiary-light,$color-primary-light);
+    padding: 15rem 0 15rem 0;
+    margin-top: -10rem;
+    transform: skewY(-7deg);
+    & > *{
+        transform: skewY(7deg);
+    }
+}
+.section-connect{
+    padding: 15rem 0 25rem 0;
+    background-color: $color-grey-light-1;
+    transform: skewY(-7deg);
+    & > *{
+        transform: skewY(7deg);
+    }
+}
+.connect{
+    height: 50rem;
+    background-image:linear-gradient(105deg,rgba($color-white,.9) 40%,transparent 50%) ,
+                    url(../../img/connect.jpg);
+    background-size: cover;
+    border-radius: .3rem;
+    box-shadow: 0 3rem 4rem rgba($color-black,.5);
+
+    &__form{
+        padding: 6rem;
+        width: 50%;
+    }
+}
+
+.section-reviews{
+    position: relative;
+    padding: 15rem 0;
+    //background-image: linear-gradient($color-tertiary-light,$color-primary-dark);
+    background-color: $color-grey-light-1;
+    transform: skewY(-7deg);
+    & > *{
+        transform: skewY(7deg);
+    }
+}
+.section-book{
+    padding: 15rem 0;
+    background-image: linear-gradient($color-tertiary-light,$color-primary-light);
+    transform: skewY(-7deg);
+    & > *{
+        transform: skewY(7deg);
+    }
+}
+.book{
+    height: 50rem;
+    background-image:linear-gradient(105deg,rgba($color-white,.9) 50%,transparent 50%) ,
+                    url(../img/khumbu.jpg);
+    background-size: cover;
+    border-radius: .3rem;
+    box-shadow: 0 3rem 4rem rgba($color-black,.5);
+
+    &__form{
+        padding: 6rem;
+        width: 50%;
+    }
+}
+
+
+
+

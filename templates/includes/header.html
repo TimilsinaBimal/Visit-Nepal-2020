@@ -1,0 +1,29 @@
+{% load staticfiles %}
+<header class="header">
+    <div class="bg-video--1">
+        <video class="bg-video__content" autoplay loop muted>
+            <source src="{% static 'img/visit-nepal-final.mp4' %}" type="video/mp4">
+            <!--<source src="img/test/video.webm" type="video/webm">-->
+            Your format is not supported
+        </video>
+    </div>
+    <nav class="nav-bar">
+        <div class="row">
+            <img src="{% static 'img/logo.png' %}" alt="logo" class="nav-bar__logo">
+            <ul class="nav-bar__titles">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Features</a></li>
+                <li><a href="#">Adventures</a></li>
+                <li><a href="#">Hotels</a></li>
+                <li><a href="#">Book</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="header__text-box">
+        <h1 class="heading-primary">
+            <span class="heading-primary--main">Travel</span>
+            <span class="heading-primary--sub">is the only thing you buy that makes you richer</span>
+        </h1>
+        <a href="#" class="btn btn--white btn--animated">Discover Nepal</a>
+    </div>
+</header>

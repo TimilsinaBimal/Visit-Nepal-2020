@@ -1,0 +1,43 @@
+.nav-bar{
+    padding-top: 3rem;
+    //background-image: linear-gradient($color-primary-light,$color-primary-dark);
+
+    &__logo{
+        height: 8rem;
+        width: auto;
+        float: left;
+        //margin-top: 1rem;
+    }
+
+    &__titles{
+        list-style: none;
+        float: right;
+        //margin-top: 2.5rem;
+
+        & li{
+            //text-decoration: none;
+            display: inline-block;
+            margin-left: 4rem;
+            transition: all .3s;
+
+            & a:link,
+            & a:visited{
+                color: $color-white;
+                text-decoration: none;
+                text-transform: uppercase;
+                font-family: inherit;
+                font-size: 1.8rem;
+                padding-bottom: .5rem;
+            }
+            & a:hover,
+            & a:active{
+               border-bottom: .25rem solid $color-secondary-dark;
+               box-shadow: 0 2rem 4rem rgba($color-black,.15);
+            }
+
+    
+        }
+    }
+
+    
+}

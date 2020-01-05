@@ -1,0 +1,14 @@
+.crawl{
+    //padding: 2rem;
+    padding-top: 2rem;
+        width: 54%;
+        float: right;
+        font-size: 2.4rem;
+        &__items{
+            padding: 3rem;
+        }
+        &__list{
+            //font-size: 12rem;
+            padding: 3rem;
+        }
+}

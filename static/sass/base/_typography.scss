@@ -1,0 +1,68 @@
+body{
+    font-family: 'Lato', sans-serif;
+    font-weight: 480;
+    /*font-size: 1.6rem;*/
+    line-height: 1.7;
+    color: $color-grey-dark;
+    
+    padding: 3.0rem;
+}
+.heading-primary{
+    text-transform: uppercase;
+    color: $color-white;
+    backface-visibility: hidden;
+    margin-bottom: 6.0rem;
+
+    &--main{
+        font-size: 6.5rem;
+        font-weight: 400;
+        display: block;
+        letter-spacing: 5.5rem;
+        animation: moveInleft 1s ease-out;
+    }
+    &--sub{
+        font-size: 1.4rem;
+        font-weight: 700;
+        display: block;
+        letter-spacing: .6rem;
+        animation: moveInRight 1s ease-out;
+        
+    }
+}
+.heading-secondary{
+    font-size: 3.5rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    display: inline-block;
+    letter-spacing: .2rem;
+    background-image: linear-gradient(to right,$color-primary-light,$color-primary-dark);
+    -webkit-background-clip: text;
+    color: transparent;
+    transition: all .2s;
+
+    &--1{
+        background-image: linear-gradient(to right bottom ,$color-grey-light-1,$color-grey-light-2);
+        -webkit-background-clip: text;
+        color: transparent;
+    }
+    &--feature{
+        background-image: linear-gradient(to right ,$color-black,$color-tertiary-dark);
+        -webkit-background-clip: text;
+        color: transparent;
+    }
+    &:hover{
+        transform: skewY(2deg) skewX(15deg) scale(1.1);
+        text-shadow: .5rem 1rem 2rem rgba($color-black,.2);
+    }
+}
+.heading-tertiary{
+    font-size: $default-font-size;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+.paragraph{
+    font-size: $default-font-size;
+    &:not(:last-child){
+        margin-bottom: 3rem;
+    }
+}
