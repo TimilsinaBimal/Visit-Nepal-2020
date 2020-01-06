@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+<section class="section-register">
+    <div class="u-center-text u-margin-bottom-medium">
+        <h2 class="heading-secondary heading-secondary--1"> Become a Memeber!!!</h2>
+    </div>
+    <div class="row">
+        <div class="register">
+            <form action="#" class="register__form">
+
+                <div class="form__group">
+                    <input type="text" class="form__input" placeholder="Full Name" id="Full Name" required>
+                    <label for="fullname" class="form__label">Full Name</label>
+                </div>
+
+                <div class="form__group">
+                    <input type="text" class="form__input" placeholder="Username" id="Username" required>
+                    <label for="fullname" class="form__label">Username</label>
+                </div>
+
+                <div class="form__group">
+                    <input type="email" placeholder="Email Address" class="form__input" id="email" required>
+                    <label for="email" class="form__label">Email Address</label>
+                </div>
+
+                <div class="form__group">
+                    <input type="password" placeholder="Password" class="form__input" id="password" required>
+                    <label for="password" class="form__label">Password</label>
+                </div>
+
+                <div class="form__group">
+                    <button class="btn btn--green">Register Me</button>
+                </div>
+
+                <div class="form__group">
+                    <span class="form__register-text"> ALready have Account</span><a href="../index.html"
+                        class="btn-text">Login From Here &rarr;</a>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</section>
+{% endblock content %}

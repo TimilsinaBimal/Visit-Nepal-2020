@@ -5,3 +5,7 @@ from django.http import HttpResponse
 
 def homePageView(request):
     return render(request, 'home.html')
+
+
+def signUpView(request):
+    return render(request, 'register.html')

@@ -18,4 +18,5 @@ from . import views
 
 urlpatterns = [
     path('', views.homePageView, name='home'),
+    path('signup/', views.signUpView, name='signUp'),
 ]
