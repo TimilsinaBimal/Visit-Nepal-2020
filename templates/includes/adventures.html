@@ -6,30 +6,19 @@
 
     <div class="row">
         <div class="col-1-of-2">
-            <h3 class="heading-tertiary u-margin-bottom-small">Trekking in Nepal</h3>
-            <p class="paragraph">Nepal is a blessing on geographical variation. In the limited area of this
-                small nation, you get to live in different terrains. They vary from tropical climate in the
-                Terai region to the alpine in the Himalayas.
-
-                With eight out of the 10 highest peaks in the world and spellbinding places you can reach on
-                foot, the best adventure one can have in Nepal is trekking.
+            {% for a in adventures %}
+            <h3 class="heading-tertiary u-margin-bottom-small">{{a.adventureName}}</h3>
+            <p class="paragraph">{{a.adventureDesc|safe |slice:500}}
             </p>
-            <h3 class="heading-tertiary u-margin-bottom-small">Jungle Safari : An adventure into the wild</h3>
-            <p class="paragraph">
-                A jungle safari might not seem adventure at first. But, wait till you have the wildest
-                experience of your life. Chitwan and Bardia are the best places in Nepal to relax and enjoy the
-                tropical climate and greenery.
-            </p>
+            {% endfor %}
             <a href="#" class="btn-text">Learn More &rarr;</a>
         </div>
         <div class="col-1-of-2">
             <div class="composition">
-                <img src="{% static 'img/animationn pic3.jpg' %}" alt="photo1"
-                    class="composition__photo composition__photo--p1">
-                <img src="{% static 'img/animation pic2.jpeg' %} " alt="photo 2"
-                    class="composition__photo composition__photo--p2">
-                <img src="{% static 'img/animation pic1.jpg' %} " alt="photo 3"
-                    class="composition__photo composition__photo--p3">
+                {% for a in adventures %}
+                <img src="media/{{a.adventureImage}}" alt="{{a.adventureName}}"
+                    class="composition__photo composition__photo--p{{a.id}}">
+                {% endfor %}
             </div>
         </div>
     </div>

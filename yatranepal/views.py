@@ -4,10 +4,12 @@ from .forms import SignUpForm, LoginForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages, auth
+from .models import Place, Profile, Transportation, TransportationType, Package, Adventure, Hotel
 # Create your views here.
 
 
 def homePageView(request):
+
     if request.method == "POST":
         form = LoginForm(request=request, data=request.POST)
         if form.is_valid():
@@ -32,7 +34,12 @@ def homePageView(request):
         context = {
             "form": form,
             'user': user,
-            "fullname": fullname
+            "fullname": fullname,
+            "userDetail": Profile.objects.get(user=user),
+            "hotels": Hotel.objects.all()[0:3],
+            "places": Place.objects.all()[0:3],
+            "adventures": Adventure.objects.all()[0:3],
+            "packages": Package.objects.all()[0:3],
         }
         return render(
             request,
@@ -43,7 +50,8 @@ def homePageView(request):
         return render(
             request,
             "home.html",
-            {"form": form}
+            {"form": form},
+
         )
 
 

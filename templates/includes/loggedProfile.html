@@ -8,21 +8,19 @@
                 </div>
                 <h3 class="heading-tertiary"> Full name </h3>
                 <p class="paragraph">{{ fullname }}</p>
-                <h3 class="heading-tertiary "> user name </h3>
-                <p class="paragraph">{{ user.username }}</p>
+                <h3 class="heading-tertiary "> Country </h3>
+                <p class="paragraph">{{ userDetail.country.name }}</p>
                 <h3 class="heading-tertiary "> Email </h3>
                 <p class="paragraph">{{user.email}}</p>
                 <h3 class="heading-tertiary "> Bio: </h3>
 
-                <p class="paragraph"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci reprehenderit
-                    ipsum eos, placeat, praesentium iste quia eveniet alias nesciunt at sint obcaecati doloribus natus!
-                    Maxime cupiditate earum expedita asperiores accusantium.</p>
+                <p class="paragraph"> {{userDetail.bio}}</p>
                 <div class="form__group">
-                    <a href=""><button class="btn btn--green">Go to Profile</button></a> &nbsp;&nbsp; <a
-                        href="{% url 'logout' %}"><button class="btn btn--green">Log Out</button></a>
+                    <a href="{{user.username}}"><button class="btn btn--green">Go to Profile</button></a> &nbsp;&nbsp;
+                    <a href="{% url 'logout' %}"><button class="btn btn--green">Log Out</button></a>
                 </div>
                 <div class="profile__img-box">
-                    <img src="{% static 'img/profile_user.jpeg' %}" class=" profile__img" alt="profile image">
+                    <img src="media/{{userDetail.profileImage}}" class=" profile__img" alt="profile image">
                 </div>
             </form>
         </div>

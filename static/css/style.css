@@ -252,6 +252,11 @@ body {
   transform: translateY(0);
 }
 
+a {
+  text-decoration: none;
+  color: #777;
+}
+
 .cards {
   perspective: 150rem;
   -moz-perspective: 150rem;
@@ -320,29 +325,6 @@ body {
   clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);
 }
 
-.cards__picture--3 {
-  background-image: linear-gradient(to right bottom, #ffb900, #ff7730), url(../img/test/nat-5.jpg);
-}
-
-.cards__picture--1 {
-  background-image: linear-gradient(to right bottom, #7ed56f, #28b485), url(../img/test/nat-6.jpg);
-}
-
-.cards__picture--2 {
-  background-image: linear-gradient(to right bottom, #2998ff, #5643fa), url(../img/test/nat-7.jpg);
-}
-
-.cards__picture--4 {
-  background-image: linear-gradient(to right bottom, #2998ff, #ff7730), url(../img/hyatt-hotel.png);
-}
-
-.cards__picture--5 {
-  background-image: linear-gradient(to right bottom, #7ed56f, #28b485), url(../img/soaltee-crown-plaza.jpg);
-}
-
-.cards__picture--6 {
-  background-image: linear-gradient(to right bottom, #2998ff, #28b485), url(../img/raddison-hotel.jpeg);
-}
 
 .cards__picture--profile {
   background-image: linear-gradient(to right bottom, #2998ff, #28b485), url(../img/ashish_review.jpg);

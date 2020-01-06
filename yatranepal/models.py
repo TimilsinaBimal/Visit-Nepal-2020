@@ -34,6 +34,9 @@ class Hotel(models.Model):
     def __str__(self):
         return self.hotelName
 
+    def features_as_list(self):
+        return self.hotelFeatures.split('\n')
+
 
 class TransportationType(models.Model):
     transportationType = models.CharField(
@@ -77,11 +80,12 @@ class Package(models.Model):
     packagePrice = models.IntegerField(
         verbose_name="Package Tentative Price(NRs)")
     packageFeatures = models.TextField(verbose_name="Package Features")
-    placeName = models.ManyToManyField(
-        Place, verbose_name="Places that Lies in This Package")
 
     def __str__(self):
         return self.packageName
+
+    def package_features_as_list(self):
+        return self.packageFeatures.split('\n')
 
 
 class Profile(models.Model):
@@ -89,9 +93,12 @@ class Profile(models.Model):
         User, on_delete=models.CASCADE, verbose_name="Username")
     bio = models.CharField(max_length=150, verbose_name="Bio")
     country = CountryField(blank_label='Select Country')
-    address = models.CharField(max_length=100, verbose_name=Address)
+    address = models.CharField(max_length=100, verbose_name="Address")
     phone = models.IntegerField(verbose_name="Mobile Number")
     dob = models.DateField(verbose_name="Date of Birth")
+    # profileLink = user.username
+    profileImage = models.ImageField(
+        upload_to="users/", verbose_name="Profile Picture", default="")
 
     def __str__(self):
         return self.user.username

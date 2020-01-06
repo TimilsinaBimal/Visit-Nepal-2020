@@ -6,37 +6,28 @@
 
     <div class="row">
         <div class="col-1-of-2">
-            <h3 class="heading-tertiary u-margin-bottom-small">Mustang</h3>
+            {% for p in places %}
+            <a href="{{p.placeSlug}}">
+                <h3 class="heading-tertiary u-margin-bottom-small">{{p.placeName}}</h3>
+            </a>
+            <style>
+                a {
+                    text-decoration: none;
+                    text-color: 
+                }
+            </style>
             <p class="paragraph">
-                A jungle safari might not seem adventure at first. But, wait till you have the wildest
-                experience of your life. Chitwan and Bardia are the best places in Nepal to relax and enjoy
-                the
-                tropical climate and greenery.
+                {{p.placeDesc|safe}}
             </p>
-            <h3 class="heading-tertiary u-margin-bottom-small">Gosaikunda</h3>
-            <p class="paragraph">
-                A jungle safari might not seem adventure at first. But, wait till you have the wildest
-                experience of your life. Chitwan and Bardia are the best places in Nepal to relax and enjoy
-                the
-                tropical climate and greenery.
-            </p>
-            <h3 class="heading-tertiary u-margin-bottom-small">Khumbu</h3>
-            <p class="paragraph">
-                A jungle safari might not seem adventure at first. But, wait till you have the wildest
-                experience of your life. Chitwan and Bardia are the best places in Nepal to relax and enjoy
-                the
-                tropical climate and greenery.
-            </p>
+            {% endfor %}
             <a href="#" class="btn-text">Learn More &rarr;</a>
         </div>
         <div class="col-1-of-2">
             <div class="composition">
-                <img src="{% static 'img/gosaikunda.jpg' %} " alt="photo1"
-                    class="composition__photo composition__photo--p4">
-                <img src="{% static 'img/khumbu.jpg' %} " alt="photo 2"
-                    class="composition__photo composition__photo--p5">
-                <img src="{% static 'img/mustang.jpg' %} " alt="photo 3"
-                    class="composition__photo composition__photo--p6">
+                {% for p in places %}
+                <img src="media/{{p.placeImage}}" alt="{{p.placeName}}"
+                    class="composition__photo composition__photo--p{{p.id}}">
+                {% endfor %}
             </div>
         </div>
     </div>
