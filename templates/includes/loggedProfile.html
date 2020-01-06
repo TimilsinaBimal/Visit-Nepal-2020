@@ -1,15 +1,13 @@
 {% load staticfiles %}
 <section class="section-profile">
     <div class="row">
-        <div class="profile" background-image="linear-gradient(105deg, rgba(255, 255, 255, 0.9) 50%, transparent 50%),
-            url({% static 'img/profile_user.jpeg' %})">
+        <div class="profile">
             <form action="#" class="connect__form">
-
                 <div class=" u-margin-bottom-small">
                     <h2 class="heading-secondary"> Your Profile</h2>
                 </div>
                 <h3 class="heading-tertiary"> Full name </h3>
-                <p class="paragraph">{{fullname}}</p>
+                <p class="paragraph">{{ fullname }}</p>
                 <h3 class="heading-tertiary "> user name </h3>
                 <p class="paragraph">{{ user.username }}</p>
                 <h3 class="heading-tertiary "> Email </h3>
@@ -20,9 +18,9 @@
                     ipsum eos, placeat, praesentium iste quia eveniet alias nesciunt at sint obcaecati doloribus natus!
                     Maxime cupiditate earum expedita asperiores accusantium.</p>
                 <div class="form__group">
-                    <button class="btn btn--green">Log Out</button>
+                    <a href=""><button class="btn btn--green">Go to Profile</button></a> &nbsp;&nbsp; <a
+                        href="{% url 'logout' %}"><button class="btn btn--green">Log Out</button></a>
                 </div>
-
                 <div class="profile__img-box">
                     <img src="{% static 'img/profile_user.jpeg' %}" class=" profile__img" alt="profile image">
                 </div>

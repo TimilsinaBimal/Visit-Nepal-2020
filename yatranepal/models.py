@@ -1,4 +1,6 @@
 from django.db import models
+from django.contrib.auth.models import User
+from django_countries.fields import CountryField
 
 # Create your models here.
 
@@ -80,6 +82,19 @@ class Package(models.Model):
 
     def __str__(self):
         return self.packageName
+
+
+class Profile(models.Model):
+    user = models.OneToOneField(
+        User, on_delete=models.CASCADE, verbose_name="Username")
+    bio = models.CharField(max_length=150, verbose_name="Bio")
+    country = CountryField(blank_label='Select Country')
+    address = models.CharField(max_length=100, verbose_name=Address)
+    phone = models.IntegerField(verbose_name="Mobile Number")
+    dob = models.DateField(verbose_name="Date of Birth")
+
+    def __str__(self):
+        return self.user.username
 
 
 # class Testimonial(models.Model):

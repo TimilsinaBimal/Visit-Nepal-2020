@@ -11,11 +11,10 @@
 {% include 'includes/connect.html' %}
 {% include 'includes/moreFeatures.html' %}
 {% include 'includes/reviews.html' %}
-{% if not user.is_authenticated %}
-{% include 'includes/login.html' %}
-{% endif %}
 {% if user.is_authenticated %}
 {% include 'includes/loggedProfile.html' %}
+{% else %}
+{% include 'includes/login.html' %}
 {% endif %}
 {% include 'footer.html' %}
 
