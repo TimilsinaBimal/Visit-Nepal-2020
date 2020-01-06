@@ -8,7 +8,34 @@ from django.contrib import messages
 
 
 def homePageView(request):
-    return render(request, 'home.html')
+    if request.method == "POST":
+        form = LoginForm(request=request, data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request, user)
+                messages.info(
+                    request, f"Logged in Successfully as: {username}")
+                return redirect('register')
+            else:
+                return messages.error(request, "Invalid Username or Password")
+        else:
+            return messages.error(request, "Invalid Username or Password")
+
+    form = LoginForm()
+    user = request.user
+    fullname = user.get_full_name()
+    context = {"form": form,
+               'user': user,
+               "fullname": fullname
+               }
+    return render(
+        request,
+        "home.html",
+        context
+    )
 
 
 # def signUpView(request):
@@ -44,7 +71,7 @@ def register(request):
 
 # def login_request(request):
 #     if request.method == "POST":
-#         form = AuthenticationForm(request=request, data=request.POST)
+#         form = LoginForm(request=request, data=request.POST)
 #         if form.is_valid():
 #             username = form.cleaned_data.get('username')
 #             password = form.cleaned_data.get('password')
@@ -53,15 +80,15 @@ def register(request):
 #                 login(request, user)
 #                 messages.info(
 #                     request, f"Logged in Successfully as: {username}")
-#                 return redirect('main:homepage')
+#                 return redirect('home')
 #             else:
 #                 return messages.error(request, "Invalid Username or Password")
 #         else:
 #             return messages.error(request, "Invalid Username or Password")
 
-#     form = AuthenticationForm()
+#     form = LoginForm()
 #     return render(
 #         request,
-#         "main/login.html",
+#         "home.html",
 #         {"form": form}
 #     )

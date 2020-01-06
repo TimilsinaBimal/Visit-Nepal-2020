@@ -1,30 +1,34 @@
+
 <section class="section-book">
     <div class="row">
         <div class="book">
             <form action="#" method="POST" class="book__form">
                 {% csrf_token %}
 
+
                 <div class="u-center-text u-margin-bottom-medium">
                     <h2 class="heading-secondary"> Book NOW!!!</h2>
                 </div>
 
                 <div class="form__group">
-                    <input type="text" class="form__input" placeholder="Username" id="username" required>
-                    <label for="username" class="form__label">Username</label>
+                    {{ form.username.errors }}
+                    {{ form.username }}
+                    <label class="form__label" for="{{ form.username.id_for_label }}">Username</label>
                 </div>
 
                 <div class="form__group">
-                    <input type="password" placeholder="Password" class="form__input" id="password"
-                        data-toggle="password" required>
-                    <label for="password" class="form__label">Password</label>
+                    {{ form.password.errors }}
+                    {{ form.password }}
+                    <label class="form__label" for="{{ form.password.id_for_label }}">Password</label>
                 </div>
 
                 <div class="form__group">
-                    <button class="btn btn--green">Login</button>
+                    <button type="submit" class=" btn btn--green">Login</button>
                 </div>
 
                 <div class="form__group">
-                    <span class="form__register-text"> New to Our Website?</span><a href="#" class="btn-text">Register
+                    <span class="form__register-text"> New to Our Website?</span><a href={% url 'register' %}
+                        class="btn-text">Register
                         Now &rarr;</a>
                 </div>
             </form>

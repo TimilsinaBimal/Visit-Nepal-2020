@@ -1,9 +1,9 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 
 
-class LoginForm(forms.Form):
+class LoginForm(AuthenticationForm):
     username = forms.CharField(
         max_length=30,
         widget=forms.TextInput(
@@ -21,6 +21,18 @@ class LoginForm(forms.Form):
                 'placeholder': 'password'
             })
     )
+
+    class Meta:
+        model = User
+        fields = ("username", "password")
+
+    def save(self, commit=True):
+        user = super(LoginForm, self).save(commit=False)
+        user.username = self.cleaned_data['username']
+        user.password1 = self.cleaned_data['password']
+        if commit:
+            user.save()
+        return user
 
 
 class SignUpForm(UserCreationForm):

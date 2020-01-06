@@ -993,6 +993,7 @@ body {
   padding: 15rem 0 15rem 0;
   background-image: linear-gradient(#2998ff, #7ed56f);
   transform: skewY(-7deg);
+  overflow: hidden;
 }
 
 .section-profile>* {
@@ -1002,7 +1003,7 @@ body {
 .profile {
   position: relative;
   height: 65rem;
-  background-image: linear-gradient(105deg, rgba(255, 255, 255, 0.9) 40%, transparent 55%), url(../img/profile-section.jpg);
+  background-image: linear-gradient(105deg, rgba(255, 255, 255, 0.9) 100%, transparent 100%);
   background-size: cover;
   border-radius: .3rem;
   box-shadow: 0 3rem 4rem rgba(0, 0, 0, 0.5);
@@ -1016,22 +1017,16 @@ body {
 
 .profile__img-box {
   position: absolute;
-  top: 12rem;
-  right: 10rem;
+  top: 0rem;
+  right: 0rem;
+  overflow: hidden;
+  height: 100%;
+  width: 50%;
+  border-radius: 0 .3rem .3rem 0;
 }
 
 .profile__img {
-  width: 30rem;
-  height: auto;
-  border-radius: .7rem;
-  box-shadow: 0 12rem 50rem rgba(0, 0, 0, 0.8);
+  width: auto;
+  height: 100%;
+
 }
-
-/*
-COLORS:
-
-Light green: #7ed56f
-Medium green: #55c57a
-Dark green: #28b485
-
-*/
