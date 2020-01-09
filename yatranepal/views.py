@@ -92,7 +92,6 @@ def placeDetailView(request,placeLink):
     images = [item for item in PlaceImage.objects.filter(place__placeSlug= placeLink)]
 
     # Review Form
-
     if request.method == "POST":
         form = ReviewForm(request.POST)
         if form.is_valid():
@@ -100,7 +99,9 @@ def placeDetailView(request,placeLink):
             instance.reviewedFor = placeContent.placeName
             instance.save()
 
-
+    # Handling Reviews Lists
+    reviews = [item for item in Review.objects.filter(reviewedFor = placeContent.placeName)]
+    # Profile.objects.filter(user=reviews.user)
     return render(
         request,
         'pages/places.html',
@@ -108,7 +109,13 @@ def placeDetailView(request,placeLink):
             'place' : placeContent,
             'adventure': adventure,
             'placeImage': images,
-            'form': ReviewForm
+            'form': ReviewForm,
+            'reviews': reviews,
+            'five_stars_review': ["checked", "checked", "checked", "checked", "checked"],
+            'four_stars_review': ["checked", "checked", "checked", "checked", ""],
+            'three_stars_review': ["checked", "checked", "checked", "", ""],
+            'two_stars_review': ["checked", "checked", "", "", ""],
+            'one_star_review': ["checked", "", "", "", ""]
         }
     )
 

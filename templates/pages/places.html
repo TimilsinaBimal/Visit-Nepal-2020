@@ -82,64 +82,48 @@
             <h2 class="heading-secondary">Reviews</h2>
         </div>
         <div class="row">
+            {% for r in reviews %}
             <div class="reviews reviews--detail">
                 <figure class="reviews__shape reviews__shape--detail">
-                    <img src="../../img/review 1.jpg" alt="photo for review" class="reviews__img reviews__img--detail">
-                    <figcaption class="reviews__caption">Emily Kutcher</figcaption>
+                    <img src="" alt="photo for review" class="reviews__img reviews__img--detail">
+                    <figcaption class="reviews__caption">{{r.user}}</figcaption>
                 </figure>
+
                 <div class="reviews__text reviews__text--detail">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione hic repellat autem quidem
-                        officiis explicabo magni qua</p>
+                    <p>{{r.comments}}</p>
                 </div>
                 <div class="reviews__star">
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
+                    {% if r.rating == 5 %}
+                    {% for rating in five_stars_review%}
+                    <span class="fa fa-star {{rating}}"></span>
+                    {% endfor %}
+
+                    {% elif r.rating == 4 %}
+                    {% for rating in four_stars_review%}
+                    <span class="fa fa-star {{rating}}"></span>
+                    {% endfor %}
+
+                    {% elif r.rating == 3 %}
+                    {% for rating in three_stars_review%}
+                    <span class="fa fa-star {{rating}}"></span>
+                    {% endfor %}
+
+
+                    {% elif r.rating == 2 %}
+                    {% for rating in two_stars_review%}
+                    <span class="fa fa-star {{rating}}"></span>
+                    {% endfor %}
+
+                    {% else %}
+                    {% for rating in four_stars_review%}
+                    <span class="fa fa-star {{rating}}"></span>
+                    {% endfor %}
+                    {% endif %}
                 </div>
+
             </div>
 
-
-            <div class="reviews reviews--detail">
-                <figure class="reviews__shape reviews__shape--detail">
-                    <img src="../../img/jenny ally.jpg" alt="photo for review"
-                        class="reviews__img reviews__img--detail">
-                    <figcaption class="reviews__caption">Jenny Ally</figcaption>
-                </figure>
-                <div class="reviews__text reviews__text--detail">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione hic repellat autem quidem
-                        officiis explicabo magni qua</p>
-                </div>
-                <div class="reviews__star">
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star"></span>
-                </div>
-            </div>
-
-
-
-            <div class="reviews reviews--detail">
-                <figure class="reviews__shape reviews__shape--detail">
-                    <img src="../../img/ashton kutcher.jpg" alt="photo for review"
-                        class="reviews__img reviews__img--detail">
-                    <figcaption class="reviews__caption">David Williams</figcaption>
-                </figure>
-                <div class="reviews__text reviews__text--detail">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione hic repellat autem quidem
-                        officiis explicabo magni qua</p>
-                </div>
-                <div class="reviews__star">
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </section>
 </section>

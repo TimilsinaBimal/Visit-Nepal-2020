@@ -145,7 +145,7 @@ class Profile(models.Model):
 class Review(models.Model):
     user = CurrentUserField()
     reviewedFor = models.CharField(max_length= 200,verbose_name = "Reviewed For")
-    rating = models.PositiveIntegerField(validators=[MinValueValidator(0), MaxValueValidator(5)],verbose_name = "Your Rating on 5")
+    rating = models.PositiveIntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)],verbose_name = "Your Rating on 5")
     comments = models.CharField(max_length = 600,verbose_name = "Comment")
 
     def __str__(self):
