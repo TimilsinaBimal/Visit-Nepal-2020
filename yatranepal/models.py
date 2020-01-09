@@ -1,6 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django_countries.fields import CountryField
+from django.core.validators import MaxValueValidator, MinValueValidator
+from django_currentuser.middleware import (get_current_user, get_current_authenticated_user)
+from django_currentuser.db.models import CurrentUserField
 
 # Create your models here.
 
@@ -140,13 +143,10 @@ class Profile(models.Model):
 
 
 class Review(models.Model):
-    user = request.user
-    place = models.ForeignKey(Place,on_delete=models.CASCADE,null=True)
-    hotel  = models.ForeignKey(Hotel,on_delete=models.CASCADE,null=True)
-    adventure = models.ForeignKey(Adventure, on_delete=models.CASCADE, null=True)
-    package = models.ForeignKey(Package, on_delete=models.CASCADE, null=True)
-    rating = models.PositiveIntegerField(max_value = 5, min_value = 0,verbose_name = "Your Rating on 5")
+    user = CurrentUserField()
+    reviewedFor = models.CharField(max_length= 200,verbose_name = "Reviewed For")
+    rating = models.PositiveIntegerField(validators=[MinValueValidator(0), MaxValueValidator(5)],verbose_name = "Your Rating on 5")
     comments = models.CharField(max_length = 600,verbose_name = "Comment")
 
     def __str__(self):
-        return f"{self.user.username} Reviewed {self.place.placeName} {self.hotel.hotelName} {self.package.packageName} {self.adventure.adventureName}"
+        return f"{self.user.username} Reviewed {self.reviewedFor}"

@@ -1,10 +1,10 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .forms import SignUpForm, LoginForm
+from .forms import SignUpForm, LoginForm, ReviewForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages, auth
-from .models import Place, Profile, Transportation, TransportationType, Package, Adventure, Hotel,AdventureToPlace,PlaceImage
+from .models import Place, Profile, Transportation, TransportationType, Package, Adventure, Hotel,AdventureToPlace,PlaceImage,Review
 # Create your views here.
 
 
@@ -91,13 +91,24 @@ def placeDetailView(request,placeLink):
     # Getting Images for places from Database
     images = [item for item in PlaceImage.objects.filter(place__placeSlug= placeLink)]
 
+    # Review Form
+
+    if request.method == "POST":
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            instance = form.save(commit=False)
+            instance.reviewedFor = placeContent.placeName
+            instance.save()
+
+
     return render(
         request,
         'pages/places.html',
         {
             'place' : placeContent,
             'adventure': adventure,
-            'placeImage': images
+            'placeImage': images,
+            'form': ReviewForm
         }
     )
 

@@ -143,6 +143,39 @@
         </div>
     </section>
 </section>
+<section class="section-register">
+    <div class="u-center-text u-margin-bottom-medium">
+        <h2 class="heading-secondary heading-secondary--1"> Write a Review!!!</h2>
+    </div>
+    <div class="row">
+        <div class="register">
+            <form action="#" method="POST" class="register__form">
+                {% csrf_token %}
+                <div class="form__group">
+                    {{ form.reviewedFor }}
+                </div>
+                <div class="form__group">
+                    {{ form.rating.errors }}
+                    {{ form.rating }}
+                    <label class="form__label" for="{{ form.rating.id_for_label }}"> Rating</label>
+                </div>
+                <div class="form__group">
+                    {{ form.comments.errors }}
+                    {{ form.comments }}
+                    <label class="form__label" for="{{ form.comments.id_for_label }}"> Comments</label>
+                </div>
+                <div class="form__group">
+                    <button type="submit" class="btn btn--green">Submit</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+
+</section>
+
+
 <footer class="footer">
     <div class="footer__logo-box">
         <img src="{% static 'img/logo.png' %} " alt="visit nepal 2020" class="footer__logo">

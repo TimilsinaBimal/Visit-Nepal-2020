@@ -1,6 +1,8 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
+from django.forms import ModelForm
+from .models import Review
 
 
 class LoginForm(AuthenticationForm):
@@ -114,3 +116,40 @@ class SignUpForm(UserCreationForm):
         if commit:
             user.save()
         return user
+
+# user = request.user
+
+class ReviewForm(ModelForm):
+    reviewedFor = forms.CharField(
+        required=True,
+        widget=forms.HiddenInput(
+            attrs={
+                'class': 'form__input',
+                'id': 'reviewed_for',
+                'placeholder': 'Reviewed For',
+                'value': 'Hello'
+            })
+    )
+    rating = forms.IntegerField(
+        required=True,
+        widget=forms.NumberInput(
+            attrs={
+                'class': 'form__input',
+                'id': 'rating',
+                'placeholder': 'Rating(1-5)',
+            })
+    )
+    comments = forms.CharField(
+        required=True,
+        widget=forms.Textarea(
+            attrs={
+                'cols':80,
+                'rows':8,
+                'class': 'form__input',
+                'id': 'comment',
+                'placeholder': 'Your Review Here...',
+            })
+    )
+    class Meta:
+        model = Review
+        fields=['reviewedFor','rating','comments']

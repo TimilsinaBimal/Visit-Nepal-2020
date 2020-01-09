@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Place, Hotel, Adventure, Package, Transportation, TransportationType, Profile,AdventureToPlace,PlaceImage
+from .models import Place, Hotel, Adventure, Package, Transportation, TransportationType, Profile,AdventureToPlace,PlaceImage,Review
 from tinymce.widgets import TinyMCE
 from django.db import models
 
@@ -62,3 +62,4 @@ admin.site.register(TransportationType)
 admin.site.register(Profile)
 admin.site.register(AdventureToPlace)
 admin.site.register(PlaceImage)
+admin.site.register(Review)
