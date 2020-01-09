@@ -18,6 +18,8 @@ class Adventure(models.Model):
         return self.adventureName
 
 
+
+
 class Place(models.Model):
     placeName = models.CharField(
         max_length=255, verbose_name="Name of the Place")
@@ -29,6 +31,16 @@ class Place(models.Model):
 
     def __str__(self):
         return self.placeName
+
+
+class PlaceImage(models.Model):
+    place = models.ForeignKey(
+        Place, on_delete=models.CASCADE, verbose_name="Name of the Place", default="")
+    placeImage = models.ImageField(
+        upload_to="places/", verbose_name="Image of the Place")
+
+    def __str__(self):
+        return self.place.placeName
 
 class AdventureToPlace(models.Model):
     place = models.ForeignKey(Place,verbose_name = "Place Name", default="",on_delete=models.CASCADE)
@@ -127,4 +139,14 @@ class Profile(models.Model):
 #         return self.name
 
 
-# class Rating(models.Model):
+class Review(models.Model):
+    user = request.user
+    place = models.ForeignKey(Place,on_delete=models.CASCADE,null=True)
+    hotel  = models.ForeignKey(Hotel,on_delete=models.CASCADE,null=True)
+    adventure = models.ForeignKey(Adventure, on_delete=models.CASCADE, null=True)
+    package = models.ForeignKey(Package, on_delete=models.CASCADE, null=True)
+    rating = models.PositiveIntegerField(max_value = 5, min_value = 0,verbose_name = "Your Rating on 5")
+    comments = models.CharField(max_length = 600,verbose_name = "Comment")
+
+    def __str__(self):
+        return f"{self.user.username} Reviewed {self.place.placeName} {self.hotel.hotelName} {self.package.packageName} {self.adventure.adventureName}"

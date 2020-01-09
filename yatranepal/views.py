@@ -4,7 +4,7 @@ from .forms import SignUpForm, LoginForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages, auth
-from .models import Place, Profile, Transportation, TransportationType, Package, Adventure, Hotel,AdventureToPlace
+from .models import Place, Profile, Transportation, TransportationType, Package, Adventure, Hotel,AdventureToPlace,PlaceImage
 # Create your views here.
 
 
@@ -81,15 +81,23 @@ def logout(request):
 
 
 def placeDetailView(request,placeLink):
+    # Getting place details from Database
     placeContent = Place.objects.get(placeSlug=placeLink)
+
+    # Fetching To-Do list for Same place from Database
     adventure = [item.adventure for item in AdventureToPlace.objects.filter(
         place__placeSlug=placeLink)]
+
+    # Getting Images for places from Database
+    images = [item for item in PlaceImage.objects.filter(place__placeSlug= placeLink)]
+
     return render(
         request,
         'pages/places.html',
         {
             'place' : placeContent,
-            'adventure': adventure
+            'adventure': adventure,
+            'placeImage': images
         }
     )
 

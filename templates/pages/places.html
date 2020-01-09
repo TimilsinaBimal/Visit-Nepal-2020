@@ -66,22 +66,13 @@
     </section>
     <section class="section-gallery">
         <ul class="gallery-showcase clearfix">
+            {% for image in placeImage %}
             <li>
                 <figure class="gallery-photo">
-                    <img src="../../img/gosaikunda.jpg" alt="Korean bibimbap with egg and vegetables">
+                    <img src="{{image.placeImage.url}}" alt="{{image}}">
                 </figure>
             </li>
-            <li>
-                <figure class="gallery-photo">
-                    <img src="../../img/gosaikunda-2.jpeg" alt="Simple italian pizza with cherry tomatoes">
-                </figure>
-            </li>
-            <li>
-                <figure class="gallery-photo">
-                    <img src="../../img/gosaikunda-3.jpg" alt="Chicken breast steak with vegetables">
-                </figure>
-            </li>
-
+            {% endfor %}
         </ul>
 
     </section>
