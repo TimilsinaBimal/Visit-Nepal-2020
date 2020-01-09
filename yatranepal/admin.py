@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Place, Hotel, Adventure, Package, Transportation, TransportationType, Profile
+from .models import Place, Hotel, Adventure, Package, Transportation, TransportationType, Profile,AdventureToPlace
 from tinymce.widgets import TinyMCE
 from django.db import models
 
@@ -8,7 +8,7 @@ from django.db import models
 
 class PlaceAdmin(admin.ModelAdmin):
     fieldsets = [
-        ("Title/Link", {"fields": ["placeName", "placeSlug"]}),
+        ("Title/Link", {"fields": ["placeName", "placeSlug","placetodoList","placetheme"]}),
         ("Place Image", {"fields": ["placeImage"]}),
         ("Place Description", {"fields": ["placeDesc"]}),
     ]
@@ -62,3 +62,4 @@ admin.site.register(Package, PackageAdmin)
 admin.site.register(Transportation)
 admin.site.register(TransportationType)
 admin.site.register(Profile)
+admin.site.register(AdventureToPlace)

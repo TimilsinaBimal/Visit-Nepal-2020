@@ -5,9 +5,23 @@ from django_countries.fields import CountryField
 # Create your models here.
 
 
+class Adventure(models.Model):
+    adventureName = models.CharField(
+        max_length=200, verbose_name="Name of Adventure")
+    adventureDesc = models.TextField(verbose_name="Adventure Description")
+    adventureImage = models.ImageField(
+        upload_to="adventures/", verbose_name="Adventure Image")
+    adventureSlug = models.CharField(
+        max_length=50, verbose_name="Adventure URL")
+
+    def __str__(self):
+        return self.adventureName
+
+
 class Place(models.Model):
     placeName = models.CharField(
         max_length=255, verbose_name="Name of the Place")
+    placetheme = models.CharField(max_length = 500, verbose_name = "Theme of the Place",default="")
     placeImage = models.ImageField(
         upload_to="places/", verbose_name="Image of Place")
     placeDesc = models.TextField(verbose_name="Place Description")
@@ -16,6 +30,12 @@ class Place(models.Model):
     def __str__(self):
         return self.placeName
 
+class AdventureToPlace(models.Model):
+    place = models.ForeignKey(Place,verbose_name = "Place Name", default="",on_delete=models.CASCADE)
+    adventure = models.ForeignKey(Adventure,verbose_name = "Adventure",default ="",on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"Place: {self.place.placeName}  \n Adventure: {self.adventure.adventureName}"
 
 class Hotel(models.Model):
     hotelName = models.CharField(
@@ -58,17 +78,7 @@ class Transportation(models.Model):
         return self.placeFrom + " " + self.placeTo
 
 
-class Adventure(models.Model):
-    adventureName = models.CharField(
-        max_length=200, verbose_name="Name of Adventure")
-    adventureDesc = models.TextField(verbose_name="Adventure Description")
-    adventureImage = models.ImageField(
-        upload_to="adventures/", verbose_name="Adventure Image")
-    adventureSlug = models.CharField(
-        max_length=50, verbose_name="Adventure URL")
 
-    def __str__(self):
-        return self.adventureName
 
 
 class Package(models.Model):

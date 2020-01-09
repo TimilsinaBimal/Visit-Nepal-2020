@@ -7,7 +7,7 @@
             <div class="row">
                 <img src="{% static 'img/logo.png' %}" alt="logo" class="nav-bar__logo">
                 <ul class="nav-bar__titles">
-                    <li><a href="#">Home</a></li>
+                    <li><a href="{% url 'home' %}">Home</a></li>
                     <li><a href="#">Features</a></li>
                     <li><a href="#">Adventures</a></li>
                     <li><a href="#">Hotels</a></li>
@@ -16,12 +16,10 @@
             </div>
         </nav>
         <div class="header__text-box">
-
-
             <div class="header__text-box">
                 <h1 class="heading-primary">
-                    <span class="heading-primary--detail">Gosaikunda</span>
-                    <span class="heading-primary--sub">Meet mother nature</span>
+                    <span class="heading-primary--detail">{{place.placeName}}</span>
+                    <span class="heading-primary--sub">{{place.placetheme}}</span>
                 </h1>
             </div>
         </div>
@@ -33,16 +31,9 @@
 
             <div class="col-1-of-2">
                 <div class="u-center-text u-margin-bottom-medium u-margin-top-big">
-                    <h2 class="heading-secondary heading-secondary--big u-margin-bottom-medium"> About Gosaikunda</h2>
-                    <p class="paragraph paragraph--justified">Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                        Distinctio cumque quis reiciendis voluptatibus, a voluptates. Cum ullam cumque voluptatibus,
-                        suscipit voluptate maiores! Ex in ad officia illo impedit eum provident.<br><br>
-                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Placeat dolorem modi praesentium quod
-                        porro, dignissimos, delectus corrupti dolor omnis beatae hic tempora! Temporibus dolorem,
-                        placeat obcaecati voluptatum porro consequatur mollitia?Lorem ipsum dolor, sit amet consectetur
-                        adipisicing elit. Incidunt laboriosam quia, odio cumque non rerum repellendus esse velit
-                        delectus tempora, sint praesentium voluptate reprehenderit quo, sequi expedita quis inventore.
-                        Suscipit.
+                    <h2 class="heading-secondary heading-secondary--big u-margin-bottom-medium"> About
+                        {{place.placeName}}</h2>
+                    <p class="paragraph paragraph--justified">{{place.placeDesc|safe}}
                     </p>
                 </div>
             </div>
@@ -58,37 +49,14 @@
 
 
                         <ul class="detail-text__items">
-                            <li>
-                                <div class="detail__icons">
-                                    <ion-icon name="walk"></ion-icon>
-                                    Hiking
-                                </div>
+                            {% for item in adventure %}
+                            <li><a href="{{item.adventureSlug}}">
+                                    <div class="detail__icons">
+                                        {{item.adventureName}}
+                                    </div>
+                                </a>
                             </li>
-
-                            <li>
-                                <div class="detail__icons">
-                                    <ion-icon name="bonfire"></ion-icon>Mountainnering
-                                </div>
-                            </li>
-
-                            <li>
-                                <div class="detail__icons">
-                                    <ion-icon name="bicycle"></ion-icon>Cycling
-                                </div>
-                            </li>
-
-                            <li>
-                                <div class="detail__icons">
-                                    <ion-icon name="videocam"></ion-icon>Photography
-                                </div>
-                            </li>
-
-                            <li>
-                                <div class="detail__icons">
-                                    <ion-icon name="car"></ion-icon>Safari
-                                </div>
-                            </li>
-
+                            {% endfor %}
                         </ul>
                     </div>
                 </div>

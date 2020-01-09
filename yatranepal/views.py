@@ -4,7 +4,7 @@ from .forms import SignUpForm, LoginForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages, auth
-from .models import Place, Profile, Transportation, TransportationType, Package, Adventure, Hotel
+from .models import Place, Profile, Transportation, TransportationType, Package, Adventure, Hotel,AdventureToPlace
 # Create your views here.
 
 
@@ -80,10 +80,17 @@ def logout(request):
     auth.logout(request)
 
 
-def placeDetailView(request):
+def placeDetailView(request,placeLink):
+    placeContent = Place.objects.get(placeSlug=placeLink)
+    adventure = [item.adventure for item in AdventureToPlace.objects.filter(
+        place__placeSlug=placeLink)]
     return render(
         request,
-        'pages/places.html'
+        'pages/places.html',
+        {
+            'place' : placeContent,
+            'adventure': adventure
+        }
     )
 
 def adventureDetailView(request):
