@@ -20,4 +20,8 @@ urlpatterns = [
     path('', views.homePageView, name='home'),
     path('register/', views.register, name='register'),
     path('logout/', views.logout, name='logout'),
+    path('places/', views.placeDetailView, name='places'),
+    path('adventures/', views.adventureDetailView, name='adventures'),
+    path('hotels/', views.hotelDetailView, name='hotels'),
+    path('packages/', views.packageDetailView, name='packages'),
 ]

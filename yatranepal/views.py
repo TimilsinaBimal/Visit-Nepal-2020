@@ -78,3 +78,28 @@ def register(request):
 
 def logout(request):
     auth.logout(request)
+
+
+def placeDetailView(request):
+    return render(
+        request,
+        'pages/places.html'
+    )
+
+def adventureDetailView(request):
+    return render(
+        request,
+        'pages/adventures.html'
+    )
+
+def hotelDetailView(request):
+    return render(
+        request,
+        'pages/hotels.html'
+    )
+
+def packageDetailView(request):
+    return render(
+        request,
+        'pages/packages.html'
+    )

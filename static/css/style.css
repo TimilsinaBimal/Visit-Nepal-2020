@@ -74,6 +74,12 @@ body {
   animation: moveInRight 1s ease-out;
 }
 
+.heading-primary--detail {
+  font-size: 6.5rem;
+  font-weight: 300;
+  display: block;
+}
+
 .heading-secondary {
   font-size: 3.5rem;
   text-transform: uppercase;
@@ -103,6 +109,10 @@ body {
   text-shadow: 0.5rem 1rem 2rem rgba(0, 0, 0, 0.2);
 }
 
+.heading-secondary--big {
+  font-size: 2.25rem;
+}
+
 .heading-tertiary {
   font-size: 1.6rem;
   font-weight: 700;
@@ -115,6 +125,10 @@ body {
 
 .paragraph:not(:last-child) {
   margin-bottom: 3rem;
+}
+
+.paragraph--justified {
+  text-align: justify;
 }
 
 .u-center-text {
@@ -211,6 +225,14 @@ body {
   background-color: #55c57a;
 }
 
+.btn--detail {
+  color: #fff;
+}
+
+.btn--detail::after {
+  background-color: #55c57a;
+}
+
 .btn::after {
   content: "";
   display: inline-block;
@@ -252,9 +274,27 @@ body {
   transform: translateY(0);
 }
 
-a {
+.btn-text-white:link,
+.btn-text-white:visited {
   text-decoration: none;
-  color: #777;
+  font-size: 1.6rem;
+  display: inline-block;
+  color: #fff;
+  border-bottom: 0.1rem solid #fff;
+  padding: .3rem;
+  transition: all .2s;
+}
+
+.btn-text-white:hover {
+  background-color: #55c57a;
+  color: #fff;
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
+  transform: translateY(-0.2rem);
+}
+
+.btn-text-white:active {
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  transform: translateY(0);
 }
 
 .cards {
@@ -325,9 +365,32 @@ a {
   clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);
 }
 
+.cards__picture--3 {
+  background-image: linear-gradient(to right bottom, #ffb900, #ff7730), url(../img/test/nat-5.jpg);
+}
+
+.cards__picture--1 {
+  background-image: linear-gradient(to right bottom, #7ed56f, #28b485), url(../img/test/nat-6.jpg);
+}
+
+.cards__picture--2 {
+  background-image: linear-gradient(to right bottom, #2998ff, #5643fa), url(../img/test/nat-7.jpg);
+}
+
+.cards__picture--4 {
+  background-image: linear-gradient(to right bottom, #2998ff, #ff7730), url(../../img/hyatt-hotel.png);
+}
+
+.cards__picture--5 {
+  background-image: linear-gradient(to right bottom, #7ed56f, #28b485), url(../../img/soaltee-crown-plaza.jpg);
+}
+
+.cards__picture--6 {
+  background-image: linear-gradient(to right bottom, #2998ff, #28b485), url(../../img/raddison-hotel.jpeg);
+}
 
 .cards__picture--profile {
-  background-image: linear-gradient(to right bottom, #2998ff, #28b485), url(../img/ashish_review.jpg);
+  background-image: linear-gradient(to right bottom, #2998ff, #28b485), url(../../img/ashish_review.jpg);
 }
 
 .cards__heading {
@@ -390,6 +453,12 @@ a {
 
 .cards__details li:not(:last-child) {
   border-bottom: 1px solid #eee;
+}
+
+.cards__details li ion-icon {
+  font-size: 3rem;
+  margin-right: 2rem;
+  margin-bottom: -0.7rem;
 }
 
 .cards__cta {
@@ -507,6 +576,18 @@ a {
   backface-visibility: hidden;
 }
 
+.reviews--detail {
+  width: 30%;
+  float: left;
+  margin: 0 auto;
+  margin-right: 3rem;
+  background-color: rgba(255, 255, 255, 0.6);
+  padding: 6rem;
+  padding-left: 9rem;
+  font-size: 1.6rem;
+  box-shadow: 0 3rem 6rem rgba(0, 0, 0, 0.14);
+}
+
 .reviews>* {
   transform: skewX(12deg);
 }
@@ -525,6 +606,11 @@ a {
   backface-visibility: hidden;
 }
 
+.reviews__shape--detail {
+  float: none;
+  margin: 0 auto;
+}
+
 .reviews__img {
   height: 100%;
   transform: translateX(-3rem) scale(1.4);
@@ -534,6 +620,12 @@ a {
 
 .reviews__text {
   transform: skewX(12deg);
+}
+
+.reviews__text--detail {
+  text-align: justify;
+  margin-top: 5rem;
+  margin-bottom: 2rem;
 }
 
 .reviews__caption {
@@ -560,6 +652,15 @@ a {
   transform: translateX(-3rem) scale(1);
   filter: blur(0.3rem) brightness(80%);
   backface-visibility: hidden;
+}
+
+.reviews__star {
+  text-align: center;
+}
+
+/********For detail section***********/
+.checked {
+  color: orange;
 }
 
 .bg-video {
@@ -655,6 +756,167 @@ a {
 
 .crawl__list {
   padding: 3rem;
+}
+
+.detail {
+  padding-top: 0;
+  height: 70vh;
+  background-image: linear-gradient(to bottom right, rgba(126, 213, 111, 0.6), rgba(86, 67, 250, 0.6)), url("../../img/gosaikunda.jpg");
+  background-size: cover;
+  background-position: top;
+  position: relative;
+  clip-path: polygon(50% 0%, 100% 0, 100% 93%, 50% 100%, 0 93%, 0 0);
+  /*****for list**/
+}
+
+.detail--1 {
+  background-image: linear-gradient(to bottom right, rgba(126, 213, 111, 0.6), rgba(86, 67, 250, 0.6)), url("../../img/gosaikunda.jpg");
+}
+
+.detail--2 {
+  background-image: linear-gradient(to bottom right, rgba(126, 213, 111, 0.6), rgba(86, 67, 250, 0.6)), url("../../img/mustang.jpg");
+}
+
+.detail--3 {
+  background-image: linear-gradient(to bottom right, rgba(126, 213, 111, 0.6), rgba(86, 67, 250, 0.6)), url("../../img/khumbu.jpg");
+}
+
+.detail--4 {
+  background-image: linear-gradient(to bottom right, rgba(126, 213, 111, 0.6), rgba(86, 67, 250, 0.6)), url("../../img/animation pic2.jpeg");
+}
+
+.detail--5 {
+  background-image: linear-gradient(to bottom right, rgba(126, 213, 111, 0.6), rgba(86, 67, 250, 0.6)), url("../../img/jungle-safari-2.jpg");
+}
+
+.detail--6 {
+  background-image: linear-gradient(to bottom right, rgba(126, 213, 111, 0.6), rgba(86, 67, 250, 0.6)), url("../../img/treeking-1.jpeg");
+}
+
+.detail--7 {
+  background-image: linear-gradient(to bottom right, rgba(126, 213, 111, 0.6), rgba(86, 67, 250, 0.6)), url("../../img/hyatt-3.jpg");
+}
+
+.detail--8 {
+  background-image: linear-gradient(to bottom right, rgba(126, 213, 111, 0.6), rgba(86, 67, 250, 0.6)), url("../../img/soaltee-crown-plaza.jpg");
+}
+
+.detail--9 {
+  background-image: linear-gradient(to bottom right, rgba(126, 213, 111, 0.6), rgba(86, 67, 250, 0.6)), url("../../img/raddison-2.jpg");
+}
+
+.detail--10 {
+  background-image: linear-gradient(to bottom right, rgba(126, 213, 111, 0.6), rgba(86, 67, 250, 0.6)), url("../../img/jungle-safari-3.jpg");
+}
+
+.detail--11 {
+  background-image: linear-gradient(to bottom right, rgba(126, 213, 111, 0.6), rgba(86, 67, 250, 0.6)), url("../../img/treeking-2.jpg");
+}
+
+.detail--12 {
+  background-image: linear-gradient(to bottom right, rgba(126, 213, 111, 0.6), rgba(86, 67, 250, 0.6)), url("../../img/khumbu-3.jpg");
+}
+
+.detail__logo-box {
+  position: absolute;
+  top: 3.0rem;
+  left: 3.0rem;
+}
+
+.detail__logo {
+  height: 12.0rem;
+}
+
+.detail__text-box {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -20%);
+  text-align: center;
+}
+
+.detail__img {
+  float: left;
+  width: 48.5rem;
+  height: auto;
+  object-fit: cover;
+  display: block;
+}
+
+.detail__tour-guide {
+  height: 5rem;
+  border-radius: 50%;
+  margin-bottom: -1rem;
+}
+
+.about {
+  background-color: #55c57a;
+}
+
+/* ----------------------------------------------- */
+/* Detail Pictures Gallery */
+/* ----------------------------------------------- */
+.section-gallery {
+  padding: 0;
+}
+
+.gallery-showcase {
+  list-style: none;
+  width: 100%;
+}
+
+.gallery-showcase li {
+  display: block;
+  float: left;
+  width: 33%;
+}
+
+.gallery-photo {
+  width: 100%;
+  margin: 0;
+  overflow: hidden;
+  background-color: #000;
+}
+
+.gallery-photo img {
+  opacity: 0.7;
+  width: 100%;
+  height: 35rem;
+  -webkit-transform: scale(1.15);
+  -ms-transform: scale(1.15);
+  transform: scale(1.15);
+  -webkit-transition: -webkit-transform 0.5s, opacity 0.5s;
+  transition: transform 0.5s, opacity 0.5s;
+}
+
+.gallery-photo img:hover {
+  opacity: 1;
+  -webkit-transform: scale(1.03);
+  -ms-transform: scale(1.03);
+  transform: scale(1.03);
+}
+
+/************for to do**************/
+.detail__icons {
+  font-size: 2rem;
+  text-align: center;
+}
+
+/**********For bottom book now box**********/
+.book-now-box {
+  background-color: #eee;
+  width: 65%;
+  height: 100%;
+  margin: 0 auto;
+  border-radius: 3rem;
+  box-shadow: 0 6rem 8rem rgba(0, 0, 0, 0.2);
+  padding: 5rem;
+  margin-bottom: 5rem;
+}
+
+.book-now-box__link {
+  float: right;
+  margin-top: -6rem;
 }
 
 .header {
@@ -844,7 +1106,7 @@ a {
 
 .news {
   height: 50rem;
-  background-image: linear-gradient(105deg, transparent 40%, rgba(255, 255, 255, 0.9) 20%), url(../img/news-events.jpg);
+  background-image: linear-gradient(105deg, transparent 40%, rgba(255, 255, 255, 0.9) 20%), url(../../img/news-events.jpg);
   background-size: cover;
   border-radius: .3rem;
   box-shadow: 0 8rem 8rem rgba(0, 0, 0, 0.5);
@@ -908,7 +1170,7 @@ a {
 
 .connect {
   height: 50rem;
-  background-image: linear-gradient(105deg, rgba(255, 255, 255, 0.9) 40%, transparent 50%), url(../img/connect.jpg);
+  background-image: linear-gradient(105deg, rgba(255, 255, 255, 0.9) 40%, transparent 50%), url(../../img/connect.jpg);
   background-size: cover;
   border-radius: .3rem;
   box-shadow: 0 3rem 4rem rgba(0, 0, 0, 0.5);
@@ -975,7 +1237,6 @@ a {
   padding: 15rem 0 15rem 0;
   background-image: linear-gradient(#2998ff, #7ed56f);
   transform: skewY(-7deg);
-  overflow: hidden;
 }
 
 .section-profile>* {
@@ -985,7 +1246,7 @@ a {
 .profile {
   position: relative;
   height: 65rem;
-  background-image: linear-gradient(105deg, rgba(255, 255, 255, 0.9) 100%, transparent 100%);
+  background-image: linear-gradient(105deg, rgba(255, 255, 255, 0.9) 40%, transparent 55%), url(../../img/profile-section.jpg);
   background-size: cover;
   border-radius: .3rem;
   box-shadow: 0 3rem 4rem rgba(0, 0, 0, 0.5);
@@ -999,16 +1260,26 @@ a {
 
 .profile__img-box {
   position: absolute;
-  top: 0rem;
-  right: 0rem;
-  overflow: hidden;
-  height: 100%;
-  width: 50%;
-  border-radius: 0 .3rem .3rem 0;
+  top: 12rem;
+  right: 10rem;
 }
 
 .profile__img {
-  width: auto;
-  height: 100%;
+  width: 30rem;
+  height: auto;
+  border-radius: .7rem;
+  box-shadow: 0 12rem 50rem rgba(0, 0, 0, 0.8);
+}
 
+.section-detail {
+  background-color: #fff;
+}
+
+.detail-text {
+  padding: 5rem 0;
+}
+
+.detail-ratings {
+  padding-top: 45rem;
+  padding-bottom: 15rem;
 }
