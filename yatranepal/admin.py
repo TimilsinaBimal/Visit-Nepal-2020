@@ -4,7 +4,11 @@ from tinymce.widgets import TinyMCE
 from django.db import models
 
 # Register your models here.
+# class PlaceImageInline(admin.TabularInline):
+#     model=Place
+#     fields= ('placeImages',)
 class PlaceAdmin(admin.ModelAdmin):
+    # inlines= [PlaceImageInline]
     fieldsets = [
         ("Title/Link", {"fields": ["placeName", "placeSlug","placetheme"]}),
         ("Place Image", {"fields": ["placeImage"]}),

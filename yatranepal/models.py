@@ -29,6 +29,7 @@ class Place(models.Model):
     placetheme = models.CharField(max_length = 500, verbose_name = "Theme of the Place",default="")
     placeImage = models.ImageField(
         upload_to="places/", verbose_name="Image of Place")
+    # placeImages = models.ImageField(upload_to="places/")
     placeDesc = models.TextField(verbose_name="Place Description")
     placeSlug = models.CharField(max_length=50, verbose_name="Place URL")
 
@@ -109,6 +110,35 @@ class Package(models.Model):
     def package_features_as_list(self):
         return self.packageFeatures.split('\n')
 
+
+class AdventureImage(models.Model):
+    adventure = models.ForeignKey(
+        Adventure, on_delete=models.CASCADE, verbose_name="Name of the Adventure", default="")
+    adventureImages = models.ImageField(
+        upload_to="adventures/", verbose_name="Image of the adventure")
+
+    def __str__(self):
+        return self.adventure.adventureName
+
+
+class HotelImage(models.Model):
+    hotel = models.ForeignKey(
+        Hotel, on_delete=models.CASCADE, verbose_name="Name of the Hotel", default="")
+    hotelImages = models.ImageField(
+        upload_to="hotels/", verbose_name="Image of the Hotel")
+
+    def __str__(self):
+        return self.hotel.hotelName
+
+
+class PackageImage(models.Model):
+    package = models.ForeignKey(
+        Package, on_delete=models.CASCADE, verbose_name="Name of the package", default="")
+    packageImages = models.ImageField(
+        upload_to="packages/", verbose_name="Image of the Package")
+
+    def __str__(self):
+        return self.package.packageName
 
 class Profile(models.Model):
     user = models.OneToOneField(
