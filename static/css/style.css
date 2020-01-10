@@ -663,6 +663,11 @@ body {
   color: orange;
 }
 
+a {
+  text-decoration: none;
+  color: #777;
+}
+
 .bg-video {
   position: absolute;
   top: 0;
@@ -761,60 +766,10 @@ body {
 .detail {
   padding-top: 0;
   height: 70vh;
-  background-image: linear-gradient(to bottom right, rgba(126, 213, 111, 0.6), rgba(86, 67, 250, 0.6)), url("../../img/gosaikunda.jpg");
   background-size: cover;
   background-position: top;
   position: relative;
   clip-path: polygon(50% 0%, 100% 0, 100% 93%, 50% 100%, 0 93%, 0 0);
-  /*****for list**/
-}
-
-.detail--1 {
-  background-image: linear-gradient(to bottom right, rgba(126, 213, 111, 0.6), rgba(86, 67, 250, 0.6)), url("../../img/gosaikunda.jpg");
-}
-
-.detail--2 {
-  background-image: linear-gradient(to bottom right, rgba(126, 213, 111, 0.6), rgba(86, 67, 250, 0.6)), url("../../img/mustang.jpg");
-}
-
-.detail--3 {
-  background-image: linear-gradient(to bottom right, rgba(126, 213, 111, 0.6), rgba(86, 67, 250, 0.6)), url("../../img/khumbu.jpg");
-}
-
-.detail--4 {
-  background-image: linear-gradient(to bottom right, rgba(126, 213, 111, 0.6), rgba(86, 67, 250, 0.6)), url("../../img/animation pic2.jpeg");
-}
-
-.detail--5 {
-  background-image: linear-gradient(to bottom right, rgba(126, 213, 111, 0.6), rgba(86, 67, 250, 0.6)), url("../../img/jungle-safari-2.jpg");
-}
-
-.detail--6 {
-  background-image: linear-gradient(to bottom right, rgba(126, 213, 111, 0.6), rgba(86, 67, 250, 0.6)), url("../../img/treeking-1.jpeg");
-}
-
-.detail--7 {
-  background-image: linear-gradient(to bottom right, rgba(126, 213, 111, 0.6), rgba(86, 67, 250, 0.6)), url("../../img/hyatt-3.jpg");
-}
-
-.detail--8 {
-  background-image: linear-gradient(to bottom right, rgba(126, 213, 111, 0.6), rgba(86, 67, 250, 0.6)), url("../../img/soaltee-crown-plaza.jpg");
-}
-
-.detail--9 {
-  background-image: linear-gradient(to bottom right, rgba(126, 213, 111, 0.6), rgba(86, 67, 250, 0.6)), url("../../img/raddison-2.jpg");
-}
-
-.detail--10 {
-  background-image: linear-gradient(to bottom right, rgba(126, 213, 111, 0.6), rgba(86, 67, 250, 0.6)), url("../../img/jungle-safari-3.jpg");
-}
-
-.detail--11 {
-  background-image: linear-gradient(to bottom right, rgba(126, 213, 111, 0.6), rgba(86, 67, 250, 0.6)), url("../../img/treeking-2.jpg");
-}
-
-.detail--12 {
-  background-image: linear-gradient(to bottom right, rgba(126, 213, 111, 0.6), rgba(86, 67, 250, 0.6)), url("../../img/khumbu-3.jpg");
 }
 
 .detail__logo-box {

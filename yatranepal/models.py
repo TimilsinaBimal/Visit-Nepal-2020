@@ -93,9 +93,6 @@ class Transportation(models.Model):
         return self.placeFrom + " " + self.placeTo
 
 
-
-
-
 class Package(models.Model):
     packageName = models.CharField(max_length=200, verbose_name="Package Name")
     packageDesc = models.TextField(verbose_name="Package Description")
@@ -150,3 +147,6 @@ class Review(models.Model):
 
     def __str__(self):
         return f"{self.user.username} Reviewed {self.reviewedFor}"
+
+    class Meta:
+        unique_together= ('user','reviewedFor')

@@ -15,6 +15,12 @@
                 </ul>
             </div>
         </nav>
+        <style>
+            .detail {
+                background-image: linear-gradient(to bottom right, rgba(126, 213, 111, 0.6), rgba(86, 67, 250, 0.6)),
+                url({{place.placeImage.url}});
+            }
+        </style>
         <div class="header__text-box">
             <div class="header__text-box">
                 <h1 class="heading-primary">
@@ -82,11 +88,11 @@
             <h2 class="heading-secondary">Reviews</h2>
         </div>
         <div class="row">
-            {% for r in reviews %}
+            {% for r,p in reviews %}
             <div class="reviews reviews--detail">
                 <figure class="reviews__shape reviews__shape--detail">
-                    <img src="" alt="photo for review" class="reviews__img reviews__img--detail">
-                    <figcaption class="reviews__caption">{{r.user}}</figcaption>
+                    <img src="{{p.profileImage.url}}" alt="photo for review" class="reviews__img reviews__img--detail">
+                    <figcaption class="reviews__caption">{{r.user.first_name}} {{r.user.last_name}}</figcaption>
                 </figure>
 
                 <div class="reviews__text reviews__text--detail">
@@ -127,14 +133,30 @@
         </div>
     </section>
 </section>
-<section class="section-register">
-    <div class="u-center-text u-margin-bottom-medium">
-        <h2 class="heading-secondary heading-secondary--1"> Write a Review!!!</h2>
-    </div>
+{% if user.is_authenticated %}
+<section class="section-profile">
     <div class="row">
         <div class="register">
-            <form action="#" method="POST" class="register__form">
+            <form method="POST" class="register__form">
+                <div class="u-center-text u-margin-bottom-medium">
+                    <h2 class="heading-secondary"> Write a Review!!!</h2>
+                </div>
+
                 {% csrf_token %}
+                {% if form.errors %}
+                {% for field in form %}
+                {% for error in field.errors %}
+                <div class="alert alert-danger">
+                    <strong>{{ error|escape }}</strong>
+                </div>
+                {% endfor %}
+                {% endfor %}
+                {% for error in form.non_field_errors %}
+                <div class="alert alert-danger">
+                    <strong>{{ error|escape }}</strong>
+                </div>
+                {% endfor %}
+                {% endif %}
                 <div class="form__group">
                     {{ form.reviewedFor }}
                 </div>
@@ -155,9 +177,8 @@
         </div>
 
     </div>
-
-
 </section>
+{% endif %}
 
 
 <footer class="footer">

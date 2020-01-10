@@ -4,6 +4,7 @@ from .forms import SignUpForm, LoginForm, ReviewForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages, auth
+from django.db import IntegrityError
 from .models import Place, Profile, Transportation, TransportationType, Package, Adventure, Hotel,AdventureToPlace,PlaceImage,Review
 # Create your views here.
 
@@ -80,6 +81,16 @@ def logout(request):
     auth.logout(request)
 
 
+# Reviews Details
+five_stars_review= ["checked", "checked", "checked", "checked", "checked"]
+four_stars_review= ["checked", "checked", "checked", "checked", ""]
+three_stars_review= ["checked", "checked", "checked", "", ""]
+two_stars_review= ["checked", "checked", "", "", ""]
+one_star_review= ["checked", "", "", "", ""]
+
+
+
+# Place Details Page View
 def placeDetailView(request,placeLink):
     # Getting place details from Database
     placeContent = Place.objects.get(placeSlug=placeLink)
@@ -91,35 +102,98 @@ def placeDetailView(request,placeLink):
     # Getting Images for places from Database
     images = [item for item in PlaceImage.objects.filter(place__placeSlug= placeLink)]
 
-    # Review Form
+# Review Form
     if request.method == "POST":
         form = ReviewForm(request.POST)
         if form.is_valid():
-            instance = form.save(commit=False)
-            instance.reviewedFor = placeContent.placeName
-            instance.save()
+            try:
+                instance = form.save(commit=False)
+                instance.reviewedFor = placeContent.placeName
+                instance.save()
+
+            except IntegrityError as e:
+                return HttpResponse('<script>alert("You have already reviewed this place.")</script>')
+        else:
+            return HttpResponse('<script>alert("Error Occured! Please Review your form and Submit again.")</script>')
 
     # Handling Reviews Lists
     reviews = [item for item in Review.objects.filter(reviewedFor = placeContent.placeName)]
     # Profile.objects.filter(user=reviews.user)
+    userProfile=[]
+    for item in reviews:
+        userProfileList= Profile.objects.get(user__username=item.user)
+        userProfile.append(userProfileList)
+
+    placeReviews = zip(reviews,userProfile)
+
     return render(
         request,
         'pages/places.html',
         {
-            'place' : placeContent,
+            'place': placeContent,
             'adventure': adventure,
             'placeImage': images,
             'form': ReviewForm,
-            'reviews': reviews,
-            'five_stars_review': ["checked", "checked", "checked", "checked", "checked"],
-            'four_stars_review': ["checked", "checked", "checked", "checked", ""],
-            'three_stars_review': ["checked", "checked", "checked", "", ""],
-            'two_stars_review': ["checked", "checked", "", "", ""],
-            'one_star_review': ["checked", "", "", "", ""]
+            'reviews': placeReviews,
+            'user': request.user,
+            'five_stars_review': five_stars_review,
+            'four_stars_review': four_stars_review,
+            'three_stars_review': three_stars_review,
+            'two_stars_review': two_stars_review,
+            'one_star_review': one_star_review
         }
     )
 
-def adventureDetailView(request):
+# Adventure Details Page View
+def adventureDetailView(request,adventureLink):
+
+    # # Getting Adventure details from Database
+    # adventureContent = Adventure.objects.get(adventureSlug=adventureLink)
+
+    # # Fetching To-Do list for Same place from Database
+    # place = [item.place for item in AdventureToPlace.objects.filter(
+    #     adventure__adventureSlug=adventureLink)]
+
+    # # Getting Images for places from Database
+    # images = [item for item in adventureImage.objects.filter(
+    #     adventure__adventureSlug=adventureLink)]
+
+    # # Review Form
+    # if request.method == "POST":
+    #     form = ReviewForm(request.POST)
+    #     if form.is_valid():
+    #         instance = form.save(commit=False)
+    #         instance.reviewedFor = placeContent.placeName
+    #         instance.save()
+
+    # # Handling Reviews Lists
+    # reviews = [item for item in Review.objects.filter(
+    #     reviewedFor=placeContent.placeName)]
+    # # Profile.objects.filter(user=reviews.user)
+    # userProfile = []
+    # for item in reviews:
+    #     userProfileList = Profile.objects.get(user__username=item.user)
+    #     userProfile.append(userProfileList)
+
+    # placeReviews = zip(reviews, userProfile)
+
+    # return render(
+    #     request,
+    #     'pages/places.html',
+    #     {
+    #         'place': placeContent,
+    #         'adventure': adventure,
+    #         'placeImage': images,
+    #         'form': ReviewForm,
+    #         'reviews': placeReviews,
+    #         'user': request.user,
+    # 'five_stars_review': five_stars_review,
+    # 'four_stars_review': four_stars_review,
+    # 'three_stars_review': three_stars_review,
+    # 'two_stars_review': two_stars_review,
+    # 'one_star_review': one_star_review
+#     }
+    # )
     return render(
         request,
         'pages/adventures.html'
