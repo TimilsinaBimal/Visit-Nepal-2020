@@ -38,17 +38,18 @@ class Place(models.Model):
 
 class PlaceImage(models.Model):
     place = models.ForeignKey(
-        Place, on_delete=models.CASCADE, verbose_name="Name of the Place", default="")
+        Place, on_delete=models.CASCADE, verbose_name="Name of the Place", default=None)
     placeImage = models.ImageField(
         upload_to="places/", verbose_name="Images of the Place")
 
     def __str__(self):
-        return self.place.placeName
+        return self.place.placeImage.url
 
 
-class AdventureToPlace(models.Model):
-    place = models.ForeignKey(Place,verbose_name = "Place Name", default="",on_delete=models.CASCADE)
-    adventure = models.ForeignKey(Adventure,verbose_name = "Adventure",default ="",on_delete=models.CASCADE)
+class AdventuresInPlace(models.Model):
+    place = models.ForeignKey(
+        Place, on_delete=models.CASCADE, verbose_name="Places for this Adventure", default=None)
+    adventure= models.ForeignKey(Adventure,on_delete=models.CASCADE,verbose_name = "Adventures in this Place",default=None)
 
     def __str__(self):
         return f"Place: {self.place.placeName}  \n Adventure: {self.adventure.adventureName}"

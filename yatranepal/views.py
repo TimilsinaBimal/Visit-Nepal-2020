@@ -5,7 +5,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages, auth
 from django.db import IntegrityError
-from .models import Place, Profile, Transportation, TransportationType, Package, Adventure, Hotel,AdventureToPlace,PlaceImage,Review
+from .models import Place, Profile, Transportation, TransportationType, Package, Adventure, Hotel,AdventuresInPlace,PlaceImage,Review,AdventureImage,HotelImage,PackageImage
 # Create your views here.
 
 
@@ -92,17 +92,18 @@ one_star_review= ["checked", "", "", "", ""]
 
 # Place Details Page View
 def placeDetailView(request,placeLink):
+
     # Getting place details from Database
     placeContent = Place.objects.get(placeSlug=placeLink)
 
     # Fetching To-Do list for Same place from Database
-    adventure = [item.adventure for item in AdventureToPlace.objects.filter(
+    adventure = [item.adventure for item in AdventuresInPlace.objects.filter(
         place__placeSlug=placeLink)]
 
     # Getting Images for places from Database
     images = [item for item in PlaceImage.objects.filter(place__placeSlug= placeLink)]
 
-# Review Form
+    # Review Form
     if request.method == "POST":
         form = ReviewForm(request.POST)
         if form.is_valid():
@@ -128,7 +129,7 @@ def placeDetailView(request,placeLink):
 
     return render(
         request,
-        'pages/places.html',
+        'pages/placeDetail.html',
         {
             'place': placeContent,
             'adventure': adventure,
@@ -147,73 +148,69 @@ def placeDetailView(request,placeLink):
 # Adventure Details Page View
 def adventureDetailView(request,adventureLink):
 
-    # # Getting Adventure details from Database
-    # adventureContent = Adventure.objects.get(adventureSlug=adventureLink)
+    # Getting Adventure details from Database
+    adventureContent = Adventure.objects.get(adventureSlug=adventureLink)
 
-    # # Fetching To-Do list for Same place from Database
-    # place = [item.place for item in AdventureToPlace.objects.filter(
-    #     adventure__adventureSlug=adventureLink)]
+    # Fetching To-Do list for Same place from Database
+    place = [item.place for item in AdventuresInPlace.objects.filter(
+        adventure__adventureSlug=adventureLink)]
 
-    # # Getting Images for places from Database
-    # images = [item for item in adventureImage.objects.filter(
-    #     adventure__adventureSlug=adventureLink)]
+    # Getting Images for places from Database
+    images = [item for item in AdventureImage.objects.filter(
+        adventure__adventureSlug=adventureLink)]
 
-    # # Review Form
-    # if request.method == "POST":
-    #     form = ReviewForm(request.POST)
-    #     if form.is_valid():
-    #         try:
-    #             instance = form.save(commit=False)
-    #             instance.reviewedFor = adventureContent.adventureName
-    #             instance.save()
+    # Review Form
+    if request.method == "POST":
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            try:
+                instance = form.save(commit=False)
+                instance.reviewedFor = adventureContent.adventureName
+                instance.save()
 
-    #         except IntegrityError as e:
-    #             return HttpResponse('<script>alert("You have already reviewed this Adventure.")</script>')
-    #     else:
-    #         return HttpResponse('<script>alert("Error Occured! Please Review your form and Submit again.")</script>')
+            except IntegrityError as e:
+                return HttpResponse('<script>alert("You have already reviewed this Adventure.")</script>')
+        else:
+            return HttpResponse('<script>alert("Error Occured! Please Review your form and Submit again.")</script>')
 
 
-    # # Handling Reviews Lists
-    # reviews = [item for item in Review.objects.filter(
-    #     reviewedFor=adventureContent.adventureName)]
-    # # Profile.objects.filter(user=reviews.user)
-    # userProfile = []
-    # for item in reviews:
-    #     userProfileList = Profile.objects.get(user__username=item.user)
-    #     userProfile.append(userProfileList)
+    # Handling Reviews Lists
+    reviews = [item for item in Review.objects.filter(
+        reviewedFor=adventureContent.adventureName)]
+    # Profile.objects.filter(user=reviews.user)
+    userProfile = []
+    for item in reviews:
+        userProfileList = Profile.objects.get(user__username=item.user)
+        userProfile.append(userProfileList)
 
-    # adventureReview = zip(reviews, userProfile)
+    adventureReview = zip(reviews, userProfile)
 
-    # return render(
-    #     request,
-    #     'pages/adventures.html',
-    #     {
-    #         'adventure': adventureContent,
-    #         'place': place,
-    #         'adventureImage': images,
-    #         'form': ReviewForm,
-    #         'reviews': adventureReview,
-    #         'user': request.user,
-    #         'five_stars_review': five_stars_review,
-    #         'four_stars_review': four_stars_review,
-    #         'three_stars_review': three_stars_review,
-    #         'two_stars_review': two_stars_review,
-    #         'one_star_review': one_star_review
-    # }
-    # )
-     return render(
-         request,
-         'pages/hotels.html'
-     )
-
-def hotelDetailView(request):
     return render(
         request,
-        'pages/hotels.html'
+        'pages/adventureDetail.html',
+        {
+            'adventure': adventureContent,
+            'place': place,
+            'adventureImage': images,
+            'form': ReviewForm,
+            'reviews': adventureReview,
+            'user': request.user,
+            'five_stars_review': five_stars_review,
+            'four_stars_review': four_stars_review,
+            'three_stars_review': three_stars_review,
+            'two_stars_review': two_stars_review,
+            'one_star_review': one_star_review
+    }
     )
 
-def packageDetailView(request):
+def hotelDetailView(request,hotelLink):
     return render(
         request,
-        'pages/packages.html'
+        'pages/hotelDetail.html'
+    )
+
+def packageDetailView(request,packageLink):
+    return render(
+        request,
+        'pages/packageDetail.html'
     )
