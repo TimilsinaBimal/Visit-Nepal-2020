@@ -162,42 +162,49 @@ def adventureDetailView(request,adventureLink):
     # if request.method == "POST":
     #     form = ReviewForm(request.POST)
     #     if form.is_valid():
-    #         instance = form.save(commit=False)
-    #         instance.reviewedFor = placeContent.placeName
-    #         instance.save()
+    #         try:
+    #             instance = form.save(commit=False)
+    #             instance.reviewedFor = adventureContent.adventureName
+    #             instance.save()
+
+    #         except IntegrityError as e:
+    #             return HttpResponse('<script>alert("You have already reviewed this Adventure.")</script>')
+    #     else:
+    #         return HttpResponse('<script>alert("Error Occured! Please Review your form and Submit again.")</script>')
+
 
     # # Handling Reviews Lists
     # reviews = [item for item in Review.objects.filter(
-    #     reviewedFor=placeContent.placeName)]
+    #     reviewedFor=adventureContent.adventureName)]
     # # Profile.objects.filter(user=reviews.user)
     # userProfile = []
     # for item in reviews:
     #     userProfileList = Profile.objects.get(user__username=item.user)
     #     userProfile.append(userProfileList)
 
-    # placeReviews = zip(reviews, userProfile)
+    # adventureReview = zip(reviews, userProfile)
 
     # return render(
     #     request,
-    #     'pages/places.html',
+    #     'pages/adventures.html',
     #     {
-    #         'place': placeContent,
-    #         'adventure': adventure,
-    #         'placeImage': images,
+    #         'adventure': adventureContent,
+    #         'place': place,
+    #         'adventureImage': images,
     #         'form': ReviewForm,
-    #         'reviews': placeReviews,
+    #         'reviews': adventureReview,
     #         'user': request.user,
-    # 'five_stars_review': five_stars_review,
-    # 'four_stars_review': four_stars_review,
-    # 'three_stars_review': three_stars_review,
-    # 'two_stars_review': two_stars_review,
-    # 'one_star_review': one_star_review
-#     }
+    #         'five_stars_review': five_stars_review,
+    #         'four_stars_review': four_stars_review,
+    #         'three_stars_review': three_stars_review,
+    #         'two_stars_review': two_stars_review,
+    #         'one_star_review': one_star_review
+    # }
     # )
-    return render(
-        request,
-        'pages/adventures.html'
-    )
+     return render(
+         request,
+         'pages/hotels.html'
+     )
 
 def hotelDetailView(request):
     return render(

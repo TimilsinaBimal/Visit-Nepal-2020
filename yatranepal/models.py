@@ -11,6 +11,7 @@ from django_currentuser.db.models import CurrentUserField
 class Adventure(models.Model):
     adventureName = models.CharField(
         max_length=200, verbose_name="Name of Adventure")
+    adventureTheme = models.CharField(max_length=200,verbose_name="Theme for Adventure",default="")
     adventureDesc = models.TextField(verbose_name="Adventure Description")
     adventureImage = models.ImageField(
         upload_to="adventures/", verbose_name="Adventure Image")
@@ -22,14 +23,12 @@ class Adventure(models.Model):
 
 
 
-
 class Place(models.Model):
     placeName = models.CharField(
         max_length=255, verbose_name="Name of the Place")
     placetheme = models.CharField(max_length = 500, verbose_name = "Theme of the Place",default="")
     placeImage = models.ImageField(
         upload_to="places/", verbose_name="Image of Place")
-    # placeImages = models.ImageField(upload_to="places/")
     placeDesc = models.TextField(verbose_name="Place Description")
     placeSlug = models.CharField(max_length=50, verbose_name="Place URL")
 
@@ -41,10 +40,11 @@ class PlaceImage(models.Model):
     place = models.ForeignKey(
         Place, on_delete=models.CASCADE, verbose_name="Name of the Place", default="")
     placeImage = models.ImageField(
-        upload_to="places/", verbose_name="Image of the Place")
+        upload_to="places/", verbose_name="Images of the Place")
 
     def __str__(self):
         return self.place.placeName
+
 
 class AdventureToPlace(models.Model):
     place = models.ForeignKey(Place,verbose_name = "Place Name", default="",on_delete=models.CASCADE)
@@ -53,11 +53,14 @@ class AdventureToPlace(models.Model):
     def __str__(self):
         return f"Place: {self.place.placeName}  \n Adventure: {self.adventure.adventureName}"
 
+
 class Hotel(models.Model):
     hotelName = models.CharField(
         max_length=255, verbose_name="Name of the Hotel")
     hotelAddress = models.CharField(
         max_length=255, verbose_name="Location of Hotel")
+    hotelTheme = models.CharField(
+        max_length=500, verbose_name="Theme of the Hotel", default="")
     hotelImage = models.ImageField(
         upload_to='hotels/', verbose_name="Image of Hotel")
     hotelDesc = models.TextField(verbose_name="Hotel Description")
@@ -97,6 +100,8 @@ class Transportation(models.Model):
 class Package(models.Model):
     packageName = models.CharField(max_length=200, verbose_name="Package Name")
     packageDesc = models.TextField(verbose_name="Package Description")
+    packageTheme = models.CharField(
+        max_length=500, verbose_name="Theme of the Package", default="")
     packageImage = models.ImageField(
         upload_to="packages/", verbose_name="Package Image")
     packageSlug = models.CharField(max_length=50, verbose_name="Package URL")
