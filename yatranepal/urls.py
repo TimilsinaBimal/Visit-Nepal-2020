@@ -21,7 +21,9 @@ urlpatterns = [
     path('register/', views.register, name='register'),
     path('logout/', views.logout, name='logout'),
     path('place/<placeLink>', views.placeDetailView, name='placeDetail'),
-    path('adventure/<adventureLink>', views.adventureDetailView, name='adventureDetail'),
+    path('adventure/<adventureLink>',
+         views.adventureDetailView, name='adventureDetail'),
     path('hotel/<hotelLink>', views.hotelDetailView, name='hotelDetail'),
     path('package/<packageLink>', views.packageDetailView, name='packageDetail'),
+    path('news/<newsLink>', views.newsDetailView, name='newsDetail'),
 ]

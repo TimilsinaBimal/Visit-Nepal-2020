@@ -6,16 +6,13 @@
         <div class="news">
             <div class="crawl">
                 <ol class="crawl__list">
-                    <li class="crawl__item">Govt told to intensify bid to resolve border dispute</li>
-                    <li class="crawl__item">Increase in number of women delivering at Bhojpur health facilities
-                    </li>
-                    <li class="crawl__item">Govt told to intensify bid to resolve border dispute</li>
-                    <li class="crawl__item">Govt told to intensify bid to resolve border dispute</li>
-                    <li class="crawl__item">Govt told to intensify bid to resolve border dispute</li>
-                    <li class="crawl__item">Govt told to intensify bid to resolve border dispute</li>
-                    <li class="crawl__item">Govt told to intensify bid to resolve border dispute</li>
+                    {% for h,i in news_title %}
+                    <a href="news/{{ i }}">
+                        <li class="crawl__item">{{ h }}</li>
+                    </a>
+                    {% endfor %}
                 </ol>
-                <a href="#" class="btn-text">Learn More &rarr;</a>
+                <a href="#" class="btn-text">All News &rarr;</a>
             </div>
         </div>
 

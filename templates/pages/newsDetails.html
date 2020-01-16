@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+<header class="detail detail--4">
+    <nav class="nav-bar">
+        <div class="row">
+            <img src="{% static 'img/logo.png' %}" alt="logo" class="nav-bar__logo">
+            <ul class="nav-bar__titles">
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="#">Features</a></li>
+                <li><a href="#">Adventures</a></li>
+                <li><a href="#">Hotels</a></li>
+                <li><a href="#">News</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="header__text-box">
+        <div class="header__text-box">
+            <h1 class="heading-primary">
+                <span class="heading-primary--detail">{{ news_title }}</span>
+            </h1>
+        </div>
+    </div>
+</header>
+
+<section class="detail-text">
+
+    <div class="row">
+
+        <div class="col-1-of-2">
+            <div class="u-center-text u-margin-bottom-medium u-margin-top-big">
+                <h2 class="heading-secondary heading-secondary--big u-margin-bottom-medium">{{ news_title }}
+                </h2>
+                <img height=600 src="{{news_image}}" alt="{{news_title}}">
+                <p class="paragraph paragraph--justified"> {{ news_content }}
+                </p>
+            </div>
+        </div>
+
+        <style>
+            .detail {
+                background-image: linear-gradient(to bottom right, rgba(126, 213, 111, 0.6), rgba(86, 67, 250, 0.6)),
+                    url();
+            }
+        </style>
+    </div>
+</section>
+
+{% endblock content %}

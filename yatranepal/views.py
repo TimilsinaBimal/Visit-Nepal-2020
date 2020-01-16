@@ -1,3 +1,5 @@
+from bs4 import BeautifulSoup
+import requests
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .forms import SignUpForm, LoginForm, ReviewForm
@@ -5,12 +7,22 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages, auth
 from django.db import IntegrityError
-from .models import Place, Profile, Transportation, TransportationType, Package, Adventure, Hotel,AdventuresInPlace,PlaceImage,Review,AdventureImage,HotelImage,PackageImage
+from .models import Place, Profile, Transportation, TransportationType, Package, Adventure, Hotel, AdventuresInPlace, PlaceImage, Review, AdventureImage, HotelImage, PackageImage
 # Create your views here.
 
 
-def homePageView(request):
+# News Scrapper
+res = requests.get("https://visitnepal2020.com/news/")
+soup = BeautifulSoup(res.text, 'lxml')
+temp_headline = soup.select('.card-theme-news-title')
+temp_link = soup.find_all('a', {'class': 'card--news__link'})
 
+headline = [i.text for i in temp_headline]
+link = [i.get('href') for i in temp_link]
+newsLink = [i.lower().replace(' ', '-') for i in headline]
+
+
+def homePageView(request):
     if request.method == "POST":
         form = LoginForm(request=request, data=request.POST)
         if form.is_valid():
@@ -29,10 +41,13 @@ def homePageView(request):
 
     form = LoginForm()
     user = request.user
+    # News Section
+    my_title = zip(headline[0:7], newsLink[0:7])
 
     if user.is_authenticated:
         fullname = user.get_full_name()
         context = {
+            "news_title": my_title,
             "form": form,
             'user': user,
             "fullname": fullname,
@@ -82,16 +97,15 @@ def logout(request):
 
 
 # Reviews Details
-five_stars_review= ["checked", "checked", "checked", "checked", "checked"]
-four_stars_review= ["checked", "checked", "checked", "checked", ""]
-three_stars_review= ["checked", "checked", "checked", "", ""]
-two_stars_review= ["checked", "checked", "", "", ""]
-one_star_review= ["checked", "", "", "", ""]
-
+five_stars_review = ["checked", "checked", "checked", "checked", "checked"]
+four_stars_review = ["checked", "checked", "checked", "checked", ""]
+three_stars_review = ["checked", "checked", "checked", "", ""]
+two_stars_review = ["checked", "checked", "", "", ""]
+one_star_review = ["checked", "", "", "", ""]
 
 
 # Place Details Page View
-def placeDetailView(request,placeLink):
+def placeDetailView(request, placeLink):
 
     # Getting place details from Database
     placeContent = Place.objects.get(placeSlug=placeLink)
@@ -101,7 +115,8 @@ def placeDetailView(request,placeLink):
         place__placeSlug=placeLink)]
 
     # Getting Images for places from Database
-    images = [item for item in PlaceImage.objects.filter(place__placeSlug= placeLink)]
+    images = [item for item in PlaceImage.objects.filter(
+        place__placeSlug=placeLink)]
 
     # Review Form
     if request.method == "POST":
@@ -118,14 +133,15 @@ def placeDetailView(request,placeLink):
             return HttpResponse('<script>alert("Error Occured! Please Review your form and Submit again.")</script>')
 
     # Handling Reviews Lists
-    reviews = [item for item in Review.objects.filter(reviewedFor = placeContent.placeName)]
+    reviews = [item for item in Review.objects.filter(
+        reviewedFor=placeContent.placeName)]
     # Profile.objects.filter(user=reviews.user)
-    userProfile=[]
+    userProfile = []
     for item in reviews:
-        userProfileList= Profile.objects.get(user__username=item.user)
+        userProfileList = Profile.objects.get(user__username=item.user)
         userProfile.append(userProfileList)
 
-    placeReviews = zip(reviews,userProfile)
+    placeReviews = zip(reviews, userProfile)
 
     return render(
         request,
@@ -146,7 +162,9 @@ def placeDetailView(request,placeLink):
     )
 
 # Adventure Details Page View
-def adventureDetailView(request,adventureLink):
+
+
+def adventureDetailView(request, adventureLink):
 
     # Getting Adventure details from Database
     adventureContent = Adventure.objects.get(adventureSlug=adventureLink)
@@ -172,7 +190,6 @@ def adventureDetailView(request,adventureLink):
                 return HttpResponse('<script>alert("You have already reviewed this Adventure.")</script>')
         else:
             return HttpResponse('<script>alert("Error Occured! Please Review your form and Submit again.")</script>')
-
 
     # Handling Reviews Lists
     reviews = [item for item in Review.objects.filter(
@@ -200,16 +217,39 @@ def adventureDetailView(request,adventureLink):
             'three_stars_review': three_stars_review,
             'two_stars_review': two_stars_review,
             'one_star_review': one_star_review
-    }
+        }
     )
 
-def hotelDetailView(request,hotelLink):
+
+def newsDetailView(request, newsLink):
+    temp_url = "https://visitnepal2020.com/{}/"
+    url = temp_url.format(newsLink)
+    res = requests.get(url)
+    soup = BeautifulSoup(res.text, 'lxml')
+    news_title = soup.find('h3', {'class': 'modal--news__main-title'}).text
+    news_figure = soup.find(
+        'figure', {'class': 'review-wrap-content__figure text-center'})
+    news_image = news_figure.find('img').get('src')
+    news_content = soup.find('div', {'class': 'newspaper'}).text
+    return render(
+        request,
+        'pages/newsDetails.html',
+        {
+            'news_title': news_title,
+            'news_image': news_image,
+            'news_content': news_content
+        }
+    )
+
+
+def hotelDetailView(request, hotelLink):
     return render(
         request,
         'pages/hotelDetail.html'
     )
 
-def packageDetailView(request,packageLink):
+
+def packageDetailView(request, packageLink):
     return render(
         request,
         'pages/packageDetail.html'
