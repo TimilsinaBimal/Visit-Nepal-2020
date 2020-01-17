@@ -17,7 +17,7 @@
     <div class="header__text-box">
         <div class="header__text-box">
             <h1 class="heading-primary">
-                <span class="heading-primary--detail">Places</span>
+                <span class="heading-primary--detail">News</span>
                 <span class="heading-primary--sub">All Places of Nepal</span>
             </h1>
         </div>
@@ -34,46 +34,41 @@
     <div class="u-center-text u-margin-bottom-big">
     </div>
     <div class="row">
-        {% for p in place %}
+        {% for title,image,content,link in news %}
         <style>
-            .cards__picture-- {
-                    {
-                    p.placeSlug
-                }
-            }
-
+            .cards__picture--{{ link }}
                 {
                 background-image: linear-gradient(to right bottom, #2998ff, #ff7730),
-                url({{p.placeImage.url}});
+                url({{ image }});
             }
         </style>
         <div class="col-1-of-3">
             <div class="cards">
                 <div class="cards__side cards__side--front">
-                    <div class="cards__picture cards__picture--{{p.placeSlug}}">
+                    <div class="cards__picture cards__picture--{{ link }}">
                         &nbsp;
                     </div>
                     <h4 class="cards__heading">
                         <span class="cards__heading-span cards__heading-span--5">
-                            {{p.placeName}}
+                            {{ title }}
                         </span>
                     </h4>
                     <div class="cards__details">
                         <p class="paragraph">
-                            {{p.placeDesc|safe|slice:":300"}}
+                            {{content}}
                         </p>
                     </div>
                 </div>
                 <div class="cards__side cards__side--back cards__side--back-5">
                     <div class="cards__cta">
-                        <a href="../place/{{p.placeSlug}}" class="btn btn--white">See More</a>
+                        <a href="../news/{{link}}" class="btn btn--white">See More</a>
                     </div>
                 </div>
             </div>
         </div>
         {% endfor %}
     </div>
-    <div class=pg>
+    <!-- <div class=pg>
         <div class="u-center-text u-margin-top-medium u-padding-bottom-medium">
             <a href="#" class="btn-text">&larr;Prev </a>
             <a href="#" class="btn btn--card-detail">1</a>
@@ -87,6 +82,6 @@
         .pg {
             padding-bottom: 100px;
         }
-    </style>
+    </style> -->
 </section>
 {% endblock content %}

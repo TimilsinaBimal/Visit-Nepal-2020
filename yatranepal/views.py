@@ -140,12 +140,19 @@ def packageListView(request):
     )
 
 def newsListView(request):
-    adventures = Adventure.objects.all()
+    res = requests.get("https://visitnepal2020.com/news/")
+    temp_soup = BeautifulSoup(res.text, 'lxml')
+    soup =temp_soup.find_all('div',{'class':'review-wrap__review'})
+    news_title = [s.find('h5',{'class': 'card-theme-news-title'}).text for s in soup]
+    news_image = [s.find('img').get('src') for s in soup]
+    news_content = [s.find('p',{'class':'card-theme-news-text'}).text for s in soup]
+    news_slug = [t.lower().replace(' ', '-') for t in news_title]
+    news = zip(news_title, news_image ,news_content, news_slug)
     return render(
         request,
-        'listingPages/adventures.html',
+        'listingPages/news.html',
         {
-            "adventure": adventures,
+            "news": news,
         }
     )
 
