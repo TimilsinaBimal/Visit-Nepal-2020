@@ -1,5 +1,5 @@
-from bs4 import BeautifulSoup
 import requests
+from bs4 import BeautifulSoup
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .forms import SignUpForm, LoginForm, ReviewForm
@@ -96,6 +96,60 @@ def logout(request):
     auth.logout(request)
 
 
+# Listing Views
+
+def placeListView(request):
+    places = Place.objects.all()
+    return render(
+        request,
+        'listingPages/places.html',
+        {
+            "place": places,
+        }
+    )
+
+
+def adventureListView(request):
+    adventures = Adventure.objects.all()
+    return render(
+        request,
+        'listingPages/adventures.html',
+        {
+            "adventure": adventures,
+        }
+    )
+
+def hotelListView(request):
+    hotels = Hotel.objects.all()
+    return render(
+        request,
+        'listingPages/hotels.html',
+        {
+            "hotel": hotels,
+        }
+    )
+
+def packageListView(request):
+    packages = Package.objects.all()
+    return render(
+        request,
+        'listingPages/packages.html',
+        {
+            "package": packages,
+        }
+    )
+
+def newsListView(request):
+    adventures = Adventure.objects.all()
+    return render(
+        request,
+        'listingPages/adventures.html',
+        {
+            "adventure": adventures,
+        }
+    )
+
+
 # Reviews Details
 five_stars_review = ["checked", "checked", "checked", "checked", "checked"]
 four_stars_review = ["checked", "checked", "checked", "checked", ""]
@@ -166,14 +220,11 @@ def placeDetailView(request, placeLink):
 
 def adventureDetailView(request, adventureLink):
 
-    # Getting Adventure details from Database
     adventureContent = Adventure.objects.get(adventureSlug=adventureLink)
 
-    # Fetching To-Do list for Same place from Database
     place = [item.place for item in AdventuresInPlace.objects.filter(
         adventure__adventureSlug=adventureLink)]
 
-    # Getting Images for places from Database
     images = [item for item in AdventureImage.objects.filter(
         adventure__adventureSlug=adventureLink)]
 
@@ -187,7 +238,7 @@ def adventureDetailView(request, adventureLink):
                 instance.save()
 
             except IntegrityError as e:
-                return HttpResponse('<script>alert("You have already reviewed this Adventure.")</script>')
+                return HttpResponseRedirect('<script>alert("You have already reviewed this Adventure.")</script>')
         else:
             return HttpResponse('<script>alert("Error Occured! Please Review your form and Submit again.")</script>')
 

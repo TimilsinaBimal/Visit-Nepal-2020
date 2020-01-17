@@ -119,6 +119,7 @@ class SignUpForm(UserCreationForm):
 
 # user = request.user
 
+
 class ReviewForm(ModelForm):
     reviewedFor = forms.CharField(
         required=True,
@@ -143,13 +144,14 @@ class ReviewForm(ModelForm):
         required=True,
         widget=forms.Textarea(
             attrs={
-                'cols':80,
-                'rows':8,
+                'cols': 80,
+                'rows': 8,
                 'class': 'form__input',
                 'id': 'comment',
                 'placeholder': 'Your Review Here...',
             })
     )
+
     class Meta:
         model = Review
-        fields=['reviewedFor','rating','comments']
+        fields = ['reviewedFor', 'rating', 'comments']
