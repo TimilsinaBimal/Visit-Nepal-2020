@@ -11,7 +11,7 @@
             .cards__picture--{{h.hotelSlug}}
                 {
                 background-image: linear-gradient(to right bottom, #2998ff, #ff7730),
-                url(media/{{h.hotelImage}});
+                url({{h.hotelImage.url}});
             }
         </style>
         <div class="col-1-of-3">
@@ -38,10 +38,10 @@
                     <div class="cards__cta">
                         <div class="cards__price-box">
                             <div class="cards__price-only">Only</div>
-                            <div class="cards__price-value">{{h.hotelPrice}}</div>
+                            <div class="cards__price-value">{{h.hotelPrice}} NPR</div>
                             <div class="cards__price-only">1 Room | 1 Guest</div>
                         </div>
-                        <a href="{{h.hotelSlug}}" class="btn btn--white">Book Now!</a>
+                        <a href="hotel/{{h.hotelSlug}}" class="btn btn--white">See Details!</a>
                     </div>
 
                 </div>
@@ -50,6 +50,6 @@
         {% endfor %}
     </div>
     <div class="u-center-text u-margin-top-huge">
-        <a href="#" class="btn btn--green">Show More Hotels</a>
+        <a href="{% url 'hotels' %}" class="btn btn--green">See All Hotels</a>
     </div>
 </section>

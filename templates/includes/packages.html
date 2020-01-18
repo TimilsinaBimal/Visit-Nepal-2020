@@ -39,7 +39,7 @@
                             <div class="cards__price-only">Only</div>
                             <div class="cards__price-value">{{p.packagePrice}}</div>
                         </div>
-                        <a href="{{p.packageSlug}}" class="btn btn--white">Book Now!</a>
+                        <a href="package/{{p.packageSlug}}" class="btn btn--white">See Details!</a>
                     </div>
 
                 </div>
@@ -48,6 +48,6 @@
         {% endfor %}
     </div>
     <div class="u-center-text u-margin-top-huge">
-        <a href="#" class="btn btn--green">More Packages</a>
+        <a href="{% url 'packages' %}" class="btn btn--green">See All Packages</a>
     </div>
 </section>
