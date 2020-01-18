@@ -20,7 +20,8 @@
                 </div>
 
                 <div class="form__group">
-                    <span class="form__register-text"> Hello {{fullname}}</span><a href="{% url 'logout' %}" class="btn-text">Logout &rarr;</a>
+                    <span class="form__register-text"> Hello {{user.first_name}} {{user.last_name}}</span><a
+                        href="{% url 'logout' %}" class="btn-text">Logout &rarr;</a>
                 </div>
                 {% else %}
                 <div class="form__group">

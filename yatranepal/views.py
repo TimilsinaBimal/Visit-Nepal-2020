@@ -11,7 +11,6 @@ from .models import Place, Profile, Transportation, TransportationType, Package,
 # Create your views here.
 
 def homePageView(request):
-    # News Scrapper
     # res = requests.get("https://visitnepal2020.com/news/")
     # soup = BeautifulSoup(res.text, 'lxml')
     # temp_headline = soup.select('.card-theme-news-title')
@@ -19,7 +18,6 @@ def homePageView(request):
     # newsLink = [i.lower().replace(' ', '-') for i in headline]
 
     user = request.user
-    # News Section
     # my_title = zip(headline[0:7], newsLink[0:7])
 
     temp_adventures = Adventure.objects.all()[0:3]
@@ -27,43 +25,21 @@ def homePageView(request):
 
     temp_places = Place.objects.all()[0:3]
     places = enumerate(temp_places,4)
-
-    if user.is_authenticated:
-        fullname = user.get_full_name()
-        context = {
-            # "news_title": my_title,
-            # "form": form,
-            'user': user,
-            "fullname": fullname,
-            "hotels": Hotel.objects.all()[0:3],
-            "places": Place.objects.all()[0:3],
-            "adventures": Adventure.objects.all()[0:3],
-            'n_places': places,
-            'n_adventures':adventures,
-            "packages": Package.objects.all()[0:3],
-        }
-        return render(
-            request,
-            "home.html",
-            context
-        )
-    else:
-        return render(
+    return render(
             request,
             "home.html",
             {
-                # "form": form,
                 # "news_title": my_title,
+                # "form": form,
+                'user': user,
                 "hotels": Hotel.objects.all()[0:3],
                 "places": Place.objects.all()[0:3],
                 "adventures": Adventure.objects.all()[0:3],
                 'n_places': places,
                 'n_adventures':adventures,
                 "packages": Package.objects.all()[0:3],
-            },
-
+            }
         )
-
 
 
 def register(request):
@@ -100,7 +76,7 @@ def loginView(request):
                 login(request, user)
                 messages.info(
                     request, f"Logged in Successfully as: {username}")
-                return redirect('home')
+                return redirect('connect')
             else:
                 return messages.error(request, "Invalid Username or Password")
         else:
