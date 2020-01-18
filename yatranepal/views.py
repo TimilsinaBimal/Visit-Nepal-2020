@@ -46,7 +46,6 @@ def homePageView(request):
             {
                 # "form": form,
                 # "news_title": my_title,
-                # "form": form,
                 "hotels": Hotel.objects.all()[0:3],
                 "places": Place.objects.all()[0:3],
                 "adventures": Adventure.objects.all()[0:3],
