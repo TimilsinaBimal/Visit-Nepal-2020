@@ -24,9 +24,9 @@
         </div>
         <div class="col-1-of-2">
             <div class="composition">
-                {% for p in places %}
+                {% for n,p in n_places %}
                 <img src="media/{{p.placeImage}}" alt="{{p.placeName}}"
-                    class="composition__photo composition__photo--p{{p.id}}">
+                    class="composition__photo composition__photo--p{{n}}">
                 {% endfor %}
             </div>
         </div>

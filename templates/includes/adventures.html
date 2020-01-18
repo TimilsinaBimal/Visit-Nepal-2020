@@ -17,9 +17,9 @@
         </div>
         <div class="col-1-of-2">
             <div class="composition">
-                {% for a in adventures %}
+                {% for n,a in n_adventures %}
                 <img src="{{a.adventureImage.url}}" alt="{{a.adventureName}}"
-                    class="composition__photo composition__photo--p{{a.id}}">
+                    class="composition__photo composition__photo--p{{n}}">
                 {% endfor %}
             </div>
         </div>

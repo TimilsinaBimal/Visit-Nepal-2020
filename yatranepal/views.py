@@ -22,6 +22,12 @@ def homePageView(request):
     # News Section
     # my_title = zip(headline[0:7], newsLink[0:7])
 
+    temp_adventures = Adventure.objects.all()[0:3]
+    adventures = enumerate(temp_adventures,1)
+
+    temp_places = Place.objects.all()[0:3]
+    places = enumerate(temp_places,4)
+
     if user.is_authenticated:
         fullname = user.get_full_name()
         context = {
@@ -32,6 +38,8 @@ def homePageView(request):
             "hotels": Hotel.objects.all()[0:3],
             "places": Place.objects.all()[0:3],
             "adventures": Adventure.objects.all()[0:3],
+            'n_places': places,
+            'n_adventures':adventures,
             "packages": Package.objects.all()[0:3],
         }
         return render(
@@ -49,6 +57,8 @@ def homePageView(request):
                 "hotels": Hotel.objects.all()[0:3],
                 "places": Place.objects.all()[0:3],
                 "adventures": Adventure.objects.all()[0:3],
+                'n_places': places,
+                'n_adventures':adventures,
                 "packages": Package.objects.all()[0:3],
             },
 
