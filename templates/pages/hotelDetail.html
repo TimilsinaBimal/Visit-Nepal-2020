@@ -1,18 +1,19 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 {% block content %}
-{% includes './../includes/nav.html' %}
 <section class="section-detail">
     <header class="detail detail--7">
         <nav class="nav-bar">
             <div class="row">
                 <img src="{% static 'img/logo.png' %}" alt="logo" class="nav-bar__logo">
                 <ul class="nav-bar__titles">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Features</a></li>
-                    <li><a href="#">Adventures</a></li>
-                    <li><a href="#">Hotels</a></li>
-                    <li><a href="#">Book</a></li>
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'places' %}">Places</a></li>
+                    <li><a href="{% url 'adventures' %}">Adventures</a></li>
+                    <li><a href="{% url 'hotels' %}" class="active">Hotels</a></li>
+                    <li><a href="{% url 'news' %}">News</a></li>
+                    <li><a href="{% url 'packages' %}">Packages</a></li>
+                    <li><a href="{% url 'connect' %}">Connect</a></li>
                 </ul>
             </div>
         </nav>
@@ -20,75 +21,45 @@
 
             <div class="header__text-box">
                 <h1 class="heading-primary">
-                    <span class="heading-primary--detail">Hyatt</span>
-                    <span class="heading-primary--sub"> Regency kathmadnu</span>
+                    <span class="heading-primary--detail">{{hotel.hotelName}}</span>
+                    <span class="heading-primary--sub">{{hotel.hotelTheme}}</span>
                 </h1>
             </div>
         </div>
     </header>
 
+    <style>
+        .detail {
+            background-image: linear-gradient(to bottom right, rgba(126, 213, 111, 0.6), rgba(86, 67, 250, 0.6)),
+            url({{hotel.hotelImage.url}});
+        }
+    </style>
+
     <section class="detail-text">
         <div class="row">
             <div class="col-1-of-2">
                 <div class="u-center-text u-margin-bottom-medium u-margin-top-big">
-                    <h2 class="heading-secondary heading-secondary--big u-margin-bottom-medium"> About Hyatt
+                    <h2 class="heading-secondary heading-secondary--big u-margin-bottom-medium"> About {{hotel.hotelName}}
                     </h2>
-                    <p class="paragraph paragraph--justified">Lorem ipsum dolor sit amet consectetur,
-                        adipisicing elit. Distinctio cumque quis reiciendis voluptatibus, a voluptates. Cum
-                        ullam cumque voluptatibus, suscipit voluptate maiores! Ex in ad officia illo impedit eum
-                        provident.<br><br>
-                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Placeat dolorem modi
-                        praesentium quod porro, dignissimos, delectus corrupti dolor omnis beatae hic tempora!
-                        Temporibus dolorem, placeat obcaecati voluptatum porro consequatur mollitia?Lorem ipsum
-                        dolor, sit amet consectetur adipisicing elit. Incidunt laboriosam quia, odio cumque non
-                        rerum repellendus esse velit delectus tempora, sint praesentium voluptate reprehenderit
-                        quo, sequi expedita quis inventore. Suscipit.
+                    <p class="paragraph paragraph--justified">
+                        {{hotel.hotelDesc|safe}}
                     </p>
                 </div>
             </div>
-
-
-
-
             <div class="col-1-of-2">
-
                 <div class="u-center-text u-margin-bottom-medium u-margin-top-big">
                     <h2 class="heading-secondary heading-secondary--big"> Services</h2>
                     <div class="cards__details">
 
 
                         <ul class="detail-text__items">
+                            {% for list in hotel.features_as_list %}
                             <li>
                                 <div class="detail__icons">
-                                    <ion-icon name="man"></ion-icon>
-                                    Room Service
+                                    {{list|safe}}
                                 </div>
                             </li>
-
-                            <li>
-                                <div class="detail__icons">
-                                    <ion-icon name="sunny"></ion-icon>Pool
-                                </div>
-                            </li>
-
-                            <li>
-                                <div class="detail__icons">
-                                    <ion-icon name="ios-restaurant"></ion-icon>Restaurant On-Site
-                                </div>
-                            </li>
-
-                            <li>
-                                <div class="detail__icons">
-                                    <ion-icon name="ios-wifi"></ion-icon>WiFi
-                                </div>
-                            </li>
-
-                            <li>
-                                <div class="detail__icons">
-                                    <ion-icon name="fitness"></ion-icon>Fitness Center
-                                </div>
-                            </li>
-
+                            {% endfor %}
                         </ul>
                     </div>
                 </div>
@@ -96,41 +67,31 @@
 
         </div>
     </section>
+    <section class="book-now-box">
+        <div class="col-span-1-of-2">
+
+            <h2 class="heading-secondary heading-secondary--big"> WHAT ARE YOU WAITING FOR?</h2>
+
+            <p class="paragraph">
+                NPR {{hotel.hotelPrice}}. 1 Place for all. Infinite memories. Make it yours today!
+            </p>
+        </div>
+        <div class="col-span-1-of-2">
+            <a href="#" class="btn btn--green book-now-box__link">Book Now!</a>
+        </div>
+    </section>
     <section class="section-gallery">
         <ul class="gallery-showcase clearfix">
+            {% for image in hotelImage %}
             <li>
                 <figure class="gallery-photo">
-                    <img src="../../img/hyatt-3.jpg" alt="Korean bibimbap with egg and vegetables">
+                    <img src="{{image.hotelImages.url}}" alt="{{hotel.hotelName}}">
                 </figure>
             </li>
-            <li>
-                <figure class="gallery-photo">
-                    <img src="../../img/hyatt-hotel.png" alt="Simple italian pizza with cherry tomatoes">
-                </figure>
-            </li>
-            <li>
-                <figure class="gallery-photo">
-                    <img src="../../img/hyatt-2.webp" alt="Chicken breast steak with vegetables">
-                </figure>
-            </li>
-
+            {% endfor %}
         </ul>
 
     </section>
-    <!--
-<section class="detail-pictures">
-
-        <div class="detail__pictures">
-        <img src="../../img/gosaikunda.jpg" class="detail__img">
-        </div>
-        <div class="detail__pictures">
-            <img src="../../img/gosaikunda.jpg" class="detail__img">
-            </div>
-            <div class="detail__pictures">
-                <img src="../../img/gosaikunda.jpg" class="detail__img">
-                </div>
-
-            </section>-->
 
     <section class="detail-ratings">
 
@@ -138,124 +99,99 @@
             <h2 class="heading-secondary">Reviews</h2>
         </div>
         <div class="row">
-            <div class="reviews reviews--detail">
-                <figure class="reviews__shape reviews__shape--detail">
-                    <img src="../../img/review 1.jpg" alt="photo for review" class="reviews__img reviews__img--detail">
-                    <figcaption class="reviews__caption">Emily Kutcher</figcaption>
-                </figure>
-                <div class="reviews__text reviews__text--detail">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione hic repellat autem
-                        quidem officiis explicabo magni qua</p>
-                </div>
-                <div class="reviews__star">
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
-                </div>
-            </div>
+                {% for r,p in reviews %}
+                <div class="reviews reviews--detail">
+                    <figure class="reviews__shape reviews__shape--detail">
+                        <img src="{{p.profileImage.url}}" alt="photo for review"
+                            class="reviews__img reviews__img--detail">
+                        <figcaption class="reviews__caption">{{r.user.first_name}} {{r.user.last_name}}</figcaption>
+                    </figure>
+
+                    <div class="reviews__text reviews__text--detail">
+                        <p>{{r.comments}}</p>
+                    </div>
+                    <div class="reviews__star">
+                        {% if r.rating == 5 %}
+                        {% for rating in five_stars_review%}
+                        <span class="fa fa-star {{rating}}"></span>
+                        {% endfor %}
+
+                        {% elif r.rating == 4 %}
+                        {% for rating in four_stars_review%}
+                        <span class="fa fa-star {{rating}}"></span>
+                        {% endfor %}
+
+                        {% elif r.rating == 3 %}
+                        {% for rating in three_stars_review%}
+                        <span class="fa fa-star {{rating}}"></span>
+                        {% endfor %}
 
 
-            <div class="reviews reviews--detail">
-                <figure class="reviews__shape reviews__shape--detail">
-                    <img src="../../img/jenny ally.jpg" alt="photo for review"
-                        class="reviews__img reviews__img--detail">
-                    <figcaption class="reviews__caption">Jenny Ally</figcaption>
-                </figure>
-                <div class="reviews__text reviews__text--detail">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione hic repellat autem
-                        quidem officiis explicabo magni qua</p>
-                </div>
-                <div class="reviews__star">
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star"></span>
-                </div>
-            </div>
+                        {% elif r.rating == 2 %}
+                        {% for rating in two_stars_review%}
+                        <span class="fa fa-star {{rating}}"></span>
+                        {% endfor %}
 
+                        {% else %}
+                        {% for rating in four_stars_review%}
+                        <span class="fa fa-star {{rating}}"></span>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
 
+                </div>
 
-            <div class="reviews reviews--detail">
-                <figure class="reviews__shape reviews__shape--detail">
-                    <img src="../../img/ashton kutcher.jpg" alt="photo for review"
-                        class="reviews__img reviews__img--detail">
-                    <figcaption class="reviews__caption">David Williams</figcaption>
-                </figure>
-                <div class="reviews__text reviews__text--detail">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione hic repellat autem
-                        quidem officiis explicabo magni qua</p>
-                </div>
-                <div class="reviews__star">
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
-                </div>
-            </div>
+                {% endfor %}
         </div>
     </section>
-    <section class="book-now-box">
 
 
-        <div class="col-span-1-of-2">
+    {% if user.is_authenticated %}
+    <section class="section-profile">
+        <div class="row">
+            <div class="register">
+                <form method="POST" class="register__form">
+                    <div class="u-center-text u-margin-bottom-medium">
+                        <h2 class="heading-secondary"> Write a Review!!!</h2>
+                    </div>
 
-            <h2 class="heading-secondary heading-secondary--big"> WHAT ARE YOU WAITING FOR?</h2>
-
-            <p class="paragraph">
-                14 K. 1 Place for all. Infinite memories. Make it yours today!
-            </p>
+                    {% csrf_token %}
+                    {% if form.errors %}
+                    {% for field in form %}
+                    {% for error in field.errors %}
+                    <div class="alert alert-danger">
+                        <strong>{{ error|escape }}</strong>
+                    </div>
+                    {% endfor %}
+                    {% endfor %}
+                    {% for error in form.non_field_errors %}
+                    <div class="alert alert-danger">
+                        <strong>{{ error|escape }}</strong>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                    <div class="form__group">
+                        {{ form.reviewedFor }}
+                    </div>
+                    <div class="form__group">
+                        {{ form.rating.errors }}
+                        {{ form.rating }}
+                        <label class="form__label" for="{{ form.rating.id_for_label }}"> Rating</label>
+                    </div>
+                    <div class="form__group">
+                        {{ form.comments.errors }}
+                        {{ form.comments }}
+                        <label class="form__label" for="{{ form.comments.id_for_label }}"> Comments</label>
+                    </div>
+                    <div class="form__group">
+                        <button type="submit" class="btn btn--green">Submit</button>
+                    </div>
+                </form>
+            </div>
 
         </div>
-        <div class="col-span-1-of-2">
-            <a href="#" class="btn btn--green book-now-box__link">Book Now!</a>
-        </div>
-
-
     </section>
+    {% endif %}
+
 </section>
-<footer class="footer">
-    <div class="footer__logo-box">
-        <img src="{% static 'img/logo.png' %} " alt="visit nepal 2020" class="footer__logo">
-    </div>
-    <div class="row">
-        <div class="footer__navigation">
-            <div class="col-1-of-2">
-                <ul class="footer__list">
-                    <li class="footer__item"><a href="#" class="footer__link">About us</a></li>
-                    <li class="footer__item"><a href="#" class="footer__link">Contact us</a></li>
-                    <li class="footer__item"><a href="#" class="footer__link">About Nepal</a></li>
-                    <li class="footer__item"><a href="#" class="footer__link">Terms</a></li>
-                    <li class="footer__item"><a href="#" class="footer__link">Policy</a></li>
-                </ul>
-            </div>
-            <div class="col-1-of-2">
-                <ul class="footer__list footer__list--2">
-                    <li class="footer__item"><a href="#" class="footer__link footer__link--2">
-                            <ion-icon name="logo-facebook"></ion-icon>
-                        </a></li>
-                    <li class="footer__item"><a href="#" class="footer__link footer__link--2">
-                            <ion-icon name="logo-twitter"></ion-icon>
-                        </a></li>
-                    <li class="footer__item"><a href="#" class="footer__link footer__link--2">
-                            <ion-icon name="logo-github"></ion-icon>
-                        </a></li>
-                    <li class="footer__item"><a href="#" class="footer__link footer__link--2">
-                            <ion-icon name="mail"></ion-icon>
-                        </a></li>
-                    <li class="footer__item"><a href="#" class="footer__link footer__link--2">
-                            <ion-icon name="logo-youtube"></ion-icon>
-                        </a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="footer__copyright">
-        <p>Copyright &copy; Yatra Nepal, Visit Nepal 2020</p>
-    </div>
-
-</footer>
 {% endblock content %}

@@ -343,9 +343,51 @@ def newsDetailView(request, newsLink):
 
 
 def hotelDetailView(request, hotelLink):
+    hotelContent = Hotel.objects.get(hotelSlug=hotelLink)
+
+    images = [item for item in HotelImage.objects.filter(
+        hotel__hotelSlug=hotelLink)]
+
+    # Review Form
+    if request.method == "POST":
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            try:
+                instance = form.save(commit=False)
+                instance.reviewedFor = hotelContent.hotelName
+                instance.save()
+
+            except IntegrityError as e:
+                return HttpResponseRedirect('<script>alert("You have already reviewed this Hotel.")</script>')
+        else:
+            return HttpResponse('<script>alert("Error Occured! Please Review your form and Submit again.")</script>')
+
+    # Handling Reviews Lists
+    reviews = [item for item in Review.objects.filter(
+        reviewedFor=hotelContent.hotelName)]
+    # Profile.objects.filter(user=reviews.user)
+    userProfile = []
+    for item in reviews:
+        userProfileList = Profile.objects.get(user__username=item.user)
+        userProfile.append(userProfileList)
+
+    hotelReview = zip(reviews, userProfile)
+
     return render(
         request,
-        'pages/hotelDetail.html'
+        'pages/hotelDetail.html',
+        {
+            'hotel': hotelContent,
+            'hotelImage': images,
+            'form': ReviewForm,
+            'reviews': hotelReview,
+            'user': request.user,
+            'five_stars_review': five_stars_review,
+            'four_stars_review': four_stars_review,
+            'three_stars_review': three_stars_review,
+            'two_stars_review': two_stars_review,
+            'one_star_review': one_star_review
+        }
     )
 
 
