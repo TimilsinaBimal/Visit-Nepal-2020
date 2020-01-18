@@ -1,0 +1,33 @@
+
+<section class="section-book">
+    <div class="row">
+        <div class="book">
+            <form action="#" method="POST" class="book__form">
+                {% csrf_token %}
+                <div class="u-center-text u-margin-bottom-medium">
+                    <h2 class="heading-secondary"> Currency Converter!!!</h2>
+                </div>
+
+                <div class="form__group">
+                    <label class="form__label" for="">Amount to be Converted</label>
+                </div>
+
+                <div class="form__group">
+                    <label class="form__label" for="">Select source Currency</label>
+                </div>
+
+                <div class="form__group">
+                    <label class="form__label" for="">Destination Currency</label>
+                </div>
+                <div class="form__group">
+                    <label class="form__label" for="">Result</label>
+                </div>
+
+                <div class="form__group">
+                    <button type="submit" class=" btn btn--green">Convert</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</section>

@@ -10,48 +10,25 @@ from django.db import IntegrityError
 from .models import Place, Profile, Transportation, TransportationType, Package, Adventure, Hotel, AdventuresInPlace, PlaceImage, Review, AdventureImage, HotelImage, PackageImage
 # Create your views here.
 
-
-# News Scrapper
-res = requests.get("https://visitnepal2020.com/news/")
-soup = BeautifulSoup(res.text, 'lxml')
-temp_headline = soup.select('.card-theme-news-title')
-temp_link = soup.find_all('a', {'class': 'card--news__link'})
-
-headline = [i.text for i in temp_headline]
-link = [i.get('href') for i in temp_link]
-newsLink = [i.lower().replace(' ', '-') for i in headline]
-
-
 def homePageView(request):
-    if request.method == "POST":
-        form = LoginForm(request=request, data=request.POST)
-        if form.is_valid():
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password')
-            user = authenticate(username=username, password=password)
-            if user is not None:
-                login(request, user)
-                messages.info(
-                    request, f"Logged in Successfully as: {username}")
-                return redirect('home')
-            else:
-                return messages.error(request, "Invalid Username or Password")
-        else:
-            return messages.error(request, "Invalid Username or Password")
+    # News Scrapper
+    # res = requests.get("https://visitnepal2020.com/news/")
+    # soup = BeautifulSoup(res.text, 'lxml')
+    # temp_headline = soup.select('.card-theme-news-title')
+    # headline = [i.text for i in temp_headline]
+    # newsLink = [i.lower().replace(' ', '-') for i in headline]
 
-    form = LoginForm()
     user = request.user
     # News Section
-    my_title = zip(headline[0:7], newsLink[0:7])
+    # my_title = zip(headline[0:7], newsLink[0:7])
 
     if user.is_authenticated:
         fullname = user.get_full_name()
         context = {
-            "news_title": my_title,
-            "form": form,
+            # "news_title": my_title,
+            # "form": form,
             'user': user,
             "fullname": fullname,
-            "userDetail": Profile.objects.get(user=user),
             "hotels": Hotel.objects.all()[0:3],
             "places": Place.objects.all()[0:3],
             "adventures": Adventure.objects.all()[0:3],
@@ -66,9 +43,18 @@ def homePageView(request):
         return render(
             request,
             "home.html",
-            {"form": form},
+            {
+                # "form": form,
+                # "news_title": my_title,
+                # "form": form,
+                "hotels": Hotel.objects.all()[0:3],
+                "places": Place.objects.all()[0:3],
+                "adventures": Adventure.objects.all()[0:3],
+                "packages": Package.objects.all()[0:3],
+            },
 
         )
+
 
 
 def register(request):
@@ -92,8 +78,41 @@ def register(request):
     )
 
 
-def logout(request):
-    auth.logout(request)
+
+
+def loginView(request):
+    if request.method == "POST":
+        form = LoginForm(request=request, data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request, user)
+                messages.info(
+                    request, f"Logged in Successfully as: {username}")
+                return redirect('home')
+            else:
+                return messages.error(request, "Invalid Username or Password")
+        else:
+            return messages.error(request, "Invalid Username or Password")
+
+    form = LoginForm()
+    user = request.user
+    return render(
+        request,
+        'login.html',
+        {
+            'form':form
+        }
+    )
+
+
+
+def logoutView(request):
+    logout(request)
+    return redirect('home')
+
 
 
 # Listing Views
@@ -119,6 +138,7 @@ def adventureListView(request):
         }
     )
 
+
 def hotelListView(request):
     hotels = Hotel.objects.all()
     return render(
@@ -129,6 +149,7 @@ def hotelListView(request):
         }
     )
 
+
 def packageListView(request):
     packages = Package.objects.all()
     return render(
@@ -138,6 +159,7 @@ def packageListView(request):
             "package": packages,
         }
     )
+
 
 def newsListView(request):
     res = requests.get("https://visitnepal2020.com/news/")
@@ -157,12 +179,30 @@ def newsListView(request):
     )
 
 
+
+def connectView(request):
+    return render(
+        request,
+        'connect/home.html'
+    )
+
+
+
+def profileView(request,username):
+    return render(
+        request,
+        'connect/profile.html'
+    )
+
+
+
 # Reviews Details
 five_stars_review = ["checked", "checked", "checked", "checked", "checked"]
 four_stars_review = ["checked", "checked", "checked", "checked", ""]
 three_stars_review = ["checked", "checked", "checked", "", ""]
 two_stars_review = ["checked", "checked", "", "", ""]
 one_star_review = ["checked", "", "", "", ""]
+
 
 
 # Place Details Page View
@@ -225,6 +265,7 @@ def placeDetailView(request, placeLink):
 # Adventure Details Page View
 
 
+
 def adventureDetailView(request, adventureLink):
 
     adventureContent = Adventure.objects.get(adventureSlug=adventureLink)
@@ -279,6 +320,7 @@ def adventureDetailView(request, adventureLink):
     )
 
 
+
 def newsDetailView(request, newsLink):
     temp_url = "https://visitnepal2020.com/{}/"
     url = temp_url.format(newsLink)
@@ -300,11 +342,13 @@ def newsDetailView(request, newsLink):
     )
 
 
+
 def hotelDetailView(request, hotelLink):
     return render(
         request,
         'pages/hotelDetail.html'
     )
+
 
 
 def packageDetailView(request, packageLink):

@@ -14,14 +14,20 @@
                         Maxime
                         cupiditate earum expedita asperiores accusantium.</p>
                 </div>
+                {% if user.is_authenticated %}
                 <div class="form__group">
-                    <button class="btn btn--green">Lets Connect</button>
+                    <a href=""><button class="btn btn--green">See Profile</button></a>
                 </div>
 
                 <div class="form__group">
-                    <span class="form__register-text"> Donot have Profile?</span><a href="#" class="btn-text">Create
-                        Now &rarr;</a>
+                    <span class="form__register-text"> Hello {{fullname}}</span><a href="{% url 'logout' %}" class="btn-text">Logout &rarr;</a>
                 </div>
+                {% else %}
+                <div class="form__group">
+                    <span class="form__register-text"> Login to Connect</span><a href="{% url 'login' %}"
+                        class="btn-text">Login &rarr;</a>
+                </div>
+                {% endif %}
             </form>
         </div>
     </div>
