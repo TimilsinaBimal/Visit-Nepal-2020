@@ -62,7 +62,7 @@ class PackageAdmin(admin.ModelAdmin):
         ("Places Image", {"fields": ["packageImage"]}),
         ("Package Description", {"fields": [
          "packageDesc", "packageFeatures"]}),
-        ("Package Fare", {"fields": ["packagePrice", "placeName"]}),
+        ("Package Fare", {"fields": ["packagePrice"]}),
     ]
     formfield_overrides = {
         models.TextField: {'widget': TinyMCE(attrs={'cols': 80, 'rows': 30})},

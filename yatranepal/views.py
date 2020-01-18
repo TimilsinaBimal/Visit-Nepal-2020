@@ -393,7 +393,49 @@ def hotelDetailView(request, hotelLink):
 
 
 def packageDetailView(request, packageLink):
+    packageContent = Package.objects.get(packageSlug=packageLink)
+
+    images = [item for item in PackageImage.objects.filter(
+        package__packageSlug=packageLink)]
+
+    # Review Form
+    if request.method == "POST":
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            try:
+                instance = form.save(commit=False)
+                instance.reviewedFor = packageContent.packageName
+                instance.save()
+
+            except IntegrityError as e:
+                return HttpResponse('<script>alert("You have already reviewed this Package.")</script>')
+        else:
+            return HttpResponse('<script>alert("Error Occured! Please Review your form and Submit again.")</script>')
+
+    # Handling Reviews Lists
+    reviews = [item for item in Review.objects.filter(
+        reviewedFor=packageContent.packageName)]
+    # Profile.objects.filter(user=reviews.user)
+    userProfile = []
+    for item in reviews:
+        userProfileList = Profile.objects.get(user__username=item.user)
+        userProfile.append(userProfileList)
+
+    packageReview = zip(reviews, userProfile)
+
     return render(
         request,
-        'pages/packageDetail.html'
+        'pages/packageDetail.html',
+        {
+            'package': packageContent,
+            'packageImage': images,
+            'form': ReviewForm,
+            'reviews': packageReview,
+            'user': request.user,
+            'five_stars_review': five_stars_review,
+            'four_stars_review': four_stars_review,
+            'three_stars_review': three_stars_review,
+            'two_stars_review': two_stars_review,
+            'one_star_review': one_star_review
+        }
     )
