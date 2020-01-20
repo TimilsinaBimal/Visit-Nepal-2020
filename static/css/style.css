@@ -1158,7 +1158,6 @@ a {
 }
 
 .book {
-  height: 50rem;
   background-image: linear-gradient(105deg, rgba(255, 255, 255, 0.9) 50%, transparent 50%), url(../img/khumbu.jpg);
   background-size: cover;
   border-radius: .3rem;

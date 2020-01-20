@@ -1,43 +1,73 @@
 import requests
+import json
 from bs4 import BeautifulSoup
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .forms import SignUpForm, LoginForm, ReviewForm
-from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages, auth
 from django.db import IntegrityError
-from .models import Place, Profile, Transportation, TransportationType, Package, Adventure, Hotel, AdventuresInPlace, PlaceImage, Review, AdventureImage, HotelImage, PackageImage
+from .models import *
+from .forms import *
+
 # Create your views here.
 
 def homePageView(request):
-    # res = requests.get("https://visitnepal2020.com/news/")
-    # soup = BeautifulSoup(res.text, 'lxml')
-    # temp_headline = soup.select('.card-theme-news-title')
-    # headline = [i.text for i in temp_headline]
-    # newsLink = [i.lower().replace(' ', '-') for i in headline]
+    res = requests.get("https://visitnepal2020.com/news/")
+    soup = BeautifulSoup(res.text, 'lxml')
+    temp_headline = soup.select('.card-theme-news-title')
+    headline = [i.text for i in temp_headline]
+    newsLink = [i.lower().replace(' ', '-') for i in headline]
+
+    # Currency Converter API
+    def currency_converter(from_currency, to_currency, amount):
+        api_key = '029b1a3324ceddd402ef'
+        query = f"{from_currency}_{to_currency}"
+        url = f"https://free.currconv.com/api/v7/convert?q={query}&compact=ultra&apiKey={api_key}"
+        my_request = requests.get(url)
+        json_file = json.loads(my_request.text)
+        final_amount = json_file[query] * amount
+        return final_amount
+
+    # Currency Converter THings Here
+    if request.method=='POST':
+        form = CurrencyConverterForm(request.POST)
+        if form.is_valid():
+            amount = form.cleaned_data.get('amount')
+            from_currency = form.cleaned_data.get('from_currency')
+            to_currency = form.cleaned_data.get('to_currency')
+            result = currency_converter(from_currency,to_currency,float(amount))
+            response_data = {}
+            response_data['result'] = result
+            response_data['from_currency'] = from_currency
+            response_data['to_currency'] = to_currency
+            response_data['amount'] = amount
+            return HttpResponse(
+                json.dumps(response_data),
+                content_type="application/json"
+                )
 
     user = request.user
-    # my_title = zip(headline[0:7], newsLink[0:7])
+    my_title = zip(headline[0:7], newsLink[0:7])
 
     temp_adventures = Adventure.objects.all()[0:3]
     adventures = enumerate(temp_adventures,1)
 
+    form = CurrencyConverterForm
     temp_places = Place.objects.all()[0:3]
     places = enumerate(temp_places,4)
     return render(
             request,
             "home.html",
             {
-                # "news_title": my_title,
-                # "form": form,
+                "news_title": my_title,
+                "form": form,
                 'user': user,
                 "hotels": Hotel.objects.all()[0:3],
                 "places": Place.objects.all()[0:3],
                 "adventures": Adventure.objects.all()[0:3],
                 'n_places': places,
                 'n_adventures':adventures,
-                "packages": Package.objects.all()[0:3],
+                "packages": Package.objects.all()[0:3]
             }
         )
 
@@ -133,6 +163,12 @@ def hotelListView(request):
             "hotel": hotels,
         }
     )
+
+
+# class packageListView(ListView):
+#     template_name =
+#     model =
+#     template_context_name =
 
 
 def packageListView(request):

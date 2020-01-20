@@ -1,33 +1,38 @@
-
 <section class="section-book">
+    <div class="u-center-text u-margin-bottom-big">
+        <h2 class="heading-secondary heading-secondary--1"> Currency Converter</h2>
+    </div>
     <div class="row">
         <div class="book">
-            <form action="#" method="POST" class="book__form">
+            <form method="POST" class="book__form" id="ccForm">
                 {% csrf_token %}
                 <div class="u-center-text u-margin-bottom-medium">
-                    <h2 class="heading-secondary"> Currency Converter!!!</h2>
+                    <h2 class="heading-secondary" id="result"></h2>
+                </div>
+                <div class="form__group">
+                    {{ form.amount.errors }}
+                    {{ form.amount }}
+                    <label class="form__label" for="{{ form.amount.id_for_label }}">Amount</label>
+                </div>
+                <div class="form__group">
+                    {{ form.from_currency.errors }}
+                    <label class="form__label" for="{{ form.from_currency.id_for_label }}">From Currency</label>
+                    {{ form.from_currency }}
+                </div>
+                <div class="form__group">
+                    {{ form.to_currency.errors }}
+                    <label class="form__label" for="{{ form.to_currency.id_for_label }}">To Currency</label>
+                    {{ form.to_currency }}
                 </div>
 
                 <div class="form__group">
-                    <label class="form__label" for="">Amount to be Converted</label>
-                </div>
-
-                <div class="form__group">
-                    <label class="form__label" for="">Select source Currency</label>
-                </div>
-
-                <div class="form__group">
-                    <label class="form__label" for="">Destination Currency</label>
-                </div>
-                <div class="form__group">
-                    <label class="form__label" for="">Result</label>
-                </div>
-
-                <div class="form__group">
-                    <button type="submit" class=" btn btn--green">Convert</button>
+                    <button type="submit" class="btn btn--green">Convert</button>
                 </div>
             </form>
         </div>
 
     </div>
 </section>
+<script type="text/javascript">
+
+</script>

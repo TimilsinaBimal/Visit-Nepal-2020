@@ -1,3 +1,5 @@
+import requests
+import json
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
@@ -155,3 +157,42 @@ class ReviewForm(ModelForm):
     class Meta:
         model = Review
         fields = ['reviewedFor', 'rating', 'comments']
+
+
+# Currency Converter
+api_key = '029b1a3324ceddd402ef'
+currencies = f"https://free.currconv.com/api/v7/currencies?apiKey={api_key}"
+currency = json.loads(requests.get(currencies).text)
+list = currency["results"].keys()
+my_list = []
+for i in list:
+    my_list.append((i,i))
+final_list = tuple(my_list)
+class CurrencyConverterForm(forms.Form):
+    amount = forms.CharField(
+        required=True,
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form__input',
+                'id': 'amount',
+                'placeholder': 'Enter an amount',
+            })
+    )
+    from_currency = forms.ChoiceField(
+        choices = final_list,
+        required=True,
+        widget=forms.Select(
+            attrs={
+                'class': 'form__input',
+                'id': 'from_currency',
+            })
+    )
+    to_currency = forms.ChoiceField(
+        choices = final_list,
+        required=True,
+        widget=forms.Select(
+            attrs={
+                'class': 'form__input',
+                'id': 'to_currency',
+            })
+    )
