@@ -378,19 +378,19 @@ body {
 }
 
 .cards__picture--4 {
-  background-image: linear-gradient(to right bottom, #2998ff, #ff7730), url(../../img/hyatt-hotel.png);
+  background-image: linear-gradient(to right bottom, #2998ff, #ff7730), url(../img/hyatt-hotel.png);
 }
 
 .cards__picture--5 {
-  background-image: linear-gradient(to right bottom, #7ed56f, #28b485), url(../../img/soaltee-crown-plaza.jpg);
+  background-image: linear-gradient(to right bottom, #7ed56f, #28b485), url(../img/soaltee-crown-plaza.jpg);
 }
 
 .cards__picture--6 {
-  background-image: linear-gradient(to right bottom, #2998ff, #28b485), url(../../img/raddison-hotel.jpeg);
+  background-image: linear-gradient(to right bottom, #2998ff, #28b485), url(../img/raddison-hotel.jpeg);
 }
 
 .cards__picture--profile {
-  background-image: linear-gradient(to right bottom, #2998ff, #28b485), url(../../img/ashish_review.jpg);
+  background-image: linear-gradient(to right bottom, #2998ff, #28b485), url(../img/ashish_review.jpg);
 }
 
 .cards__heading {
@@ -765,7 +765,7 @@ a {
 
 .detail {
   padding-top: 0;
-  height: 70vh;
+  height: 85vh;
   background-size: cover;
   background-position: top;
   position: relative;
@@ -1061,7 +1061,7 @@ a {
 
 .news {
   height: 50rem;
-  background-image: linear-gradient(105deg, transparent 40%, rgba(255, 255, 255, 0.9) 20%), url(../../img/news-events.jpg);
+  background-image: linear-gradient(105deg, transparent 40%, rgba(255, 255, 255, 0.9) 20%), url(../img/news-events.jpg);
   background-size: cover;
   border-radius: .3rem;
   box-shadow: 0 8rem 8rem rgba(0, 0, 0, 0.5);
@@ -1125,7 +1125,7 @@ a {
 
 .connect {
   height: 50rem;
-  background-image: linear-gradient(105deg, rgba(255, 255, 255, 0.9) 40%, transparent 50%), url(../../img/connect.jpg);
+  background-image: linear-gradient(105deg, rgba(255, 255, 255, 0.9) 40%, transparent 50%), url(../img/connect.jpg);
   background-size: cover;
   border-radius: .3rem;
   box-shadow: 0 3rem 4rem rgba(0, 0, 0, 0.5);
@@ -1158,7 +1158,7 @@ a {
 }
 
 .book {
-  background-image: linear-gradient(105deg, rgba(255, 255, 255, 0.9) 50%, transparent 50%), url(../img/khumbu.jpg);
+  background-image: linear-gradient(105deg, rgba(255, 255, 255, 0.9) 50%, transparent 50%), url(../img/cc.jpg);
   background-size: cover;
   border-radius: .3rem;
   box-shadow: 0 3rem 4rem rgba(0, 0, 0, 0.5);
@@ -1200,7 +1200,7 @@ a {
 .profile {
   position: relative;
   height: 65rem;
-  background-image: linear-gradient(105deg, rgba(255, 255, 255, 0.9) 40%, transparent 55%), url(../../img/profile-section.jpg);
+  background-image: linear-gradient(105deg, rgba(255, 255, 255, 0.9) 40%, transparent 55%), url(../img/profile-section.jpg);
   background-size: cover;
   border-radius: .3rem;
   box-shadow: 0 3rem 4rem rgba(0, 0, 0, 0.5);

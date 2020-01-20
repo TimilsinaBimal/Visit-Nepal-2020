@@ -1,16 +1,445 @@
 {% extends 'base.html' %}
-{% block content %}
+{% load staticfiles %}
+{% block header_bg %}
+<div class="bg-video--1">
+    <video class="bg-video__content" autoplay loop muted>
+        <source src="{% static 'img/visit-nepal-final.mp4' %}" type="video/mp4">
+    </video>
+</div>
+{% endblock header_bg %}
+{% block header_content %}
+<div class="header__text-box">
+    <h1 class="heading-primary">
+        <span class="heading-primary--main">Travel</span>
+        <span class="heading-primary--sub">is the only thing you buy that makes you richer</span>
+    </h1>
+    <a href="#" class="btn btn--white btn--animated">Discover Nepal</a>
+</div>
+{% endblock header_content %}
 
-{% include 'includes/header.html' %}
-{% include 'includes/news.html' %}
-{% include 'includes/features.html' %}
-{% include 'includes/adventures.html' %}
-{% include 'includes/hotels.html' %}
-{% include 'includes/places.html' %}
-{% include 'includes/packages.html' %}
-{% include 'includes/connect.html' %}
-{% include 'includes/moreFeatures.html' %}
-{% include 'includes/testimonials.html' %}
-{% include 'includes/currencyConverter.html' %}
+{% block content %}
+<!-- NEWS SECTION -->
+
+<section class="section-news">
+    <div class="u-center-text u-margin-bottom-medium">
+        <h2 class="heading-secondary"> News and Events</h2>
+    </div>
+    <div class="row">
+        <div class="news">
+            <div class="crawl">
+                <ol class="crawl__list">
+                    {% for h,i in news_title %}
+                    <a href="news/{{ i }}">
+                        <li class="crawl__item">{{ h }}</li>
+                    </a>
+                    {% endfor %}
+                </ol>
+                <a href="{% url 'news' %}" class="btn-text">See All News &rarr;</a>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- FEATURES SECTION -->
+
+<section class="section-features">
+    <div class="u-center-text u-margin-bottom-big">
+        <h2 class="heading-secondary heading-secondary--1"> Features</h2>
+    </div>
+    <div class="row">
+        <div class="col-1-of-4">
+            <div class="feature-box">
+                <i class="feature-box__icon icon-basic-map"></i>
+                <h3 class="heading-tertiary u-margin-bottom-small">Places to visit</h3>
+                <p class="feature-box__text">We provide you various places to visit. No hastle to search for
+                    other sites.</p>
+            </div>
+        </div>
+
+        <div class="col-1-of-4">
+            <div class="feature-box">
+                <i class="feature-box__icon icon-basic-home"></i>
+                <h3 class="heading-tertiary u-margin-bottom-small">Hotels to stay</h3>
+                <p class="feature-box__text">We provide you various places to visit. No hastle to search for
+                    other sites.</p>
+            </div>
+        </div>
+
+        <div class="col-1-of-4">
+            <div class="feature-box">
+                <i class="feature-box__icon icon-basic-signs"></i>
+                <h3 class="heading-tertiary u-margin-bottom-small">Adventures for you</h3>
+                <p class="feature-box__text">We provide you various places to visit. No hastle to search for
+                    other sites.</p>
+            </div>
+        </div>
+
+        <div class="col-1-of-4">
+            <div class="feature-box">
+                <i class="feature-box__icon icon-basic-mail-open-text"></i>
+                <h3 class="heading-tertiary u-margin-bottom-small">Connect with others</h3>
+                <p class="feature-box__text">We provide you various places to visit. No hastle to search for
+                    other sites.</p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- ADVENTURES SECTION -->
+
+<section class="section-about">
+    <div class="u-center-text u-margin-bottom-big">
+        <h2 class="heading-secondary"> Adventures to do in Nepal!!!</h2>
+    </div>
+
+    <div class="row">
+        <div class="col-1-of-2">
+            {% for a in adventures %}
+            <a href="adventure/{{a.adventureSlug}}">
+                <h3 class="heading-tertiary">{{a.adventureName}}</h3>
+            </a>
+            <p class="paragraph">{{a.adventureDesc|safe |slice:500}}
+            </p>
+            {% endfor %}
+            <a href="{% url 'adventures' %}" class="btn-text">See All Adventures &rarr;</a>
+        </div>
+        <div class="col-1-of-2">
+            <div class="composition">
+                {% for n,a in n_adventures %}
+                <img src="{{a.adventureImage.url}}" alt="{{a.adventureName}}"
+                    class="composition__photo composition__photo--p{{n}}">
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- HOTELS SECTION -->
+
+<section class="section-hotels">
+    <div class="u-center-text u-margin-bottom-big">
+        <h2 class="heading-secondary heading-secondary--1">
+            Hotels to Stay
+        </h2>
+    </div>
+
+    <div class="row">
+        {% for h in hotels %}
+        <style>
+            .cards__picture--{{h.hotelSlug}}
+
+                {
+                background-image: linear-gradient(to right bottom, #2998ff, #ff7730),
+                url({{h.hotelImage.url}});
+            }
+        </style>
+        <div class="col-1-of-3">
+            <div class="cards">
+                <div class="cards__side cards__side--front">
+                    <div class="cards__picture cards__picture--{{h.hotelSlug}}">
+                        &nbsp;
+                    </div>
+                    <h4 class="cards__heading">
+                        <span class="cards__heading-span cards__heading-span--4">
+                            {{h.hotelName}}
+                        </span>
+                    </h4>
+                    <div class="cards__details">
+                        <ul>
+                            {% for list in h.features_as_list %}
+                            <li>{{list|safe}}</li>
+                            {% endfor %}
+                        </ul>
+
+                    </div>
+                </div>
+                <div class="cards__side cards__side--back cards__side--back-4">
+                    <div class="cards__cta">
+                        <div class="cards__price-box">
+                            <div class="cards__price-only">Only</div>
+                            <div class="cards__price-value">{{h.hotelPrice}} NPR</div>
+                            <div class="cards__price-only">1 Room | 1 Guest</div>
+                        </div>
+                        <a href="hotel/{{h.hotelSlug}}" class="btn btn--white">See Details!</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="u-center-text u-margin-top-huge">
+        <a href="{% url 'hotels' %}" class="btn btn--green">See All Hotels</a>
+    </div>
+</section>
+
+<!-- PLACES SECTION -->
+
+
+<section class="section-places">
+    <div class="u-center-text u-margin-bottom-big">
+        <h2 class="heading-secondary"> Places to visit</h2>
+    </div>
+
+    <div class="row">
+        <div class="col-1-of-2">
+            {% for p in places %}
+            <a href="place/{{p.placeSlug}}">
+                <h3 class="heading-tertiary u-margin-bottom-small">{{p.placeName}}</h3>
+            </a>
+            <style>
+                a {
+                    text-decoration: none;
+                    text-color:
+                }
+            </style>
+            <p class="paragraph">
+                {{p.placeDesc|safe}}
+            </p>
+            {% endfor %}
+            <a href="{% url 'places' %}" class="btn-text">See All Places &rarr;</a>
+        </div>
+        <div class="col-1-of-2">
+            <div class="composition">
+                {% for n,p in n_places %}
+                <img src="media/{{p.placeImage}}" alt="{{p.placeName}}"
+                    class="composition__photo composition__photo--p{{n}}">
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PACKAGES SECTION -->
+
+<section class="section-tours">
+    <div class="u-center-text u-margin-bottom-big">
+        <h2 class="heading-secondary heading-secondary--1">
+            Most Popular Packages
+        </h2>
+    </div>
+
+    <div class="row">
+        {% for p in packages %}
+        <style>
+            .cards__picture--{{p.packageSlug}}
+                {
+                background-image: linear-gradient(to right bottom, #2998ff, #5643fa),
+                url(media/{{p.packageImage}});
+            }
+        </style>
+        <div class="col-1-of-3">
+            <div class="cards">
+                <div class="cards__side cards__side--front">
+                    <div class="cards__picture cards__picture--{{p.packageSlug}}">
+                        &nbsp;
+                    </div>
+                    <h4 class="cards__heading">
+                        <span class="cards__heading-span cards__heading-span--1">
+                            {{p.packageName}}
+                        </span>
+                    </h4>
+                    <div class="cards__details">
+                        <ul>
+                            {% for list in p.package_features_as_list %}
+                            <li>{{list|safe}}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                <div class="cards__side cards__side--back cards__side--back-1">
+                    <div class="cards__cta">
+                        <div class="cards__price-box">
+                            <div class="cards__price-only">Only</div>
+                            <div class="cards__price-value">{{p.packagePrice}}</div>
+                        </div>
+                        <a href="package/{{p.packageSlug}}" class="btn btn--white">See Details!</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="u-center-text u-margin-top-huge">
+        <a href="{% url 'packages' %}" class="btn btn--green">See All Packages</a>
+    </div>
+</section>
+
+<!-- CONNECT SECTION -->
+
+<section class="section-connect">
+    <div class="row">
+        <div class="connect">
+            <form action="#" class="connect__form">
+
+                <div class=" u-margin-bottom-small">
+                    <h2 class="heading-secondary"> Connect with others</h2>
+                </div>
+                <div class=" u-margin-bottom-small">
+                    <p class="paragraph">We allow Our users to connect with each other. Lorem ipsum dolor
+                        sit
+                        amet consectetur adipisicing elit. Adipisci reprehenderit ipsum eos, placeat,
+                        praesentium iste quia eveniet alias nesciunt at sint obcaecati doloribus natus!
+                        Maxime
+                        cupiditate earum expedita asperiores accusantium.</p>
+                </div>
+                {% if user.is_authenticated %}
+                <div class="form__group">
+                    <a href=""><button class="btn btn--green">See Profile</button></a>
+                </div>
+
+                <div class="form__group">
+                    <span class="form__register-text"> Hello {{user.first_name}} {{user.last_name}}</span><a
+                        href="{% url 'logout' %}" class="btn-text">Logout &rarr;</a>
+                </div>
+                {% else %}
+                <div class="form__group">
+                    <span class="form__register-text"> Login to Connect</span><a href="{% url 'login' %}"
+                        class="btn-text">Login &rarr;</a>
+                    <br>
+                    <span class="form__register-text"> Don'r have an account?</span><a href="{% url 'register' %}"
+                        class="btn-text">Create One &rarr;</a>
+                </div>
+                {% endif %}
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- MORE FEATURES SECTION -->
+<section class="section-features">
+    <div class="u-center-text u-margin-bottom-big">
+        <h2 class="heading-secondary heading-secondary--1"> some more Features</h2>
+    </div>
+    <div class="row">
+
+        <div class="col-1-of-4">
+            <div class="feature-box">
+                <i class="feature-box__icon icon-ecommerce-dollar"></i>
+                <h3 class="heading-tertiary u-margin-bottom-small">cURRENCY CONVERTER</h3>
+                <p class="feature-box__text">We provide you various places to visit. No hastle to search for
+                    other sites.</p>
+            </div>
+        </div>
+
+        <div class="col-1-of-4">
+            <div class="feature-box">
+                <i class="feature-box__icon icon-basic-elaboration-todolist-check"></i>
+                <h3 class="heading-tertiary u-margin-bottom-small">vechicle fares</h3>
+                <p class="feature-box__text">We provide you various places to visit. No hastle to search for
+                    other sites.</p>
+            </div>
+        </div>
+
+        <div class="col-1-of-4">
+            <div class="feature-box">
+                <i class="feature-box__icon icon-basic-star"></i>
+                <h3 class="heading-tertiary u-margin-bottom-small">Street foods</h3>
+                <p class="feature-box__text">We provide you various places to visit. No hastle to search for
+                    other sites.</p>
+            </div>
+        </div>
+
+        <div class="col-1-of-4">
+            <div class="feature-box">
+                <i class="feature-box__icon icon-basic-exclamation"></i>
+                <h3 class="heading-tertiary u-margin-bottom-small">Rules to follow</h3>
+                <p class="feature-box__text">We provide you various places to visit. No hastle to search for
+                    other sites.</p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- TESTIMONIALS SECTION -->
+
+<section class="section-reviews">
+    <div class="u-center-text u-margin-bottom-big">
+        <h2 class="heading-secondary">What people say about us!!!</h2>
+    </div>
+    <div class="row">
+        <div class="reviews">
+            <figure class="reviews__shape">
+                <img src="{% static 'img/review 1.jpg' %} " alt="photo for review" class="reviews__img">
+                <figcaption class="reviews__caption">Emily Kutcher</figcaption>
+            </figure>
+            <div class="reviews__text">
+                <h3 class="heading-tertiary u-margin-bottom-small">Thanks to this site I can say i Explored
+                    nepal perfectly</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione hic repellat autem
+                    quidem
+                    officiis explicabo magni quas minima! Enim perferendis mollitia consequatur ullam
+                    repellat
+                    consequuntur quas voluptatum nesciunt quidem error.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="reviews">
+            <figure class="reviews__shape">
+                <img src="{% static 'img/ashton kutcher.jpg' %} " alt="photo for review" class="reviews__img">
+                <figcaption class="reviews__caption">David Williams</figcaption>
+            </figure>
+            <div class="reviews__text">
+                <h3 class="heading-tertiary u-margin-bottom-small">I found perfect adventures and place in
+                    nepal
+                    for me</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione hic repellat autem
+                    quidem
+                    officiis explicabo magni quas minima! Enim perferendis mollitia consequatur ullam
+                    repellat
+                    consequuntur quas voluptatum nesciunt quidem error.</p>
+            </div>
+        </div>
+    </div>
+    <div class="u-center-text u-margin-top-huge">
+        <a href="#" class="btn-text">More Reviews &rarr;</a>
+    </div>
+</section>
+
+<!-- CURRENCY CONVERTER SECTION -->
+
+<section class="section-book">
+    <div class="u-center-text u-margin-bottom-big">
+        <h2 class="heading-secondary heading-secondary--1"> Currency Converter</h2>
+    </div>
+    <div class="row">
+        <div class="book">
+            <form method="POST" class="book__form" id="ccForm">
+                {% csrf_token %}
+                <div class="u-center-text u-margin-bottom-medium">
+                    <h2 class="heading-secondary" id="result"></h2>
+                </div>
+                <div class="form__group">
+                    {{ form.amount.errors }}
+                    {{ form.amount }}
+                    <label class="form__label" for="{{ form.amount.id_for_label }}">Amount</label>
+                </div>
+                <div class="form__group">
+                    {{ form.from_currency.errors }}
+                    <label class="form__label" for="{{ form.from_currency.id_for_label }}">From Currency</label>
+                    {{ form.from_currency }}
+                </div>
+                <div class="form__group">
+                    {{ form.to_currency.errors }}
+                    <label class="form__label" for="{{ form.to_currency.id_for_label }}">To Currency</label>
+                    {{ form.to_currency }}
+                </div>
+
+                <div class="form__group">
+                    <button type="submit" class="btn btn--green">Convert</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</section>
 
 {% endblock %}

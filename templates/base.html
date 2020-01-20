@@ -1,5 +1,4 @@
 {% load staticfiles %}
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,18 +8,38 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
     <link rel="stylesheet" href="{% static 'css/icon-font.css' %}">
     <link rel="stylesheet" href="{% static 'css/icon-font-2.css' %}">
     <link rel="stylesheet" href="{% static 'css/icon-font-3.css'  %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="shortcut icon" type="image/png" href="{% static 'img/favicon.png' %}">
-    <title>Visit Nepal 2020</title>
+    <title>{% block title %} {% endblock %}Visit Nepal 2020</title>
 </head>
 
 <body>
+    <header class=" detail detail--4">
+        {% block header_bg %}
+        {% endblock header_bg %}
+        <nav class="nav-bar">
+            <div class="row">
+                <img src="{% static 'img/logo.png' %}" alt="logo" class="nav-bar__logo">
+                <ul class="nav-bar__titles">
+                    <li><a href="{% url 'home' %}" class="active">Home</a></li>
+                    <li><a href="{% url 'places' %}">Places</a></li>
+                    <li><a href="{% url 'adventures' %}">Adventures</a></li>
+                    <li><a href="{% url 'hotels' %}">Hotels</a></li>
+                    <li><a href="{% url 'news' %}">News</a></li>
+                    <li><a href="{% url 'packages' %}">Packages</a></li>
+                    <li><a href="{% url 'connect' %}">Connect</a></li>
+                </ul>
+            </div>
+        </nav>
+        {% block header_content %}
+        {% endblock header_content %}
+    </header>
     {% block content %}
-    {% endblock %}
-
+    {% endblock content %}
     <footer class="footer">
         <div class="footer__logo-box">
             <img src="{% static 'img/logo.png' %} " alt="visit nepal 2020" class="footer__logo">
@@ -62,7 +81,6 @@
         </div>
 
     </footer>
-    <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
     <script src="../../js/script.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>

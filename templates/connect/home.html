@@ -1,18 +1,17 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
-{% block content %}
-<section class="section-detail">
-<header class="detail detail--12">
+{% block title %} Connect | {% endblock %}
+{% block header_content %}
+<div class="header__text-box">
     <div class="header__text-box">
-
-        <div class="header__text-box">
-            <h1 class="heading-primary">
-                <span class="heading-primary--detail">Connect</span>
-                <span class="heading-primary--sub"> lets connect with others</span>
-              </h1>
-        </div>
+        <h1 class="heading-primary">
+            <span class="heading-primary--detail">Connect</span>
+            <span class="heading-primary--sub"> lets connect with others</span>
+        </h1>
     </div>
-</header>
+</div>
+{% endblock header_content %}
+{% block content %}
 <style>
     .detail {
         background-image: linear-gradient(to bottom right, rgba(126, 213, 111, 0.6), rgba(86, 67, 250, 0.6)),
@@ -23,33 +22,48 @@
 
 <section class="detail-text">
 
-        <div class="row">
+    <div class="row">
 
-            <div class="col-1-of-2">
-                    <div class="u-center-text u-margin-bottom-medium u-margin-top-big">
-                        <h2 class="heading-secondary heading-secondary--big u-margin-bottom-medium"> how it Works!!!</h2>
-                        <p class="paragraph paragraph--justified">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Distinctio cumque quis reiciendis voluptatibus, a voluptates. Cum ullam cumque voluptatibus, suscipit voluptate maiores! Ex in ad officia illo impedit eum provident.<br><br>
-                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Placeat dolorem modi praesentium quod porro, dignissimos, delectus corrupti dolor omnis beatae hic tempora! Temporibus dolorem, placeat obcaecati voluptatum porro consequatur mollitia?Lorem ipsum dolor, sit amet consectetur adipisicing elit. Incidunt laboriosam quia, odio cumque non rerum repellendus esse velit delectus tempora, sint praesentium voluptate reprehenderit quo, sequi expedita quis inventore. Suscipit.<br><br>
-                        </p>
-                    </div>
-                </div>
-            <div class="col-1-of-2">
+        <div class="col-1-of-2">
+            <div class="u-center-text u-margin-bottom-medium u-margin-top-big">
+                <h2 class="heading-secondary heading-secondary--big u-margin-bottom-medium"> how it Works!!!
+                </h2>
+                <p class="paragraph paragraph--justified">Lorem ipsum dolor sit amet consectetur, adipisicing
+                    elit.
+                    Distinctio cumque quis reiciendis voluptatibus, a voluptates. Cum ullam cumque voluptatibus,
+                    suscipit voluptate maiores! Ex in ad officia illo impedit eum provident.<br><br>
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Placeat dolorem modi praesentium
+                    quod
+                    porro, dignissimos, delectus corrupti dolor omnis beatae hic tempora! Temporibus dolorem,
+                    placeat obcaecati voluptatum porro consequatur mollitia?Lorem ipsum dolor, sit amet
+                    consectetur
+                    adipisicing elit. Incidunt laboriosam quia, odio cumque non rerum repellendus esse velit
+                    delectus tempora, sint praesentium voluptate reprehenderit quo, sequi expedita quis
+                    inventore.
+                    Suscipit.<br><br>
+                </p>
+            </div>
+        </div>
+        <div class="col-1-of-2">
 
-                <div class="u-center-text u-margin-bottom-small u-margin-top-big">
-                    <h2 class="heading-secondary heading-secondary--big u-margin-bottom-medium"> Search here!!!</h2>
-                    <div class="search-bottom u-margin-left-big">
-                        <form action="profile.html">
+            <div class="u-center-text u-margin-bottom-small u-margin-top-big">
+                <h2 class="heading-secondary heading-secondary--big u-margin-bottom-medium"> Search here!!!</h2>
+                <div class="search-bottom u-margin-left-big">
+                    <form action="profile.html">
 
-                            <div class="form__group">
-                                <input type="text" class="form__input form__input--connect" placeholder="Who are You Looking For?" id="search-word" required>
-                                <label for="search-word" class="form__label form__label--connect" >Enter Name to Search <ion-icon name="search"></ion-icon></label>
-                            </div>
-                        </form>
-                    </div>
+                        <div class="form__group">
+                            <input type="text" class="form__input form__input--connect"
+                                placeholder="Who are You Looking For?" id="search-word" required>
+                            <label for="search-word" class="form__label form__label--connect">Enter Name to
+                                Search
+                                <ion-icon name="search"></ion-icon></label>
+                        </div>
+                    </form>
                 </div>
             </div>
-
         </div>
+
+    </div>
 </section>
 
 <section class="section-reviews">
@@ -92,64 +106,64 @@
             </div>
         </div>
     </div>
-     <div class="row">
-         <div class="reviews">
-             <figure class="reviews__shape">
-                 <img src="{% static 'img/ashton kutcher.jpg' %} " alt="photo for review" class="reviews__img">
-                 <figcaption class="reviews__caption">David Williams</figcaption>
-             </figure>
-             <div class="reviews__text">
-                 <h3 class="heading-tertiary u-margin-bottom-small">I found perfect adventures and place in
-                     nepal
-                     for me</h3>
-                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione hic repellat autem
-                     quidem
-                     officiis explicabo magni quas minima! Enim perferendis mollitia consequatur ullam
-                     repellat
-                     consequuntur quas voluptatum nesciunt quidem error.</p>
-             </div>
-         </div>
-     </div>
-      <div class="row">
-          <div class="reviews">
-              <figure class="reviews__shape">
-                  <img src="{% static 'img/ashton kutcher.jpg' %} " alt="photo for review" class="reviews__img">
-                  <figcaption class="reviews__caption">David Williams</figcaption>
-              </figure>
-              <div class="reviews__text">
-                  <h3 class="heading-tertiary u-margin-bottom-small">I found perfect adventures and place in
-                      nepal
-                      for me</h3>
-                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione hic repellat autem
-                      quidem
-                      officiis explicabo magni quas minima! Enim perferendis mollitia consequatur ullam
-                      repellat
-                      consequuntur quas voluptatum nesciunt quidem error.</p>
-              </div>
-          </div>
-      </div>
-       <div class="row">
-           <div class="reviews">
-               <figure class="reviews__shape">
-                   <img src="{% static 'img/ashton kutcher.jpg' %} " alt="photo for review" class="reviews__img">
-                   <figcaption class="reviews__caption">David Williams</figcaption>
-               </figure>
-               <div class="reviews__text">
-                   <h3 class="heading-tertiary u-margin-bottom-small">I found perfect adventures and place in
-                       nepal
-                       for me</h3>
-                   <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione hic repellat autem
-                       quidem
-                       officiis explicabo magni quas minima! Enim perferendis mollitia consequatur ullam
-                       repellat
-                       consequuntur quas voluptatum nesciunt quidem error.</p>
-               </div>
-           </div>
-       </div>
+    <div class="row">
+        <div class="reviews">
+            <figure class="reviews__shape">
+                <img src="{% static 'img/ashton kutcher.jpg' %} " alt="photo for review" class="reviews__img">
+                <figcaption class="reviews__caption">David Williams</figcaption>
+            </figure>
+            <div class="reviews__text">
+                <h3 class="heading-tertiary u-margin-bottom-small">I found perfect adventures and place in
+                    nepal
+                    for me</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione hic repellat autem
+                    quidem
+                    officiis explicabo magni quas minima! Enim perferendis mollitia consequatur ullam
+                    repellat
+                    consequuntur quas voluptatum nesciunt quidem error.</p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="reviews">
+            <figure class="reviews__shape">
+                <img src="{% static 'img/ashton kutcher.jpg' %} " alt="photo for review" class="reviews__img">
+                <figcaption class="reviews__caption">David Williams</figcaption>
+            </figure>
+            <div class="reviews__text">
+                <h3 class="heading-tertiary u-margin-bottom-small">I found perfect adventures and place in
+                    nepal
+                    for me</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione hic repellat autem
+                    quidem
+                    officiis explicabo magni quas minima! Enim perferendis mollitia consequatur ullam
+                    repellat
+                    consequuntur quas voluptatum nesciunt quidem error.</p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="reviews">
+            <figure class="reviews__shape">
+                <img src="{% static 'img/ashton kutcher.jpg' %} " alt="photo for review" class="reviews__img">
+                <figcaption class="reviews__caption">David Williams</figcaption>
+            </figure>
+            <div class="reviews__text">
+                <h3 class="heading-tertiary u-margin-bottom-small">I found perfect adventures and place in
+                    nepal
+                    for me</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione hic repellat autem
+                    quidem
+                    officiis explicabo magni quas minima! Enim perferendis mollitia consequatur ullam
+                    repellat
+                    consequuntur quas voluptatum nesciunt quidem error.</p>
+            </div>
+        </div>
+    </div>
     <div class="u-center-text u-margin-top-huge">
         <a href="#" class="btn-text">Next Page &rarr;</a>
     </div>
 </section>
 
-            </section>
+</section>
 {% endblock content %}

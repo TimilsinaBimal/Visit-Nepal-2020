@@ -1,196 +1,179 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
+{% block title %} {{hotel.hotelName}} {% endblock %}
+{% block header_content %}
+<div class="header__text-box">
+
+    <div class="header__text-box">
+        <h1 class="heading-primary">
+            <span class="heading-primary--detail">{{hotel.hotelName}}</span>
+            <span class="heading-primary--sub">{{hotel.hotelTheme}}</span>
+        </h1>
+    </div>
+</div>
+{% endblock %}
 {% block content %}
-<section class="section-detail">
-    <header class="detail detail--7">
-        <nav class="nav-bar">
-            <div class="row">
-                <img src="{% static 'img/logo.png' %}" alt="logo" class="nav-bar__logo">
-                <ul class="nav-bar__titles">
-                    <li><a href="{% url 'home' %}">Home</a></li>
-                    <li><a href="{% url 'places' %}">Places</a></li>
-                    <li><a href="{% url 'adventures' %}">Adventures</a></li>
-                    <li><a href="{% url 'hotels' %}" class="active">Hotels</a></li>
-                    <li><a href="{% url 'news' %}">News</a></li>
-                    <li><a href="{% url 'packages' %}">Packages</a></li>
-                    <li><a href="{% url 'connect' %}">Connect</a></li>
-                </ul>
-            </div>
-        </nav>
-        <div class="header__text-box">
+<style>
+    .detail {
+        background-image: linear-gradient(to bottom right, rgba(126, 213, 111, 0.6), rgba(86, 67, 250, 0.6)),
+        url({{hotel.hotelImage.url}});
+    }
+</style>
 
-            <div class="header__text-box">
-                <h1 class="heading-primary">
-                    <span class="heading-primary--detail">{{hotel.hotelName}}</span>
-                    <span class="heading-primary--sub">{{hotel.hotelTheme}}</span>
-                </h1>
+<section class="detail-text">
+    <div class="row">
+        <div class="col-1-of-2">
+            <div class="u-center-text u-margin-bottom-medium u-margin-top-big">
+                <h2 class="heading-secondary heading-secondary--big u-margin-bottom-medium"> About
+                    {{hotel.hotelName}}
+                </h2>
+                <p class="paragraph paragraph--justified">
+                    {{hotel.hotelDesc|safe}}
+                </p>
             </div>
         </div>
-    </header>
+        <div class="col-1-of-2">
+            <div class="u-center-text u-margin-bottom-medium u-margin-top-big">
+                <h2 class="heading-secondary heading-secondary--big"> Services</h2>
+                <div class="cards__details">
 
-    <style>
-        .detail {
-            background-image: linear-gradient(to bottom right, rgba(126, 213, 111, 0.6), rgba(86, 67, 250, 0.6)),
-            url({{hotel.hotelImage.url}});
-        }
-    </style>
 
-    <section class="detail-text">
-        <div class="row">
-            <div class="col-1-of-2">
-                <div class="u-center-text u-margin-bottom-medium u-margin-top-big">
-                    <h2 class="heading-secondary heading-secondary--big u-margin-bottom-medium"> About {{hotel.hotelName}}
-                    </h2>
-                    <p class="paragraph paragraph--justified">
-                        {{hotel.hotelDesc|safe}}
-                    </p>
+                    <ul class="detail-text__items">
+                        {% for list in hotel.features_as_list %}
+                        <li>
+                            <div class="detail__icons">
+                                {{list|safe}}
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
                 </div>
             </div>
-            <div class="col-1-of-2">
-                <div class="u-center-text u-margin-bottom-medium u-margin-top-big">
-                    <h2 class="heading-secondary heading-secondary--big"> Services</h2>
-                    <div class="cards__details">
-
-
-                        <ul class="detail-text__items">
-                            {% for list in hotel.features_as_list %}
-                            <li>
-                                <div class="detail__icons">
-                                    {{list|safe}}
-                                </div>
-                            </li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
         </div>
-    </section>
-    <section class="book-now-box">
-        <div class="col-span-1-of-2">
 
-            <h2 class="heading-secondary heading-secondary--big"> WHAT ARE YOU WAITING FOR?</h2>
+    </div>
+</section>
+<section class="book-now-box">
+    <div class="col-span-1-of-2">
 
-            <p class="paragraph">
-                NPR {{hotel.hotelPrice}}. 1 Place for all. Infinite memories. Make it yours today!
-            </p>
-        </div>
-        <div class="col-span-1-of-2">
-            <a href="#" class="btn btn--green book-now-box__link">Book Now!</a>
-        </div>
-    </section>
-    <section class="section-gallery">
-        <ul class="gallery-showcase clearfix">
-            {% for image in hotelImage %}
-            <li>
-                <figure class="gallery-photo">
-                    <img src="{{image.hotelImages.url}}" alt="{{hotel.hotelName}}">
-                </figure>
-            </li>
-            {% endfor %}
-        </ul>
+        <h2 class="heading-secondary heading-secondary--big"> WHAT ARE YOU WAITING FOR?</h2>
 
-    </section>
-
-    <section class="detail-ratings">
-        <div class="u-center-text u-margin-bottom-big">
-            <h2 class="heading-secondary">Reviews</h2>
-        </div>
-        <div class="row">
-                {% for r,p in reviews %}
-                <div class="reviews reviews--detail">
-                    <figure class="reviews__shape reviews__shape--detail">
-                        <img src="{{p.profileImage.url}}" alt="photo for review"
-                            class="reviews__img reviews__img--detail">
-                        <figcaption class="reviews__caption">{{r.user.first_name}} {{r.user.last_name}}</figcaption>
-                    </figure>
-
-                    <div class="reviews__text reviews__text--detail">
-                        <p>{{r.comments}}</p>
-                    </div>
-                    <div class="reviews__star">
-                        {% if r.rating == 5 %}
-                        {% for rating in five_stars_review%}
-                        <span class="fa fa-star {{rating}}"></span>
-                        {% endfor %}
-
-                        {% elif r.rating == 4 %}
-                        {% for rating in four_stars_review%}
-                        <span class="fa fa-star {{rating}}"></span>
-                        {% endfor %}
-
-                        {% elif r.rating == 3 %}
-                        {% for rating in three_stars_review%}
-                        <span class="fa fa-star {{rating}}"></span>
-                        {% endfor %}
-
-
-                        {% elif r.rating == 2 %}
-                        {% for rating in two_stars_review%}
-                        <span class="fa fa-star {{rating}}"></span>
-                        {% endfor %}
-
-                        {% else %}
-                        {% for rating in four_stars_review%}
-                        <span class="fa fa-star {{rating}}"></span>
-                        {% endfor %}
-                        {% endif %}
-                    </div>
-
-                </div>
-
-                {% endfor %}
-        </div>
-    </section>
-
-
-    {% if user.is_authenticated %}
-    <section class="section-profile">
-        <div class="row">
-            <div class="register">
-                <form method="POST" class="register__form">
-                    <div class="u-center-text u-margin-bottom-medium">
-                        <h2 class="heading-secondary"> Write a Review!!!</h2>
-                    </div>
-
-                    {% csrf_token %}
-                    {% if form.errors %}
-                    {% for field in form %}
-                    {% for error in field.errors %}
-                    <div class="alert alert-danger">
-                        <strong>{{ error|escape }}</strong>
-                    </div>
-                    {% endfor %}
-                    {% endfor %}
-                    {% for error in form.non_field_errors %}
-                    <div class="alert alert-danger">
-                        <strong>{{ error|escape }}</strong>
-                    </div>
-                    {% endfor %}
-                    {% endif %}
-                    <div class="form__group">
-                        {{ form.reviewedFor }}
-                    </div>
-                    <div class="form__group">
-                        {{ form.rating.errors }}
-                        {{ form.rating }}
-                        <label class="form__label" for="{{ form.rating.id_for_label }}"> Rating</label>
-                    </div>
-                    <div class="form__group">
-                        {{ form.comments.errors }}
-                        {{ form.comments }}
-                        <label class="form__label" for="{{ form.comments.id_for_label }}"> Comments</label>
-                    </div>
-                    <div class="form__group">
-                        <button type="submit" class="btn btn--green">Submit</button>
-                    </div>
-                </form>
-            </div>
-
-        </div>
-    </section>
-    {% endif %}
+        <p class="paragraph">
+            NPR {{hotel.hotelPrice}}. 1 Place for all. Infinite memories. Make it yours today!
+        </p>
+    </div>
+    <div class="col-span-1-of-2">
+        <a href="#" class="btn btn--green book-now-box__link">Book Now!</a>
+    </div>
+</section>
+<section class="section-gallery">
+    <ul class="gallery-showcase clearfix">
+        {% for image in hotelImage %}
+        <li>
+            <figure class="gallery-photo">
+                <img src="{{image.hotelImages.url}}" alt="{{hotel.hotelName}}">
+            </figure>
+        </li>
+        {% endfor %}
+    </ul>
 
 </section>
+
+<section class="detail-ratings">
+    <div class="u-center-text u-margin-bottom-big">
+        <h2 class="heading-secondary">Reviews</h2>
+    </div>
+    <div class="row">
+        {% for r,p in reviews %}
+        <div class="reviews reviews--detail">
+            <figure class="reviews__shape reviews__shape--detail">
+                <img src="{{p.profileImage.url}}" alt="photo for review" class="reviews__img reviews__img--detail">
+                <figcaption class="reviews__caption">{{r.user.first_name}} {{r.user.last_name}}</figcaption>
+            </figure>
+
+            <div class="reviews__text reviews__text--detail">
+                <p>{{r.comments}}</p>
+            </div>
+            <div class="reviews__star">
+                {% if r.rating == 5 %}
+                {% for rating in five_stars_review%}
+                <span class="fa fa-star {{rating}}"></span>
+                {% endfor %}
+
+                {% elif r.rating == 4 %}
+                {% for rating in four_stars_review%}
+                <span class="fa fa-star {{rating}}"></span>
+                {% endfor %}
+
+                {% elif r.rating == 3 %}
+                {% for rating in three_stars_review%}
+                <span class="fa fa-star {{rating}}"></span>
+                {% endfor %}
+
+
+                {% elif r.rating == 2 %}
+                {% for rating in two_stars_review%}
+                <span class="fa fa-star {{rating}}"></span>
+                {% endfor %}
+
+                {% else %}
+                {% for rating in four_stars_review%}
+                <span class="fa fa-star {{rating}}"></span>
+                {% endfor %}
+                {% endif %}
+            </div>
+
+        </div>
+
+        {% endfor %}
+    </div>
+</section>
+
+
+{% if user.is_authenticated %}
+<section class="section-profile">
+    <div class="row">
+        <div class="register">
+            <form method="POST" class="register__form">
+                <div class="u-center-text u-margin-bottom-medium">
+                    <h2 class="heading-secondary"> Write a Review!!!</h2>
+                </div>
+
+                {% csrf_token %}
+                {% if form.errors %}
+                {% for field in form %}
+                {% for error in field.errors %}
+                <div class="alert alert-danger">
+                    <strong>{{ error|escape }}</strong>
+                </div>
+                {% endfor %}
+                {% endfor %}
+                {% for error in form.non_field_errors %}
+                <div class="alert alert-danger">
+                    <strong>{{ error|escape }}</strong>
+                </div>
+                {% endfor %}
+                {% endif %}
+                <div class="form__group">
+                    {{ form.reviewedFor }}
+                </div>
+                <div class="form__group">
+                    {{ form.rating.errors }}
+                    {{ form.rating }}
+                    <label class="form__label" for="{{ form.rating.id_for_label }}"> Rating</label>
+                </div>
+                <div class="form__group">
+                    {{ form.comments.errors }}
+                    {{ form.comments }}
+                    <label class="form__label" for="{{ form.comments.id_for_label }}"> Comments</label>
+                </div>
+                <div class="form__group">
+                    <button type="submit" class="btn btn--green">Submit</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</section>
+{% endif %}
 {% endblock content %}

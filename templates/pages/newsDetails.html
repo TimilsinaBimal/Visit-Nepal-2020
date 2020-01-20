@@ -1,28 +1,16 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
-{% block content %}
-<header class="detail detail--4">
-    <nav class="nav-bar">
-        <div class="row">
-            <img src="{% static 'img/logo.png' %}" alt="logo" class="nav-bar__logo">
-            <ul class="nav-bar__titles">
-                <li><a href="{% url 'home' %}">Home</a></li>
-                <li><a href="#">Features</a></li>
-                <li><a href="#">Adventures</a></li>
-                <li><a href="#">Hotels</a></li>
-                <li><a href="#">News</a></li>
-            </ul>
-        </div>
-    </nav>
+{% block title %} {{news_title}} | {% endblock %}
+{% block header_content %}
+<div class="header__text-box">
     <div class="header__text-box">
-        <div class="header__text-box">
-            <h1 class="heading-primary">
-                <span class="heading-primary--detail">{{ news_title }}</span>
-            </h1>
-        </div>
+        <h1 class="heading-primary">
+            <span class="heading-primary--detail">{{ news_title }}</span>
+        </h1>
     </div>
-</header>
-
+</div>
+{% endblock %}
+{% block content %}
 <section class="detail-text">
 
     <div class="row">

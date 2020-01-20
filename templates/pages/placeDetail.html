@@ -1,131 +1,116 @@
 {% extends 'base.html' %}
-{% block content %}
 {% load staticfiles %}
-<section class="section-detail">
-    <header class="detail detail--1">
-        <nav class="nav-bar">
-            <div class="row">
-                <img src="{% static 'img/logo.png' %}" alt="logo" class="nav-bar__logo">
-                <ul class="nav-bar__titles">
-                    <li><a href="{% url 'home' %}">Home</a></li>
-                    <li><a href="{% url 'places' %}" class="active">Places</a></li>
-                    <li><a href="{% url 'adventures' %}">Adventures</a></li>
-                    <li><a href="{% url 'hotels' %}" >Hotels</a></li>
-                    <li><a href="{% url 'news' %}">News</a></li>
-                    <li><a href="{% url 'packages' %}">Packages</a></li>
-                    <li><a href="{% url 'connect' %}">Connect</a></li>
-                </ul>
-            </div>
-        </nav>
-        <style>
-            .detail {
-                background-image: linear-gradient(to bottom right, rgba(126, 213, 111, 0.6), rgba(86, 67, 250, 0.6)),
-                url({{place.placeImage.url}});
-            }
-        </style>
-        <div class="header__text-box">
-            <div class="header__text-box">
-                <h1 class="heading-primary">
-                    <span class="heading-primary--detail">{{place.placeName}}</span>
-                    <span class="heading-primary--sub">{{place.placetheme}}</span>
-                </h1>
+{% block title %} {{place.placeName}} | {% endblock %}
+{% block header_content %}
+<style>
+    .detail {
+        background-image: linear-gradient(to bottom right, rgba(126, 213, 111, 0.6), rgba(86, 67, 250, 0.6)),
+        url({{place.placeImage.url}});
+    }
+</style>
+<div class="header__text-box">
+    <div class="header__text-box">
+        <h1 class="heading-primary">
+            <span class="heading-primary--detail">{{place.placeName}}</span>
+            <span class="heading-primary--sub">{{place.placetheme}}</span>
+        </h1>
+    </div>
+</div>
+{% endblock %}
+{% block content %}
+<section class="detail-text">
+
+    <div class="row">
+
+        <div class="col-1-of-2">
+            <div class="u-center-text u-margin-bottom-medium u-margin-top-big">
+                <h2 class="heading-secondary heading-secondary--big u-margin-bottom-medium"> About
+                    {{place.placeName}}</h2>
+                <p class="paragraph paragraph--justified">{{place.placeDesc|safe}}
+                </p>
             </div>
         </div>
-    </header>
-
-    <section class="detail-text">
-
-        <div class="row">
-
-            <div class="col-1-of-2">
-                <div class="u-center-text u-margin-bottom-medium u-margin-top-big">
-                    <h2 class="heading-secondary heading-secondary--big u-margin-bottom-medium"> About
-                        {{place.placeName}}</h2>
-                    <p class="paragraph paragraph--justified">{{place.placeDesc|safe}}
-                    </p>
+        <div class="col-1-of-2">
+            <div class="u-center-text u-margin-bottom-medium u-margin-top-big">
+                <h2 class="heading-secondary heading-secondary--big"> To do List</h2>
+                <div class="cards__details">
+                    <ul class="detail-text__items">
+                        {% for item in adventure %}
+                        <li><a href="../adventure/{{item.adventureSlug}}">
+                                <div class="detail__icons">
+                                    {{item.adventureName}}
+                                </div>
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
                 </div>
             </div>
-            <div class="col-1-of-2">
-                <div class="u-center-text u-margin-bottom-medium u-margin-top-big">
-                    <h2 class="heading-secondary heading-secondary--big"> To do List</h2>
-                    <div class="cards__details">
-                        <ul class="detail-text__items">
-                            {% for item in adventure %}
-                            <li><a href="../adventure/{{item.adventureSlug}}">
-                                    <div class="detail__icons">
-                                        {{item.adventureName}}
-                                    </div>
-                                </a>
-                            </li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-                </div>
+        </div>
+
+    </div>
+</section>
+<section class="section-gallery">
+    <ul class="gallery-showcase clearfix">
+        {% for image in placeImage %}
+        <li>
+            <figure class="gallery-photo">
+                <img src="{{image.placeImage.url}}" alt="{{image}}">
+            </figure>
+        </li>
+        {% endfor %}
+    </ul>
+
+</section>
+<section class="detail-ratings">
+    <div class="u-center-text u-margin-bottom-big">
+        <h2 class="heading-secondary">Reviews</h2>
+    </div>
+    <div class="row">
+        {% for r,p in reviews %}
+        <div class="reviews reviews--detail">
+            <figure class="reviews__shape reviews__shape--detail">
+                <img src="{{p.profileImage.url}}" alt="photo for review" class="reviews__img reviews__img--detail">
+                <figcaption class="reviews__caption">{{r.user.first_name}} {{r.user.last_name}}</figcaption>
+            </figure>
+
+            <div class="reviews__text reviews__text--detail">
+                <p>{{r.comments}}</p>
+            </div>
+            <div class="reviews__star">
+                {% if r.rating == 5 %}
+                {% for rating in five_stars_review%}
+                <span class="fa fa-star {{rating}}"></span>
+                {% endfor %}
+
+                {% elif r.rating == 4 %}
+                {% for rating in four_stars_review%}
+                <span class="fa fa-star {{rating}}"></span>
+                {% endfor %}
+
+                {% elif r.rating == 3 %}
+                {% for rating in three_stars_review%}
+                <span class="fa fa-star {{rating}}"></span>
+                {% endfor %}
+
+
+                {% elif r.rating == 2 %}
+                {% for rating in two_stars_review%}
+                <span class="fa fa-star {{rating}}"></span>
+                {% endfor %}
+
+                {% else %}
+                {% for rating in four_stars_review%}
+                <span class="fa fa-star {{rating}}"></span>
+                {% endfor %}
+                {% endif %}
             </div>
 
         </div>
-    </section>
-    <section class="section-gallery">
-        <ul class="gallery-showcase clearfix">
-            {% for image in placeImage %}
-            <li>
-                <figure class="gallery-photo">
-                    <img src="{{image.placeImage.url}}" alt="{{image}}">
-                </figure>
-            </li>
-            {% endfor %}
-        </ul>
 
-    </section>
-    <section class="detail-ratings">
-        <div class="u-center-text u-margin-bottom-big">
-            <h2 class="heading-secondary">Reviews</h2>
-        </div>
-        <div class="row">
-            {% for r,p in reviews %}
-            <div class="reviews reviews--detail">
-                <figure class="reviews__shape reviews__shape--detail">
-                    <img src="{{p.profileImage.url}}" alt="photo for review" class="reviews__img reviews__img--detail">
-                    <figcaption class="reviews__caption">{{r.user.first_name}} {{r.user.last_name}}</figcaption>
-                </figure>
-
-                <div class="reviews__text reviews__text--detail">
-                    <p>{{r.comments}}</p>
-                </div>
-                <div class="reviews__star">
-                    {% if r.rating == 5 %}
-                    {% for rating in five_stars_review%}
-                    <span class="fa fa-star {{rating}}"></span>
-                    {% endfor %}
-
-                    {% elif r.rating == 4 %}
-                    {% for rating in four_stars_review%}
-                    <span class="fa fa-star {{rating}}"></span>
-                    {% endfor %}
-
-                    {% elif r.rating == 3 %}
-                    {% for rating in three_stars_review%}
-                    <span class="fa fa-star {{rating}}"></span>
-                    {% endfor %}
-
-
-                    {% elif r.rating == 2 %}
-                    {% for rating in two_stars_review%}
-                    <span class="fa fa-star {{rating}}"></span>
-                    {% endfor %}
-
-                    {% else %}
-                    {% for rating in four_stars_review%}
-                    <span class="fa fa-star {{rating}}"></span>
-                    {% endfor %}
-                    {% endif %}
-                </div>
-
-            </div>
-
-            {% endfor %}
-        </div>
-    </section>
+        {% endfor %}
+    </div>
+</section>
 </section>
 {% if user.is_authenticated %}
 <section class="section-profile">
