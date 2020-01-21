@@ -6,6 +6,7 @@ from django.http import HttpResponse
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages, auth
 from django.db import IntegrityError
+from django.core.paginator import Paginator
 from .models import *
 from .forms import *
 
@@ -16,7 +17,7 @@ def homePageView(request):
     soup = BeautifulSoup(res.text, 'lxml')
     temp_headline = soup.select('.card-theme-news-title')
     headline = [i.text for i in temp_headline]
-    newsLink = [i.lower().replace(' ', '-') for i in headline]
+    newsLink = [i.lower().replace(' ', '-').replace('/','-') for i in headline]
 
     # Currency Converter API
     def currency_converter(from_currency, to_currency, amount):
@@ -134,33 +135,48 @@ def logoutView(request):
 
 def placeListView(request):
     places = Place.objects.all()
+    paginator = Paginator(places, 1) # Show 25 contacts per page.
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    pages_range = range(1,page_obj.paginator.num_pages+1)
     return render(
         request,
         'listingPages/places.html',
         {
-            "place": places,
+            "page_obj": page_obj,
+            "total_pages": pages_range,
         }
     )
 
 
 def adventureListView(request):
     adventures = Adventure.objects.all()
+    paginator = Paginator(adventures, 1) # Show 25 contacts per page.
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    pages_range = range(1,page_obj.paginator.num_pages+1)
     return render(
         request,
         'listingPages/adventures.html',
         {
-            "adventure": adventures,
+            "page_obj": page_obj,
+            "total_pages": pages_range,
         }
     )
 
 
 def hotelListView(request):
     hotels = Hotel.objects.all()
+    paginator = Paginator(hotels, 1) # Show 25 contacts per page.
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    pages_range = range(1,page_obj.paginator.num_pages+1)
     return render(
         request,
         'listingPages/hotels.html',
         {
-            "hotel": hotels,
+            "page_obj": page_obj,
+            "total_pages": pages_range,
         }
     )
 
@@ -173,11 +189,16 @@ def hotelListView(request):
 
 def packageListView(request):
     packages = Package.objects.all()
+    paginator = Paginator(packages, 1) # Show 25 contacts per page.
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    pages_range = range(1,page_obj.paginator.num_pages+1)
     return render(
         request,
         'listingPages/packages.html',
         {
-            "package": packages,
+            "page_obj": page_obj,
+            "total_pages": pages_range,
         }
     )
 
@@ -189,13 +210,22 @@ def newsListView(request):
     news_title = [s.find('h5',{'class': 'card-theme-news-title'}).text for s in soup]
     news_image = [s.find('img').get('src') for s in soup]
     news_content = [s.find('p',{'class':'card-theme-news-text'}).text for s in soup]
-    news_slug = [t.lower().replace(' ', '-') for t in news_title]
+    news_slug = [t.lower().replace(' ', '-').replace('/','-') for t in news_title]
     news = zip(news_title, news_image ,news_content, news_slug)
+    # final_news = tuple(news)
+    # print(final_news)
+
+    # paginator = Paginator(final_news, 6) # Show 25 contacts per page.
+    # page_number = request.GET.get('page')
+    # page_obj = paginator.get_page(page_number)
+    # pages_range = range(1,page_obj.paginator.num_pages+1)
     return render(
         request,
         'listingPages/news.html',
         {
             "news": news,
+            # "page_obj": page_obj,
+            # "total_pages": pages_range,
         }
     )
 

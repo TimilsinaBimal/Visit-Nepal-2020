@@ -59,18 +59,22 @@
     </div>
     <div class=pg>
         <div class="u-center-text u-margin-top-medium u-padding-bottom-medium">
-            <a href="#" class="btn-text">&larr;Prev </a>
-            <a href="#" class="btn btn--card-detail">1</a>
-            <a href="#" class="btn btn--card-detail">2</a>
-            <a href="#" class="btn btn--card-detail">3</a>
-            <a href="#" class="btn btn--card-detail">4</a>
-            <a href="#" class="btn-text">Next &rarr;</a>
+            {% if page_obj.has_previous %}
+            <a href="?page=1" class="pg-no">&laquo</a>
+            <a href="?page={{ page_obj.previous_page_number }}" class="pg-no">PREV</a>
+            {% endif %}
+            {% for i in total_pages %}
+            {% ifequal i page_obj.number  %}
+            <a href="?page={{i}}" class="pg-no current">PAGE {{ i }}</a>
+            {% else %}
+            <a href="?page={{i}}" class="pg-no"> {{ i }}</a>
+            {% endifequal %}
+            {% endfor %}
+            {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}" class="pg-no">NEXT</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}" class="pg-no">&raquo;</a>
+            {% endif %}
         </div>
     </div>
-    <style>
-        .pg {
-            padding-bottom: 100px;
-        }
-    </style>
 </section>
 {% endblock content %}

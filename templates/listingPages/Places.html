@@ -2,14 +2,14 @@
 {% load staticfiles %}
 {% block title %} Places | {% endblock %}
 {% block header_content %}
+<div class="header__text-box">
     <div class="header__text-box">
-        <div class="header__text-box">
-            <h1 class="heading-primary">
-                <span class="heading-primary--detail">Places</span>
-                <span class="heading-primary--sub">All Places of Nepal</span>
-            </h1>
-        </div>
+        <h1 class="heading-primary">
+            <span class="heading-primary--detail">Places</span>
+            <span class="heading-primary--sub">All Places of Nepal</span>
+        </h1>
     </div>
+</div>
 {% endblock header_content %}
 {% block content %}
 
@@ -23,9 +23,10 @@
     <div class="u-center-text u-margin-bottom-big">
     </div>
     <div class="row">
-        {% for p in place %}
+        {% for p in page_obj %}
         <style>
             .cards__picture--{{p.placeSlug}}
+
                 {
                 background-image: linear-gradient(to right bottom, #2998ff, #ff7730),
                 url({{p.placeImage.url}});
@@ -57,20 +58,25 @@
         </div>
         {% endfor %}
     </div>
+
     <div class=pg>
         <div class="u-center-text u-margin-top-medium u-padding-bottom-medium">
-            <a href="#" class="btn-text">&larr;Prev </a>
-            <a href="#" class="btn btn--card-detail">1</a>
-            <a href="#" class="btn btn--card-detail">2</a>
-            <a href="#" class="btn btn--card-detail">3</a>
-            <a href="#" class="btn btn--card-detail">4</a>
-            <a href="#" class="btn-text">Next &rarr;</a>
+            {% if page_obj.has_previous %}
+            <a href="?page=1" class="pg-no">&laquo</a>
+            <a href="?page={{ page_obj.previous_page_number }}" class="pg-no">PREV</a>
+            {% endif %}
+            {% for i in total_pages %}
+            {% ifequal i page_obj.number  %}
+            <a href="?page={{i}}" class="pg-no current">PAGE {{ i }}</a>
+            {% else %}
+            <a href="?page={{i}}" class="pg-no"> {{ i }}</a>
+            {% endifequal %}
+            {% endfor %}
+            {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}" class="pg-no">NEXT</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}" class="pg-no">&raquo;</a>
+            {% endif %}
         </div>
     </div>
-    <style>
-        .pg {
-            padding-bottom: 100px;
-        }
-    </style>
 </section>
 {% endblock content %}

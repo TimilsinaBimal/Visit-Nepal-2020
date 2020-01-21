@@ -808,6 +808,28 @@ a {
   background-color: #55c57a;
 }
 
+/* PAGE NUMBER */
+
+.pg {
+  padding-bottom: 120px;
+}
+
+.pg-no {
+  font-size: 20px;
+  border: 2px solid #55c57a;
+  border-radius: .2em;
+  padding: 10px 15px;
+  color: #55c57a;
+  transition: .2s;
+}
+
+.pg-no:hover,
+.pg .current {
+  color: #fff;
+  background: #55c57a;
+  transition: .2s;
+}
+
 /* ----------------------------------------------- */
 /* Detail Pictures Gallery */
 /* ----------------------------------------------- */
