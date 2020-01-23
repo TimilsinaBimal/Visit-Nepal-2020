@@ -4,7 +4,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.forms import ModelForm
-from .models import Review
+from .models import Review, Testimonial
 
 
 class LoginForm(AuthenticationForm):
@@ -166,8 +166,10 @@ currency = json.loads(requests.get(currencies).text)
 list = currency["results"].keys()
 my_list = []
 for i in list:
-    my_list.append((i,i))
+    my_list.append((i, i))
 final_list = tuple(my_list)
+
+
 class CurrencyConverterForm(forms.Form):
     amount = forms.CharField(
         required=True,
@@ -179,7 +181,7 @@ class CurrencyConverterForm(forms.Form):
             })
     )
     from_currency = forms.ChoiceField(
-        choices = final_list,
+        choices=final_list,
         required=True,
         widget=forms.Select(
             attrs={
@@ -188,7 +190,7 @@ class CurrencyConverterForm(forms.Form):
             })
     )
     to_currency = forms.ChoiceField(
-        choices = final_list,
+        choices=final_list,
         required=True,
         widget=forms.Select(
             attrs={
@@ -196,3 +198,30 @@ class CurrencyConverterForm(forms.Form):
                 'id': 'to_currency',
             })
     )
+
+
+class TestimonialForm(ModelForm):
+    title = forms.CharField(
+        required=True,
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form__input',
+                'id': 'title',
+                'placeholder': 'Enter Title Here',
+            })
+    )
+    review = forms.CharField(
+        required=True,
+        widget=forms.Textarea(
+            attrs={
+                'cols': 80,
+                'rows': 8,
+                'class': 'form__input',
+                'id': 'review',
+                'placeholder': 'Your Review Here...',
+            })
+    )
+
+    class Meta:
+        model = Testimonial
+        fields = ['title', 'review']
