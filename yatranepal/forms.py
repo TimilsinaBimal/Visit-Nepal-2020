@@ -201,6 +201,16 @@ class CurrencyConverterForm(forms.Form):
 
 
 class TestimonialForm(ModelForm):
+    name = forms.CharField(
+        required=True,
+        widget=forms.HiddenInput(
+            attrs={
+                'class': 'form__input',
+                'id': 'name',
+                'placeholder': 'name',
+                'value': 'Bimal'
+            })
+    )
     title = forms.CharField(
         required=True,
         widget=forms.TextInput(

@@ -181,7 +181,8 @@ class Review(models.Model):
 
 
 class Testimonial(models.Model):
-    name = CurrentUserField()
+    name = models.OneToOneField(
+        User, on_delete=models.CASCADE, verbose_name="User", default="")
     title = models.CharField(
         max_length=500, verbose_name="Enter the Testimonial Title")
     review = models.TextField(verbose_name="Your Message")

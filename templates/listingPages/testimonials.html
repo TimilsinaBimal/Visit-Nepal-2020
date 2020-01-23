@@ -1,5 +1,7 @@
-{% extends 'base.html' %} {% load staticfiles %} {% block title %} Testimonials | {% endblock %} {%
-block header_content %}
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %} Testimonials | {% endblock %}
+{% block header_content %}
 <div class="header__text-box">
     <div class="header__text-box">
         <h1 class="heading-primary">
@@ -11,11 +13,9 @@ block header_content %}
 {% endblock header_content %} {% block content %}
 <style>
     .detail {
-        background-image: linear-gradient(
-                to bottom right,
+        background-image: linear-gradient(to bottom right,
                 rgba(126, 213, 111, 0.6),
-                rgba(86, 67, 250, 0.6)
-            ),
+                rgba(86, 67, 250, 0.6)),
             url();
     }
 </style>
@@ -23,18 +23,12 @@ block header_content %}
     <div class="u-center-text u-margin-bottom-big">
         <h2 class="heading-secondary">What people say about us!!!</h2>
     </div>
-    {% for t in testimonials %}
+    {% for t in page_obj %}
     <div class="row">
         <div class="reviews">
             <figure class="reviews__shape">
-                <img
-                    src="{% static 'img/review 1.jpg' %} "
-                    alt="{{t.name.username}}"
-                    class="reviews__img"
-                />
-                <figcaption class="reviews__caption"
-                    >{{t.name.first_name}} {{t.name.last_name}}</figcaption
-                >
+                <img src="{% static 'img/review 1.jpg' %} " alt="{{t.name.username}}" class="reviews__img" />
+                <figcaption class="reviews__caption">{{t.name.first_name}} {{t.name.last_name}}</figcaption>
             </figure>
             <div class="reviews__text">
                 <h3 class="heading-tertiary u-margin-bottom-small">{{t.title}}</h3>
@@ -44,28 +38,68 @@ block header_content %}
     </div>
     {% endfor %}
 
-    <div class="u-center-text u-margin-top-huge">
-        <a href="#" class="btn-text">More Reviews &rarr;</a>
+    <div class="pg">
+        <div class="u-center-text u-margin-top-medium u-padding-bottom-medium">
+            {% if page_obj.has_previous %}
+            <a href="?page=1" class="pg-no">&laquo</a>
+            <a href="?page={{ page_obj.previous_page_number }}" class="pg-no">PREV</a>
+            {% endif %} {% for i in total_pages %} {% ifequal i page_obj.number %}
+            <a href="?page={{i}}" class="pg-no current">PAGE {{ i }}</a>
+            {% else %}
+            <a href="?page={{i}}" class="pg-no"> {{ i }}</a>
+            {% endifequal %} {% endfor %} {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}" class="pg-no">NEXT</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}" class="pg-no">&raquo;</a>
+            {% endif %}
+        </div>
+    </div> 
+
+</section>
+
+
+
+{% if user.is_authenticated %}
+<section class="section-profile">
+    <div class="row">
+        <div class="register">
+            <form method="POST" class="register__form">
+                <div class="u-center-text u-margin-bottom-medium">
+                    <h2 class="heading-secondary"> Write a Review!!!</h2>
+                </div>
+                {% csrf_token %}
+                {% if form.errors %}
+                {% for field in form %}
+                {% for error in field.errors %}
+                <div class="alert alert-danger">
+                    <strong>{{ error|escape }}</strong>
+                </div>
+                {% endfor %}
+                {% endfor %}
+                {% for error in form.non_field_errors %}
+                <div class="alert alert-danger">
+                    <strong>{{ error|escape }}</strong>
+                </div>
+                {% endfor %}
+                {% endif %}
+                <div class="form__group">
+                    {{ form.name.errors }} {{ form.name }}
+                </div>
+                <div class="form__group">
+                    {{ form.title.errors }} {{ form.title }}
+                    <label class="form__label" for="{{ form.title.id_for_label }}"> Title</label>
+                </div>
+                <div class="form__group">
+                    {{ form.review.errors }} {{ form.review }}
+                    <label class="form__label" for="{{ form.review.id_for_label }}"> Review</label>
+                </div>
+                <div class="form__group">
+                    <button type="submit" class="btn btn--green">Submit</button>
+                </div>
+            </form>
+        </div>
     </div>
 </section>
 
-<div class="pg">
-    <div class="u-center-text u-margin-top-medium u-padding-bottom-medium">
-        {% if page_obj.has_previous %}
-        <a href="?page=1" class="pg-no">&laquo</a>
-        <a href="?page={{ page_obj.previous_page_number }}" class="pg-no">PREV</a>
-        {% endif %} {% for i in total_pages %} {% ifequal i page_obj.number %}
-        <a href="?page={{i}}" class="pg-no current">PAGE {{ i }}</a>
-        {% else %}
-        <a href="?page={{i}}" class="pg-no"> {{ i }}</a>
-        {% endifequal %} {% endfor %} {% if page_obj.has_next %}
-        <a href="?page={{ page_obj.next_page_number }}" class="pg-no">NEXT</a>
-        <a href="?page={{ page_obj.paginator.num_pages }}" class="pg-no">&raquo;</a>
-        {% endif %}
-    </div>
-</div>
-
-{% if user.is_authenticated %}
-
 {% endif %}
+
 {% endblock content %}

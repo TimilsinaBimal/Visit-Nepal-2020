@@ -229,14 +229,31 @@ def newsListView(request):
 
 def TestimonialListView(request):
     testimonials = Testimonial.objects.all()
-    paginator = Paginator(testimonial, 6)  # Show 25 contacts per page.
+    paginator = Paginator(testimonials, 6)  # Show 25 contacts per page.
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     pages_range = range(1, page_obj.paginator.num_pages+1)
+
+    # Testimonial Form
+    if request.method == "POST":
+        form = TestimonialForm(request.POST)
+        if form.is_valid():
+            try:
+                instance = form.save(commit=False)
+                instance.name = request.user
+                instance.save()
+                return redirect('testimonials')
+
+            except IntegrityError as e:
+                return HttpResponse('<script>alert("You have already Submitted Testimonial.")</script>')
+        else:
+            return HttpResponse('<script>alert("Error Occured! Please Review your form and Submit again.")</script>')
+    form = TestimonialForm
     return render(
         request,
         'listingPages/testimonials.html',
         {
+            "form": form,
             "page_obj": page_obj,
             "total_pages": pages_range,
         }
