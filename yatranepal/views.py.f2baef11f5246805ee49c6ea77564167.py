@@ -227,15 +227,15 @@ def newsListView(request):
     )
 
 
-def TestimonialListView(request):
-    testimonials = Testimonial.objects.all()
-    paginator = Paginator(testimonial, 6)  # Show 25 contacts per page.
+def placeListView(request):
+    places = Place.objects.all()
+    paginator = Paginator(places, 1) # Show 25 contacts per page.
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    pages_range = range(1, page_obj.paginator.num_pages+1)
+    pages_range = range(1,page_obj.paginator.num_pages+1)
     return render(
         request,
-        'listingPages/testimonials.html',
+        'listingPages/places.html',
         {
             "page_obj": page_obj,
             "total_pages": pages_range,
