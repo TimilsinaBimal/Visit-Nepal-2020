@@ -38,10 +38,7 @@ def homePageView(request):
             to_currency = form.cleaned_data.get('to_currency')
             result = currency_converter(from_currency,to_currency,float(amount))
             response_data = {}
-            response_data['result'] = result
-            response_data['from_currency'] = from_currency
-            response_data['to_currency'] = to_currency
-            response_data['amount'] = amount
+            response_data['result'] = round(result,4)
             return HttpResponse(
                 json.dumps(response_data),
                 content_type="application/json"

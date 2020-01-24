@@ -393,9 +393,7 @@
         <div class="book">
             <form method="POST" class="book__form" id="ccForm">
                 {% csrf_token %}
-                <div class="u-center-text u-margin-bottom-medium">
-                    <h2 class="heading-secondary" id="result"></h2>
-                </div>
+
                 <div class="form__group">
                     {{ form.amount.errors }}
                     {{ form.amount }}
@@ -403,13 +401,17 @@
                 </div>
                 <div class="form__group">
                     {{ form.from_currency.errors }}
-                    <label class="form__label" for="{{ form.from_currency.id_for_label }}">From Currency</label>
+                    <label class="form__label" for="{{ form.from_currency.id_for_label }}">Source Currency</label>
                     {{ form.from_currency }}
                 </div>
                 <div class="form__group">
                     {{ form.to_currency.errors }}
-                    <label class="form__label" for="{{ form.to_currency.id_for_label }}">To Currency</label>
+                    <label class="form__label" for="{{ form.to_currency.id_for_label }}">Target Currency</label>
                     {{ form.to_currency }}
+                </div>
+                <div class="form__group">
+                    <input type="text" class="form__input" name="result" placeholder="Result" id="result" readonly>
+                    <label for="result" class="form__label" >Result</label>
                 </div>
 
                 <div class="form__group">
