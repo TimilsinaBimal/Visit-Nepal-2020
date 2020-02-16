@@ -4,7 +4,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.forms import ModelForm
-from .models import Review, Testimonial
+from .models import Review, Testimonial, Status
 
 
 class LoginForm(AuthenticationForm):
@@ -163,11 +163,11 @@ class ReviewForm(ModelForm):
 api_key = '029b1a3324ceddd402ef'
 currencies = f"https://free.currconv.com/api/v7/currencies?apiKey={api_key}"
 currency = json.loads(requests.get(currencies).text)
-list = currency["results"].keys()
-my_list = []
-for i in list:
-    my_list.append((i, i))
-final_list = tuple(my_list)
+# list = currency["results"].keys()
+# my_list = []
+# for i in list:
+#     my_list.append((i, i))
+# final_list = tuple(my_list)
 
 
 class CurrencyConverterForm(forms.Form):
@@ -181,7 +181,7 @@ class CurrencyConverterForm(forms.Form):
             })
     )
     from_currency = forms.ChoiceField(
-        choices=final_list,
+        # choices=final_list,
         required=True,
         widget=forms.Select(
             attrs={
@@ -190,7 +190,7 @@ class CurrencyConverterForm(forms.Form):
             })
     )
     to_currency = forms.ChoiceField(
-        choices=final_list,
+        # choices=final_list,
         required=True,
         widget=forms.Select(
             attrs={
@@ -224,7 +224,7 @@ class TestimonialForm(ModelForm):
         required=True,
         widget=forms.Textarea(
             attrs={
-                'cols': 80,
+                'cols': 200,
                 'rows': 8,
                 'class': 'form__input',
                 'id': 'review',
@@ -235,3 +235,29 @@ class TestimonialForm(ModelForm):
     class Meta:
         model = Testimonial
         fields = ['title', 'review']
+
+
+class StatusForm(ModelForm):
+    name = forms.CharField(
+        required=True,
+        widget=forms.HiddenInput(
+            attrs={
+                'value': 'Bimal'
+            })
+    )
+
+    comments = forms.CharField(
+        required=True,
+        widget=forms.Textarea(
+            attrs={
+                'cols': 80,
+                'rows': 8,
+                'class': 'posttweetta',
+                'id': 'posttweetta',
+                'placeholder': 'What\'s happening?',
+            })
+    )
+
+    class Meta:
+        model = Status
+        fields = ['status']

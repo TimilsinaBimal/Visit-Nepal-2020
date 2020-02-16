@@ -189,3 +189,11 @@ class Testimonial(models.Model):
 
     def __str__(self):
         return self.name.username
+
+
+class Status(models.Model):
+    name = CurrentUserField()
+    status = models.TextField(verbose_name="Your Status", max_length=250)
+
+    def __str__(self):
+        return self.name.username + self.status

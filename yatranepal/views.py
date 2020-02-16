@@ -7,17 +7,20 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages, auth
 from django.db import IntegrityError
 from django.core.paginator import Paginator
+from django.contrib.auth.decorators import login_required
 from .models import *
 from .forms import *
 
 # Create your views here.
+
 
 def homePageView(request):
     res = requests.get("https://visitnepal2020.com/news/")
     soup = BeautifulSoup(res.text, 'lxml')
     temp_headline = soup.select('.card-theme-news-title')
     headline = [i.text for i in temp_headline]
-    newsLink = [i.lower().replace(' ', '-').replace('/','-') for i in headline]
+    newsLink = [i.lower().replace(' ', '-').replace('/', '-')
+                for i in headline]
 
     # Currency Converter API
     def currency_converter(from_currency, to_currency, amount):
@@ -30,47 +33,47 @@ def homePageView(request):
         return final_amount
 
     # Currency Converter Things Here
-    if request.method=='POST':
+    if request.method == 'POST':
         form = CurrencyConverterForm(request.POST)
         if form.is_valid():
             amount = form.cleaned_data.get('amount')
             from_currency = form.cleaned_data.get('from_currency')
             to_currency = form.cleaned_data.get('to_currency')
-            result = currency_converter(from_currency,to_currency,float(amount))
+            result = currency_converter(
+                from_currency, to_currency, float(amount))
             response_data = {}
-            response_data['result'] = round(result,4)
+            response_data['result'] = round(result, 4)
             return HttpResponse(
                 json.dumps(response_data),
                 content_type="application/json"
-                )
-
+            )
 
     user = request.user
     my_title = zip(headline[0:7], newsLink[0:7])
 
     temp_adventures = Adventure.objects.all()[0:3]
-    adventures = enumerate(temp_adventures,1)
+    adventures = enumerate(temp_adventures, 1)
 
     form = CurrencyConverterForm
     temp_places = Place.objects.all()[0:3]
-    places = enumerate(temp_places,4)
+    places = enumerate(temp_places, 4)
     return render(
-            request,
-            "home.html",
-            {
-                "news_title": my_title,
-                "form": form,
-                'user': user,
-                "hotels": Hotel.objects.all()[0:3],
-                "places": Place.objects.all()[0:3],
-                "adventures": Adventure.objects.all()[0:3],
-                'n_places': places,
-                'n_adventures':adventures,
-                "packages": Package.objects.all()[0:3],
-                "testimonials":Testimonial.objects.all()[0:2]
+        request,
+        "home.html",
+        {
+            "news_title": my_title,
+            "form": form,
+            'user': user,
+            "hotels": Hotel.objects.all()[0:3],
+            "places": Place.objects.all()[0:3],
+            "adventures": Adventure.objects.all()[0:3],
+            'n_places': places,
+            'n_adventures': adventures,
+            "packages": Package.objects.all()[0:3],
+            "testimonials": Testimonial.objects.all()[0:2]
 
-            }
-        )
+        }
+    )
 
 
 def register(request):
@@ -92,8 +95,6 @@ def register(request):
         "register.html",
         context={"form": form, "error": form.error_messages}
     )
-
-
 
 
 def loginView(request):
@@ -119,16 +120,14 @@ def loginView(request):
         request,
         'login.html',
         {
-            'form':form
+            'form': form
         }
     )
-
 
 
 def logoutView(request):
     logout(request)
     return redirect('home')
-
 
 
 # Listing Views
@@ -138,7 +137,7 @@ def placeListView(request):
     paginator = Paginator(places, 1)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    pages_range = range(1,page_obj.paginator.num_pages+1)
+    pages_range = range(1, page_obj.paginator.num_pages+1)
     return render(
         request,
         'listingPages/places.html',
@@ -154,7 +153,7 @@ def adventureListView(request):
     paginator = Paginator(adventures, 1)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    pages_range = range(1,page_obj.paginator.num_pages+1)
+    pages_range = range(1, page_obj.paginator.num_pages+1)
     return render(
         request,
         'listingPages/adventures.html',
@@ -170,7 +169,7 @@ def hotelListView(request):
     paginator = Paginator(hotels, 1)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    pages_range = range(1,page_obj.paginator.num_pages+1)
+    pages_range = range(1, page_obj.paginator.num_pages+1)
     return render(
         request,
         'listingPages/hotels.html',
@@ -186,7 +185,7 @@ def packageListView(request):
     paginator = Paginator(packages, 1)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    pages_range = range(1,page_obj.paginator.num_pages+1)
+    pages_range = range(1, page_obj.paginator.num_pages+1)
     return render(
         request,
         'listingPages/packages.html',
@@ -200,12 +199,15 @@ def packageListView(request):
 def newsListView(request):
     res = requests.get("https://visitnepal2020.com/news/")
     temp_soup = BeautifulSoup(res.text, 'lxml')
-    soup =temp_soup.find_all('div',{'class':'review-wrap__review'})
-    news_title = [s.find('h5',{'class': 'card-theme-news-title'}).text for s in soup]
+    soup = temp_soup.find_all('div', {'class': 'review-wrap__review'})
+    news_title = [
+        s.find('h5', {'class': 'card-theme-news-title'}).text for s in soup]
     news_image = [s.find('img').get('src') for s in soup]
-    news_content = [s.find('p',{'class':'card-theme-news-text'}).text for s in soup]
-    news_slug = [t.lower().replace(' ', '-').replace('/','-') for t in news_title]
-    news = zip(news_title, news_image ,news_content, news_slug)
+    news_content = [
+        s.find('p', {'class': 'card-theme-news-text'}).text for s in soup]
+    news_slug = [t.lower().replace(' ', '-').replace('/', '-')
+                 for t in news_title]
+    news = zip(news_title, news_image, news_content, news_slug)
     # final_news = tuple(news)
     # print(final_news)
 
@@ -257,21 +259,38 @@ def TestimonialListView(request):
     )
 
 
-
+@login_required
 def connectView(request):
+    user = request.user
+    # username = user.username
+    # Testimonial Form
+    bio = Profile.objects.get(user=user)
+    # print(bio.bio)
+    if request.method == "POST":
+        form = StatusForm(request.POST)
+        if form.is_valid():
+            # instance = form.save(commit=False)
+            # instance.name = request.user
+            form.save()
+            return redirect('connect')
+        else:
+            return HttpResponse('<script>alert("Error Occured! Please Review your form and Submit again.")</script>')
+    form = StatusForm
+
     return render(
         request,
-        'connect/home.html'
+        'connect/home.html',
+        {
+            'form': form,
+        }
     )
 
 
-
-def profileView(request,username):
+def profileView(request, username):
     return render(
         request,
         'connect/profile.html'
     )
-
 
 
 # Reviews Details
@@ -280,7 +299,6 @@ four_stars_review = ["checked", "checked", "checked", "checked", ""]
 three_stars_review = ["checked", "checked", "checked", "", ""]
 two_stars_review = ["checked", "checked", "", "", ""]
 one_star_review = ["checked", "", "", "", ""]
-
 
 
 # Place Details Page View
@@ -343,7 +361,6 @@ def placeDetailView(request, placeLink):
 # Adventure Details Page View
 
 
-
 def adventureDetailView(request, adventureLink):
 
     adventureContent = Adventure.objects.get(adventureSlug=adventureLink)
@@ -398,7 +415,6 @@ def adventureDetailView(request, adventureLink):
     )
 
 
-
 def newsDetailView(request, newsLink):
     temp_url = "https://visitnepal2020.com/{}/"
     url = temp_url.format(newsLink)
@@ -418,7 +434,6 @@ def newsDetailView(request, newsLink):
             'news_content': news_content
         }
     )
-
 
 
 def hotelDetailView(request, hotelLink):
@@ -468,7 +483,6 @@ def hotelDetailView(request, hotelLink):
             'one_star_review': one_star_review
         }
     )
-
 
 
 def packageDetailView(request, packageLink):

@@ -93,17 +93,18 @@
         <div class="rightcontainer">
             <div class="posttweetcontainer">
                 <img class="posttweetprofimg" src="../../img/tour-guide-1.png">
+                <form method="POST">
+                    {% csrf_token %}
                 <div class="ml56px">
                     <div class="posttweettacontainer">
-                        <textarea id="posttweetta" class="posttweetta" placeholder="What's happening?"></textarea>
-                        <div class="posttweetcountcont">
-                            <span class="posttweetcount"><span id="totalchars">0</span>/250</span>
-                        </div>
+                        {{ form.status.errors }}
+                        {{ form.status }}
                     </div>
                     <div class="posttweetbutcont">
-                        <a href=""><button id="posttweetbut" class="posttweetbut">Share</button></a>
+                        <button type="submit" id="posttweetbut" class="posttweetbut">Share</button>
                     </div>
                 </div>
+                </form>
             </div>
             <div>
                 <ul id="tweetscontainer" class="tweetscontainer">
