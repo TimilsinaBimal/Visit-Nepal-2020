@@ -18,152 +18,167 @@
             url();
     }
 </style>
-
-
 <section class="detail-text">
 
-    <div class="row">
+        <div class="row">
 
-        <div class="col-1-of-2">
-            <div class="u-center-text u-margin-bottom-medium u-margin-top-big">
-                <h2 class="heading-secondary heading-secondary--big u-margin-bottom-medium"> how it Works!!!
-                </h2>
-                <p class="paragraph paragraph--justified">Lorem ipsum dolor sit amet consectetur, adipisicing
-                    elit.
-                    Distinctio cumque quis reiciendis voluptatibus, a voluptates. Cum ullam cumque voluptatibus,
-                    suscipit voluptate maiores! Ex in ad officia illo impedit eum provident.<br><br>
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Placeat dolorem modi praesentium
-                    quod
-                    porro, dignissimos, delectus corrupti dolor omnis beatae hic tempora! Temporibus dolorem,
-                    placeat obcaecati voluptatum porro consequatur mollitia?Lorem ipsum dolor, sit amet
-                    consectetur
-                    adipisicing elit. Incidunt laboriosam quia, odio cumque non rerum repellendus esse velit
-                    delectus tempora, sint praesentium voluptate reprehenderit quo, sequi expedita quis
-                    inventore.
-                    Suscipit.<br><br>
-                </p>
-            </div>
-        </div>
-        <div class="col-1-of-2">
+            <div class="col-1-of-2">
 
-            <div class="u-center-text u-margin-bottom-small u-margin-top-big">
-                <h2 class="heading-secondary heading-secondary--big u-margin-bottom-medium"> Search here!!!</h2>
-                <div class="search-bottom u-margin-left-big">
-                    <form action="profile.html">
+                <div class="u-center-text u-margin-bottom-small u-margin-top-big">
+                    <h2 class="heading-secondary heading-secondary--big u-margin-bottom-medium"> Search here!!!</h2>
+                    <div class="search-bottom u-margin-left-big">
+                        <form action="profile.html">
 
-                        <div class="form__group">
-                            <input type="text" class="form__input form__input--connect"
-                                placeholder="Who are You Looking For?" id="search-word" required>
-                            <label for="search-word" class="form__label form__label--connect">Enter Name to
-                                Search
-                                <ion-icon name="search"></ion-icon></label>
-                        </div>
-                    </form>
+                            <div class="form__group">
+                                <input type="text" class="form__input form__input--connect" placeholder="Who are You Looking For?" id="search-word" required>
+                                <label for="search-word" class="form__label form__label--connect" >Enter Name to Search <ion-icon name="search"></ion-icon></label>
+                            </div>
+
+                           <!-- <div class="form__group">
+                                <button class="btn btn--green">Login</button>
+                            </div>-->
+                        </form>
+                    </div>
+                    <!--<div id="cover">
+                        <form method="get" action="../../pages/connect/profile.html">
+                          <div class="tb">
+                            <div class="td">
+                                <input type="text" id="search-text" placeholder="Who are You Looking For!" required>
+                            </div>
+                            <div class="td" id="s-cover">
+                              <button type="submit" id="submit-button">
+                                <div id="s-circle"></div>
+                                <span></span>
+                              </button>
+                            </div>
+                          </div>
+                        </form>
+                      </div>-->
                 </div>
             </div>
-        </div>
 
-    </div>
+        </div>
 </section>
 
-<section class="section-reviews">
-    <div class="u-center-text u-margin-bottom-big">
-        <h2 class="heading-secondary">What Match Finders Say!!!</h2>
-    </div>
-    <div class="row">
-        <div class="reviews">
-            <figure class="reviews__shape">
-                <img src="{% static 'img/review 1.jpg' %} " alt="photo for review" class="reviews__img">
+<div>
+    <div class="wallcontainer">
+        <div class="profilecard">
+            <div class="profilecardhead"></div>
+            <div class="profilecardimagediv">
+                <img src="../../img/tour-guide-1.png">
+            </div>
+
+            <div class="profilecardnameidcont">
+                <div class="profilecardnamecont">
+                    <span id="profilecardname"></span>
+                </div>
+                <span id="profilecarduid"></span>
+            </div>
+
+            <div class="profilecardstatsdiv">
+                <h3 class="heading-tertiary"> Full name </h3>
+                    <p class="paragraph">Ashish Pokhrel</p>
+                    <h3 class="heading-tertiary "> user name </h3>
+                    <p class="paragraph">Ashish Pokhrel</p>
+                    <h3 class="heading-tertiary "> Email </h3>
+                    <p class="paragraph">Ashish Pokhrel</p>
+                    <h3 class="heading-tertiary "> Bio: </h3>
+
+                    <p class="paragraph"> Traveling is my thing</p>
+
+            </div>
+        </div>
+
+
+        <div class="rightcontainer">
+            <div class="posttweetcontainer">
+                <img class="posttweetprofimg" src="../../img/tour-guide-1.png">
+                <div class="ml56px">
+                    <div class="posttweettacontainer">
+                        <textarea id="posttweetta" class="posttweetta" placeholder="What's happening?"></textarea>
+                        <div class="posttweetcountcont">
+                            <span class="posttweetcount"><span id="totalchars">0</span>/250</span>
+                        </div>
+                    </div>
+                    <div class="posttweetbutcont">
+                        <a href=""><button id="posttweetbut" class="posttweetbut">Share</button></a>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <ul id="tweetscontainer" class="tweetscontainer">
+
+                </ul>
+            </div>
+        </div>
+
+        <div class="row u-margin-top-big">
+        <div class="reviews reviews--detail reviews--detail--connect">
+            <figure class="reviews__shape reviews__shape--detail reviews__shape--detail--connect">
+                <img src="../../img/review 1.jpg" alt="photo for review" class="reviews__img reviews__img--detail">
                 <figcaption class="reviews__caption">Emily Kutcher</figcaption>
             </figure>
-            <div class="reviews__text">
-                <h3 class="heading-tertiary u-margin-bottom-small">Thanks to this site I can say i Explored
-                    nepal perfectly</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione hic repellat autem
-                    quidem
-                    officiis explicabo magni quas minima! Enim perferendis mollitia consequatur ullam
-                    repellat
-                    consequuntur quas voluptatum nesciunt quidem error.</p>
-            </div>
-        </div>
-    </div>
+            <div class="reviews__text reviews__text--detail reviews__text--detail--connect">
 
-    <div class="row">
-        <div class="reviews">
-            <figure class="reviews__shape">
-                <img src="{% static 'img/ashton kutcher.jpg' %} " alt="photo for review" class="reviews__img">
-                <figcaption class="reviews__caption">David Williams</figcaption>
-            </figure>
-            <div class="reviews__text">
-                <h3 class="heading-tertiary u-margin-bottom-small">I found perfect adventures and place in
-                    nepal
-                    for me</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione hic repellat autem
-                    quidem
-                    officiis explicabo magni quas minima! Enim perferendis mollitia consequatur ullam
-                    repellat
-                    consequuntur quas voluptatum nesciunt quidem error.</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione hic repellat autem quidem officiis explicabo magni qua</p>
             </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="reviews">
-            <figure class="reviews__shape">
-                <img src="{% static 'img/ashton kutcher.jpg' %} " alt="photo for review" class="reviews__img">
-                <figcaption class="reviews__caption">David Williams</figcaption>
-            </figure>
-            <div class="reviews__text">
-                <h3 class="heading-tertiary u-margin-bottom-small">I found perfect adventures and place in
-                    nepal
-                    for me</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione hic repellat autem
-                    quidem
-                    officiis explicabo magni quas minima! Enim perferendis mollitia consequatur ullam
-                    repellat
-                    consequuntur quas voluptatum nesciunt quidem error.</p>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="reviews">
-            <figure class="reviews__shape">
-                <img src="{% static 'img/ashton kutcher.jpg' %} " alt="photo for review" class="reviews__img">
-                <figcaption class="reviews__caption">David Williams</figcaption>
-            </figure>
-            <div class="reviews__text">
-                <h3 class="heading-tertiary u-margin-bottom-small">I found perfect adventures and place in
-                    nepal
-                    for me</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione hic repellat autem
-                    quidem
-                    officiis explicabo magni quas minima! Enim perferendis mollitia consequatur ullam
-                    repellat
-                    consequuntur quas voluptatum nesciunt quidem error.</p>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="reviews">
-            <figure class="reviews__shape">
-                <img src="{% static 'img/ashton kutcher.jpg' %} " alt="photo for review" class="reviews__img">
-                <figcaption class="reviews__caption">David Williams</figcaption>
-            </figure>
-            <div class="reviews__text">
-                <h3 class="heading-tertiary u-margin-bottom-small">I found perfect adventures and place in
-                    nepal
-                    for me</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione hic repellat autem
-                    quidem
-                    officiis explicabo magni quas minima! Enim perferendis mollitia consequatur ullam
-                    repellat
-                    consequuntur quas voluptatum nesciunt quidem error.</p>
-            </div>
-        </div>
-    </div>
-    <div class="u-center-text u-margin-top-huge">
-        <a href="#" class="btn-text">Next Page &rarr;</a>
-    </div>
-</section>
 
+        </div>
+        </div>
+
+        <div class=" u-margin-top-big">
+            <div class="reviews reviews--detail reviews--detail--connect reviews--detail--feed">
+                <figure class="reviews__shape reviews__shape--detail reviews__shape--detail--connect">
+                    <img src="../../img/review 1.jpg" alt="photo for review" class="reviews__img reviews__img--detail">
+                    <figcaption class="reviews__caption">Emily Kutcher</figcaption>
+                </figure>
+                <div class="reviews__text reviews__text--detail reviews__text--detail--connect">
+
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione hic repellat autem quidem officiis explicabo magni qua</p>
+                </div>
+
+            </div>
+            </div>
+
+            <div class=" u-margin-top-big">
+                <div class="reviews reviews--detail reviews--detail--connect reviews--detail--feed">
+                    <figure class="reviews__shape reviews__shape--detail reviews__shape--detail--connect">
+                        <img src="../../img/review 1.jpg" alt="photo for review" class="reviews__img reviews__img--detail">
+                        <figcaption class="reviews__caption">Emily Kutcher</figcaption>
+                    </figure>
+                    <div class="reviews__text reviews__text--detail reviews__text--detail--connect">
+
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione hic repellat autem quidem officiis explicabo magni qua</p>
+                    </div>
+
+                </div>
+                </div>
+    </div>
+</div>
+<!--
+<div class=pg>
+    <div class="u-center-text u-margin-top-medium u-padding-bottom-medium">
+        {% if page_obj.has_previous %}
+        <a href="?page=1" class="pg-no">&laquo</a>
+        <a href="?page={{ page_obj.previous_page_number }}" class="pg-no">PREV</a>
+        {% endif %}
+        {% for i in total_pages %}
+        {% ifequal i page_obj.number  %}
+        <a href="?page={{i}}" class="pg-no current">PAGE {{ i }}</a>
+        {% else %}
+        <a href="?page={{i}}" class="pg-no"> {{ i }}</a>
+        {% endifequal %}
+        {% endfor %}
+        {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}" class="pg-no">NEXT</a>
+        <a href="?page={{ page_obj.paginator.num_pages }}" class="pg-no">&raquo;</a>
+        {% endif %}
+    </div>
+</div> -->
+<div class= "margin-top"></div>
+    <script src="../../js/script.js"></script>
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>
 </section>
 {% endblock content %}

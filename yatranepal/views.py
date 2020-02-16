@@ -29,7 +29,7 @@ def homePageView(request):
         final_amount = json_file[query] * amount
         return final_amount
 
-    # Currency Converter THings Here
+    # Currency Converter Things Here
     if request.method=='POST':
         form = CurrencyConverterForm(request.POST)
         if form.is_valid():
@@ -135,7 +135,7 @@ def logoutView(request):
 
 def placeListView(request):
     places = Place.objects.all()
-    paginator = Paginator(places, 1) # Show 25 contacts per page.
+    paginator = Paginator(places, 1)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     pages_range = range(1,page_obj.paginator.num_pages+1)
@@ -151,7 +151,7 @@ def placeListView(request):
 
 def adventureListView(request):
     adventures = Adventure.objects.all()
-    paginator = Paginator(adventures, 1) # Show 25 contacts per page.
+    paginator = Paginator(adventures, 1)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     pages_range = range(1,page_obj.paginator.num_pages+1)
@@ -167,7 +167,7 @@ def adventureListView(request):
 
 def hotelListView(request):
     hotels = Hotel.objects.all()
-    paginator = Paginator(hotels, 1) # Show 25 contacts per page.
+    paginator = Paginator(hotels, 1)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     pages_range = range(1,page_obj.paginator.num_pages+1)
@@ -183,7 +183,7 @@ def hotelListView(request):
 
 def packageListView(request):
     packages = Package.objects.all()
-    paginator = Paginator(packages, 1) # Show 25 contacts per page.
+    paginator = Paginator(packages, 1)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     pages_range = range(1,page_obj.paginator.num_pages+1)
@@ -209,7 +209,7 @@ def newsListView(request):
     # final_news = tuple(news)
     # print(final_news)
 
-    # paginator = Paginator(final_news, 6) # Show 25 contacts per page.
+    # paginator = Paginator(final_news, 6)
     # page_number = request.GET.get('page')
     # page_obj = paginator.get_page(page_number)
     # pages_range = range(1,page_obj.paginator.num_pages+1)
@@ -226,7 +226,7 @@ def newsListView(request):
 
 def TestimonialListView(request):
     testimonials = Testimonial.objects.all()
-    paginator = Paginator(testimonials, 6)  # Show 25 contacts per page.
+    paginator = Paginator(testimonials, 6)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     pages_range = range(1, page_obj.paginator.num_pages+1)

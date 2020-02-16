@@ -48,7 +48,7 @@ body {
   /*font-size: 1.6rem;*/
   line-height: 1.7;
   color: #777;
-  padding: 3.0rem;
+  /* padding: 3.0rem; */
 }
 
 .heading-primary {
@@ -1258,4 +1258,795 @@ a {
 .detail-ratings {
   padding-top: 45rem;
   padding-bottom: 15rem;
+}
+
+
+@media (max-width: 56.25rem) {
+  .heading-primary--main {
+    font-size: 5rem;
+  }
+}
+
+@media (max-width: 37.5rem) {
+  .heading-primary--main {
+    font-size: 4rem;
+  }
+}
+
+
+@media (max-width: 56.25rem) {
+  .heading-primary--sub {
+    letter-spacing: .5rem;
+  }
+}
+
+
+
+@media (max-width: 56.25rem) {
+  .heading-secondary {
+    font-size: 3rem;
+  }
+}
+
+@media (max-width: 37.5rem) {
+  .heading-secondary {
+    font-size: 2.5rem;
+  }
+}
+
+
+
+@media (max-width: 56.25rem) {
+  .u-margin-bottom-big {
+    margin-bottom: 5rem;
+  }
+}
+
+@media (max-width: 56.25rem) {
+  .u-margin-bottom-medium {
+    margin-bottom: 3rem;
+  }
+}
+
+@media (max-width: 75rem) {
+  html {
+    font-size: 56.25%;
+  }
+}
+
+@media (max-width: 56.25rem) {
+  html {
+    font-size: 50%;
+  }
+}
+
+@media (min-width: 112.5rem) {
+  html {
+    font-size: 75%;
+  }
+}
+
+@media (max-width: 56.25rem) {
+  body {
+    padding: 0;
+  }
+}
+
+@media (max-width: 56.25rem) {
+  .composition__photo {
+    float: left;
+    position: relative;
+    width: 33.33%;
+    box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.4);
+  }
+}
+
+
+@media (max-width: 56.25rem) {
+  .composition__photo--p1 {
+    top: 1rem;
+    transform: scale(1.4);
+  }
+}
+
+
+
+@media (max-width: 56.25rem) {
+  .composition__photo--p2 {
+    top: -1rem;
+    transform: scale(1.5);
+    z-index: 100;
+  }
+}
+
+
+@media (max-width: 56.25rem) {
+  .composition__photo--p3 {
+    top: 0;
+    left: 0;
+    transform: scale(1.1);
+  }
+}
+
+
+
+@media (max-width: 56.25rem) {
+  .composition__photo--p4 {
+    top: 1rem;
+    transform: scale(1.4);
+  }
+}
+
+
+@media (max-width: 56.25rem) {
+  .composition__photo--p5 {
+    top: -1rem;
+    transform: scale(1.5);
+    z-index: 100;
+  }
+}
+
+
+@media (max-width: 56.25rem) {
+  .composition__photo--p6 {
+    top: 0;
+    left: 0;
+    transform: scale(1.1);
+  }
+}
+
+
+@media (max-width: 56.25rem) {
+  .feature-box {
+    padding: 1rem;
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 56.25rem) {
+  .feature-box__icon {
+    margin-bottom: 0;
+    font-size: 4.5rem;
+  }
+}
+
+
+
+@media (max-width: 56.25rem) {
+  .reviews {
+    width: 100%;
+    padding: 4rem;
+    padding-left: 7rem;
+  }
+}
+
+@media (max-width: 37.5rem) {
+  .reviews {
+    transform: skewX(0);
+  }
+}
+
+
+
+.reviews--detail--connect {
+  transform: skewX(0);
+  width: 62.2%;
+}
+
+.reviews--detail--feed {
+  float: none;
+}
+
+
+.reviews__shape--detail--connect {
+  transform: translateX(-3rem) skewX(0);
+}
+
+@media (max-width: 37.5rem) {
+  .reviews__shape {
+    transform: translateX(-3rem) skewX(0);
+  }
+}
+
+@media (max-width: 37.5rem) {
+  .reviews__text {
+    transform: skewX(0);
+  }
+}
+
+
+.reviews__text--detail--connect {
+  transform: skewX(0);
+}
+
+.form__input--connect {
+  width: 80%;
+  border-radius: 2rem;
+  background-color: rgba(153, 153, 153, 0.5);
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.form__label--connect {
+  font-size: 2rem;
+  margin-left: -20rem;
+}
+
+@media (max-width: 56.25rem) {
+  .crawl {
+    font-size: 1.5rem;
+  }
+}
+
+
+.topbar {
+  background-image: url("https://abs.twimg.com/a/1512226556/img/t1/lohp_streams_header_bg_v4.png");
+  background-size: 100% 100%;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+  height: 46px;
+  position: relative;
+  width: 100%;
+  text-align: center;
+}
+
+.topbar .container {
+  max-width: 1190px;
+  height: 100%;
+  text-align: center;
+  width: auto;
+  margin: 0 auto;
+  position: relative;
+}
+
+.logocenter {
+  font-size: 23px !important;
+  margin-top: 11px;
+  color: white;
+}
+
+.topcontainer {
+  background: #FFF;
+  height: 100%;
+}
+
+#submit_button {
+  background-color: #1da1f2;
+  border: 1px solid #1da1f2;
+  border-radius: 100px;
+  box-shadow: none;
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+  height: auto;
+  line-height: 24px;
+  padding: 12px 20px;
+  position: relative;
+  text-align: center;
+  white-space: nowrap;
+  width: 392px;
+}
+
+.wallcontainer {
+  width: 900px;
+  overflow: hidden;
+  margin: auto;
+}
+
+.profilecard {
+  width: 290px;
+  float: left;
+  background: #FFF;
+  margin: 10px;
+  position: relative;
+}
+
+.profilecardhead {
+  background-color: #ff0000;
+  height: 95px;
+}
+
+.profilecardimagediv {
+  margin: -30px 0 0 8px;
+  padding: 1px;
+  background: #FFF;
+  display: inline-block;
+  border-radius: 50%;
+}
+
+.profilecardimagediv img {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  box-sizing: border-box;
+  border: 2px solid #FFF;
+}
+
+.profilecardnameidcont {
+  position: absolute;
+  top: 103px;
+  left: 90px;
+  width: 185px;
+}
+
+.profilecardnamecont {
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 25px;
+  margin: -1px 0 -2px;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-wrap: normal;
+}
+
+#profilecardname {
+  color: inherit;
+  text-transform: uppercase;
+}
+
+#profilecarduid {
+  color: #667786;
+  font-size: 14px;
+  padding-right: 5px;
+  text-transform: uppercase;
+}
+
+.profilecardstatsdiv {
+  padding: 16px;
+}
+
+.profilecardstatslist {
+  table-layout: fixed;
+  box-sizing: border-box;
+  display: table;
+  margin: 0;
+  min-width: 100%;
+  padding: 0;
+  list-style: outside none;
+}
+
+.profilecardstatslistitem {
+  width: 1%;
+  vertical-align: bottom;
+  display: table-cell;
+  padding: 0;
+  box-sizing: border-box;
+  line-height: 1;
+  overflow: hidden;
+  transition: all 0.15s ease-in-out 0s;
+  text-align: inherit;
+}
+
+.dispblk {
+  display: block;
+}
+
+.statslistitemhead {
+  color: #657786;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 0, 02em;
+  line-height: 16px;
+  overflow: hidden;
+  transition: color 0.15s ease-in-out 0s;
+  display: block;
+}
+
+.statslistitemcount {
+  display: block;
+  font-size: 18px;
+  font-weight: bold;
+  padding-top: 3px;
+  transition: color .15s ease-in-out 0s;
+  color: #ff0000;
+}
+
+.rightcontainer {
+  width: 580px;
+  float: right;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
+.posttweetcontainer {
+  background: #ffe5e5;
+  padding: 10px 12px;
+  position: relative;
+}
+
+.posttweetprofimg {
+  width: 32px;
+  height: 32px;
+  position: absolute;
+  left: 28px;
+  top: 13px;
+  border-radius: 50%;
+}
+
+.ml56px {
+  margin-left: 56px;
+}
+
+.ml58px {
+  margin-left: 58px;
+}
+
+.mt10px {
+  margin-top: 10px;
+}
+
+.posttweettacontainer {
+  border-radius: 8px;
+  border: 1px solid #ff9999;
+  border-image: none;
+  line-height: 20px;
+  box-shadow: 0px 0px 0px 1px #ff9999;
+  background-color: white;
+}
+
+.posttweetta {
+  border-width: 1px 1px 0px;
+  border-style: solid solid none;
+  border-color: #e6ecf0 #e6ecf0 currentColor;
+  margin: 0px;
+  padding: 8px;
+  outline: 0px;
+  border-radius: 8px;
+  border-image: none;
+  width: 100%;
+  height: 50px;
+  font-family: "Segoe UI", Arial, sans-serif;
+  font-size: 14px;
+  box-sizing: border-box;
+  opacity: 0.8;
+  background-color: white;
+}
+
+.posttweetcountcont {
+  overflow: hidden;
+  margin-top: 10px;
+}
+
+.posttweetcount {
+  margin-right: 10px;
+  display: block;
+  float: right;
+}
+
+.posttweetbutcont {
+  overflow: hidden;
+  margin-top: 10px;
+}
+
+.posttweetbut {
+  padding: 6px 16px;
+  border-radius: 100px;
+  border: 1px solid #ff3232;
+  border-image: none;
+  text-align: center;
+  color: white;
+  line-height: 20px;
+  font-size: 14px;
+  font-weight: bold;
+  white-space: nowrap;
+  position: relative;
+  cursor: pointer;
+  float: right;
+  box-shadow: none;
+  background-color: #ff3232;
+}
+
+.tweetscontainer {
+  background: white;
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+}
+
+.tweetcontainer {
+  margin: 0px;
+  padding: 10px;
+  overflow: hidden;
+  border-bottom-color: #e6ecf0;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+}
+
+.tweetprofimg {
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  margin-right: 10px;
+  float: left;
+}
+
+.tweetprofname {
+  color: #14171a;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.tweetprofuid {
+  color: #657786;
+  font-size: 14px;
+  margin-left: 5px;
+}
+
+.tweetstats {
+  margin-right: 30px;
+  cursor: pointer;
+}
+
+.tweetstats i {
+  color: #657786;
+  font-size: 16px;
+}
+
+.tweetstatscount {
+  color: #657786;
+  line-height: 1;
+  font-size: 12px;
+  font-weight: bold;
+  margin-left: 6px;
+}
+
+.red i,
+.red span {
+  color: #f00 !important;
+}
+
+.header {
+  margin-top: -3rem;
+  height: 100vh;
+  background-image: linear-gradient(to bottom right, rgba(126, 213, 111, 0.644), rgba(40, 180, 133, 0.658));
+  background-size: cover;
+  background-position: top;
+  position: relative;
+  clip-path: polygon(50% 0%, 100% 0, 100% 93%, 50% 100%, 0 93%, 0 0);
+}
+
+.header__logo-box {
+  position: absolute;
+  top: 3.0rem;
+  left: 3.0rem;
+}
+
+.header__logo {
+  height: 12.0rem;
+}
+
+.header__text-box {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -20%);
+  text-align: center;
+}
+
+.row {
+  max-width: 114rem;
+  margin: 0 auto;
+}
+
+.row:not(:last-child) {
+  margin-bottom: 8rem;
+}
+
+@media (max-width: 56.25rem) {
+  .row:not(:last-child) {
+    margin-bottom: 6rem;
+  }
+}
+
+@media (max-width: 56.25rem) {
+  .row {
+    max-width: 50rem;
+  }
+}
+
+
+
+
+@media (max-width: 56.25rem) {
+  .row [class^="col-"]:not(:last-child) {
+    margin-right: 0;
+    margin-bottom: 6rem;
+  }
+}
+
+@media (max-width: 56.25rem) {
+  .row [class^="col-"] {
+    width: 100% !important;
+  }
+}
+
+@media (max-width: 75rem) {
+  .logo {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 56.25rem) {
+  .logo {
+    margin-top: 5rem;
+  }
+}
+
+@media (max-width: 37.5rem) {
+  .logo {
+    text-align: center;
+  }
+}
+
+.logo-black {
+  display: none;
+  height: 7rem;
+  width: auto;
+  float: left;
+}
+
+/* Main navi */
+.main-nav {
+  float: right;
+  list-style: none;
+  margin-top: 5.5rem;
+}
+
+@media (max-width: 75rem) {
+  .main-nav {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 56.25rem) {
+  .main-nav {
+    display: none;
+  }
+}
+
+.main-nav li {
+  display: inline-block;
+  margin-left: 4rem;
+}
+
+.main-nav li a:link,
+.main-nav li a:visited {
+  padding: .8rem 0;
+  color: #fff;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 1.6rem;
+  border-bottom: 2px solid transparent;
+  -webkit-transition: border-bottom 0.2s;
+  transition: border-bottom 0.2s;
+}
+
+.main-nav li a:hover,
+.main-nav li a:active {
+  border-bottom: 2px solid #e67e22;
+}
+
+.sticky {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 2px 2px #efefef;
+  z-index: 9999999999999;
+}
+
+.sticky .main-nav {
+  margin-top: 18px;
+}
+
+.sticky .main-nav li a:link,
+.sticky .main-nav li a:visited {
+  padding: 16px 0;
+  color: #555;
+}
+
+.sticky .logo {
+  display: none;
+}
+
+.sticky .logo-black {
+  display: block;
+}
+
+.section-news {
+  padding: 25rem 0;
+  background-color: #f7f7f7;
+  margin-top: -20vh;
+  font-family: inherit;
+}
+
+@media (max-width: 56.25rem) {
+  .section-news {
+    padding-bottom: 20rem;
+  }
+}
+
+
+@media (max-width: 56.25rem) {
+  .section-features {
+    padding: 8rem 0;
+  }
+}
+
+@media (max-width: 56.25rem) {
+  .section-about {
+    padding: 26rem 0 20rem 0;
+  }
+}
+
+@media (max-width: 56.25rem) {
+  .section-hotels {
+    padding: 10rem 0 10rem 0;
+  }
+}
+
+@media (max-width: 56.25rem) {
+  .section-places {
+    padding: 25rem 0 20rem 0;
+  }
+}
+
+
+
+@media (max-width: 56.25rem) {
+  .section-tours {
+    padding: 10rem 0 10rem 0;
+  }
+}
+
+
+
+@media (max-width: 56.25rem) {
+  .connect {
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.9) 100%), url(../img/khumbu.jpg);
+    background-size: cover;
+  }
+}
+
+
+
+@media (max-width: 56.25rem) {
+  .connect__form {
+    width: 100%;
+  }
+}
+
+
+@media (max-width: 56.25rem) {
+  .section-reviews {
+    padding: 10rem 0;
+  }
+}
+
+
+
+@media (max-width: 56.25rem) {
+  .section-book {
+    padding: 10rem 0;
+  }
+}
+
+@media (max-width: 56.25rem) {
+  .book {
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.9) 100%), url(../img/khumbu.jpg);
+    background-size: cover;
+  }
+}
+
+
+@media (max-width: 56.25rem) {
+  .book__form {
+    width: 100%;
+  }
+}
+
+.margin-top {
+  margin-top: 20rem;
 }
