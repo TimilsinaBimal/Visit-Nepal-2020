@@ -19,7 +19,7 @@ from . import views
 urlpatterns = [
     path('', views.homePageView, name='home'),
     path('register/', views.register, name='register'),
-    path('login/', views.loginView, name='login'),
+    path('accounts/login/', views.loginView, name='login'),
     path('logout/', views.logoutView, name='logout'),
     path('places/', views.placeListView, name="places"),
     path('adventures/', views.adventureListView, name="adventures"),
@@ -28,7 +28,7 @@ urlpatterns = [
     path('news/', views.newsListView, name="news"),
     path('testimonials/', views.TestimonialListView, name="testimonials"),
     path('connect/', views.connectView, name="connect"),
-    path('connect/<username>/', views.profileView, name="profile"),
+    path('connect/<str:username>/', views.profileView, name="profile"),
     path('place/<placeLink>/', views.placeDetailView, name='placeDetail'),
     path('adventure/<adventureLink>/',
          views.adventureDetailView, name='adventureDetail'),

@@ -238,15 +238,7 @@ class TestimonialForm(ModelForm):
 
 
 class StatusForm(ModelForm):
-    name = forms.CharField(
-        required=True,
-        widget=forms.HiddenInput(
-            attrs={
-                'value': 'Bimal'
-            })
-    )
-
-    comments = forms.CharField(
+    status = forms.CharField(
         required=True,
         widget=forms.Textarea(
             attrs={

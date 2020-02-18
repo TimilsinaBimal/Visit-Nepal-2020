@@ -194,7 +194,6 @@
             <style>
                 a {
                     text-decoration: none;
-                    text-color:
                 }
             </style>
             <p class="paragraph">
@@ -206,7 +205,7 @@
         <div class="col-1-of-2">
             <div class="composition">
                 {% for n,p in n_places %}
-                <img src="media/{{p.placeImage}}" alt="{{p.placeName}}"
+                <img src="{{p.placeImage.url}}" alt="{{p.placeName}}"
                     class="composition__photo composition__photo--p{{n}}">
                 {% endfor %}
             </div>
@@ -229,7 +228,7 @@
             .cards__picture--{{p.packageSlug}}
                 {
                 background-image: linear-gradient(to right bottom, #2998ff, #5643fa),
-                url(media/{{p.packageImage}});
+                url({{p.packageImage.url}});
             }
         </style>
         <div class="col-1-of-3">
@@ -290,7 +289,7 @@
                 </div>
                 {% if user.is_authenticated %}
                 <div class="form__group">
-                    <a href=""><button class="btn btn--green">See Profile</button></a>
+                    <a href="{% url 'profile' user.username %}"><button class="btn btn--green">See Profile</button></a>
                 </div>
 
                 <div class="form__group">

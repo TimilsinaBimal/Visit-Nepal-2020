@@ -24,7 +24,7 @@
 
             <div class="col-1-of-2">
 
-                <div class="u-center-text u-margin-bottom-small u-margin-top-big">
+                <!-- <div class="u-center-text u-margin-bottom-small u-margin-top-big">
                     <h2 class="heading-secondary heading-secondary--big u-margin-bottom-medium"> Search here!!!</h2>
                     <div class="search-bottom u-margin-left-big">
                         <form action="profile.html">
@@ -34,11 +34,11 @@
                                 <label for="search-word" class="form__label form__label--connect" >Enter Name to Search <ion-icon name="search"></ion-icon></label>
                             </div>
 
-                           <!-- <div class="form__group">
-                                <button class="btn btn--green">Login</button>
-                            </div>-->
+                           <div class="form__group">
+                                <button class="btn btn--green">Search</button>
+                            </div>
                         </form>
-                    </div>
+                    </div> -->
                     <!--<div id="cover">
                         <form method="get" action="../../pages/connect/profile.html">
                           <div class="tb">
@@ -85,7 +85,9 @@
                     <h3 class="heading-tertiary "> Bio: </h3>
 
                     <p class="paragraph"> {{profile.bio}}</p>
-
+                    <!-- <div class="form__group"> -->
+                       <a href="{% url 'logout' %}"> <button class="btn btn--green">Logout</button></a>
+                    <!-- </div> -->
             </div>
         </div>
 
@@ -95,10 +97,9 @@
                 <img class="posttweetprofimg" src="{{profile.profileImage.url}}">
                 <form method="POST">
                     {% csrf_token %}
-                <div class="ml56px">
+                    <div class="ml56px">
                     <div class="posttweettacontainer">
-                        {{ form.status.errors }}
-                        {{ form.status }}
+                    {{ form.status }}
                     </div>
                     <div class="posttweetbutcont">
                         <button type="submit" id="posttweetbut" class="posttweetbut">Share</button>
