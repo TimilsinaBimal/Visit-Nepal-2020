@@ -262,10 +262,14 @@ def TestimonialListView(request):
 @login_required
 def connectView(request):
     user = request.user
-    # username = user.username
-    # Testimonial Form
-    bio = Profile.objects.get(user=user)
-    # print(bio.bio)
+    user_profile = Profile.objects.get(user=user)
+    statuses = Status.objects.all()
+    status_users = [user for user in statuses]
+    status_image = [Profile.objects.get(
+        user=i.name).profileImage.url for i in status_users]
+    status_name = [user.name.first_name + " " +
+                   user.name.last_name for user in statuses]
+    status_detail = zip(statuses, status_image, status_name)
     if request.method == "POST":
         form = StatusForm(request.POST)
         if form.is_valid():
@@ -282,6 +286,9 @@ def connectView(request):
         'connect/home.html',
         {
             'form': form,
+            'status': status_detail,
+            'user': user,
+            'profile': user_profile
         }
     )
 

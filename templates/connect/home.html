@@ -65,7 +65,7 @@
         <div class="profilecard">
             <div class="profilecardhead"></div>
             <div class="profilecardimagediv">
-                <img src="../../img/tour-guide-1.png">
+                <img src="{{profile.profileImage.url}}">
             </div>
 
             <div class="profilecardnameidcont">
@@ -77,14 +77,14 @@
 
             <div class="profilecardstatsdiv">
                 <h3 class="heading-tertiary"> Full name </h3>
-                    <p class="paragraph">Ashish Pokhrel</p>
+                    <p class="paragraph">{{user.first_name}} {{user.last_name}}</p>
                     <h3 class="heading-tertiary "> user name </h3>
-                    <p class="paragraph">Ashish Pokhrel</p>
+                    <p class="paragraph">{{user.username}}</p>
                     <h3 class="heading-tertiary "> Email </h3>
-                    <p class="paragraph">Ashish Pokhrel</p>
+                    <p class="paragraph">{{user.email}}</p>
                     <h3 class="heading-tertiary "> Bio: </h3>
 
-                    <p class="paragraph"> Traveling is my thing</p>
+                    <p class="paragraph"> {{profile.bio}}</p>
 
             </div>
         </div>
@@ -92,7 +92,7 @@
 
         <div class="rightcontainer">
             <div class="posttweetcontainer">
-                <img class="posttweetprofimg" src="../../img/tour-guide-1.png">
+                <img class="posttweetprofimg" src="{{profile.profileImage.url}}">
                 <form method="POST">
                     {% csrf_token %}
                 <div class="ml56px">
@@ -112,48 +112,23 @@
                 </ul>
             </div>
         </div>
-
+    </div>
+        {% for statuses,image,name in status%}
         <div class="row u-margin-top-big">
-        <div class="reviews reviews--detail reviews--detail--connect">
-            <figure class="reviews__shape reviews__shape--detail reviews__shape--detail--connect">
-                <img src="../../img/review 1.jpg" alt="photo for review" class="reviews__img reviews__img--detail">
-                <figcaption class="reviews__caption">Emily Kutcher</figcaption>
-            </figure>
-            <div class="reviews__text reviews__text--detail reviews__text--detail--connect">
-
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione hic repellat autem quidem officiis explicabo magni qua</p>
-            </div>
-
-        </div>
-        </div>
-
-        <div class=" u-margin-top-big">
             <div class="reviews reviews--detail reviews--detail--connect reviews--detail--feed">
-                <figure class="reviews__shape reviews__shape--detail reviews__shape--detail--connect">
-                    <img src="../../img/review 1.jpg" alt="photo for review" class="reviews__img reviews__img--detail">
-                    <figcaption class="reviews__caption">Emily Kutcher</figcaption>
-                </figure>
+               <a href="#"> <figure class="reviews__shape reviews__shape--detail reviews__shape--detail--connect">
+                    <img src="{{image}}" alt="photo for review" class="reviews__img reviews__img--detail">
+                    <figcaption class="reviews__caption">{{name}}</figcaption>
+                </figure></a>
                 <div class="reviews__text reviews__text--detail reviews__text--detail--connect">
 
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione hic repellat autem quidem officiis explicabo magni qua</p>
+                    <p>{{statuses.status}}</p>
                 </div>
 
             </div>
             </div>
+            {% endfor %}
 
-            <div class=" u-margin-top-big">
-                <div class="reviews reviews--detail reviews--detail--connect reviews--detail--feed">
-                    <figure class="reviews__shape reviews__shape--detail reviews__shape--detail--connect">
-                        <img src="../../img/review 1.jpg" alt="photo for review" class="reviews__img reviews__img--detail">
-                        <figcaption class="reviews__caption">Emily Kutcher</figcaption>
-                    </figure>
-                    <div class="reviews__text reviews__text--detail reviews__text--detail--connect">
-
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione hic repellat autem quidem officiis explicabo magni qua</p>
-                    </div>
-
-                </div>
-                </div>
     </div>
 </div>
 <!--
