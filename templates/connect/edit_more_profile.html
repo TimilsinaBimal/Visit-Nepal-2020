@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %} Update Profile | {% endblock %}
+{% block header_content %}
+<div class="header__text-box">
+    <div class="header__text-box">
+        <h1 class="heading-primary">
+            <span class="heading-primary--detail">Update Profile</span>
+        </h1>
+    </div>
+</div>
+</header>
+{% endblock header_content%}
+{% block content %}
+<style>
+    .detail {
+        background-image: linear-gradient(to bottom right, rgba(126, 213, 111, 0.6), rgba(86, 67, 250, 0.6)),
+            url();
+    }
+</style>
+<section class="section-register">
+    <div class="u-center-text u-margin-bottom-medium">
+    </div>
+    <div class="row">
+        <div class="book">
+            <form method="post" class="book__form">{% csrf_token %}
+                <div class="form__group">
+                    {{ form.username }}
+                    <label class="form__label" for="{{ form.username.id_for_label }}">Username</label>
+                </div>
+                <div class="form__group">
+                    {{ form.first_name }}
+                    <label class="form__label" for="{{ form.first_name.id_for_label }}">First Name</label>
+                </div>
+                <div class="form__group">
+                    {{ form.last_name }}
+                    <label class="form__label" for="{{ form.last_name.id_for_label }}">Last Name</label>
+                </div>
+                <div class="form__group">
+                    {{ form.email }}
+                    <label class="form__label" for="{{ form.email.id_for_label }}">Email</label>
+                </div>
+                <div class="form__group">
+                    <button type="submit" class=" btn btn--green">Update</button>
+                </div>
+            </form>
+            <a class="btn btn--green" href="{% url 'change_password' %}">Click Here to Change Password</a>
+        </div>
+    </div>
+</section>
+<div class="u-center-text u-padding-bottom-huge">
+</div>
+{% endblock content %}

@@ -6,15 +6,16 @@ from geolite2 import geolite2
 from bs4 import BeautifulSoup
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib import messages, auth
 from django.db import IntegrityError
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
+from django.views.generic.edit import UpdateView
 from .models import *
 from .forms import *
-from django.template.loader import render_to_string
-from numpy.distutils.system_info import NotFoundError
+from django.urls import reverse_lazy
+from django.contrib.auth.forms import PasswordChangeForm
 
 # Create your views here.
 
@@ -383,6 +384,38 @@ def profileView(request, username):
             'profile': user_profile
         }
     )
+
+
+class ProfileUpdateView(UpdateView):
+    model = Profile
+    fields = ['bio', 'country', 'address', 'dob', 'profileImage']
+    template_name = 'connect/edit_profile.html'
+    success_url = reverse_lazy('connect')
+
+
+class CoreProfileUpdateView(UpdateView):
+    model = User
+    fields = ['username', 'first_name', 'last_name', 'email']
+    template_name = 'connect/edit_more_profile.html'
+    success_url = reverse_lazy('connect')
+
+
+def change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Important!
+            messages.success(
+                request, 'Your password was successfully updated!')
+            return redirect('change_password')
+        else:
+            messages.error(request, 'Please correct the error below.')
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'connect/change_password.html', {
+        'form': form
+    })
 
 
 # Reviews Details

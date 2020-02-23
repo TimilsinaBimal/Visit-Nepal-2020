@@ -2422,6 +2422,48 @@ tbody tr:hover {
 }
 
 @media (max-width: 576px) {
-  .container-table100 {padding-left: 15px;
-padding-right: 15px;
+  .container-table100 {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+
+
+input,
+select {
+  font-size: 1.5rem;
+  padding: 1.5rem 2rem;
+  font-family: inherit;
+  color: inherit;
+  border-radius: .2rem;
+  display: block;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.5);
+  width: 80%;
+  border-bottom: .3rem solid transparent;
+}
+
+
+input::-webkit-input-placeholder,
+select::-webkit-input-placeholder {
+  color: #55c57a;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-bottom: 0.3rem solid #55c57a;
+  box-shadow: 0 3rem 4rem rgba(0, 0, 0, 0.15);
+}
+
+input:focus:invalid,
+select:focus:invalid {
+  border-bottom: 0.3rem solid #ff7730;
+}
+
+input:placeholder-shown+.form__label,
+select:placeholder-shown+.form__label {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-4rem);
 }
