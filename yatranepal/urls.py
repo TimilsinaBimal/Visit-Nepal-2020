@@ -26,6 +26,7 @@ urlpatterns = [
     path('hotels/', views.hotelListView, name="hotels"),
     path('packages/', views.packageListView, name="packages"),
     path('news/', views.newsListView, name="news"),
+    path('currencies/', views.currListView, name="currconv"),
     path('testimonials/', views.TestimonialListView, name="testimonials"),
     path('connect/', views.connectView, name="connect"),
     path('connect/<str:username>/', views.profileView, name="profile"),
@@ -35,4 +36,5 @@ urlpatterns = [
     path('hotel/<hotelLink>/', views.hotelDetailView, name='hotelDetail'),
     path('package/<packageLink>/', views.packageDetailView, name='packageDetail'),
     path('news/<newsLink>/', views.newsDetailView, name='newsDetail'),
+
 ]

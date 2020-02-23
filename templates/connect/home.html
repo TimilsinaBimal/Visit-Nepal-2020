@@ -114,10 +114,10 @@
             </div>
         </div>
     </div>
-        {% for statuses,image,name in status%}
+        {% for statuses,image,name, uname in status%}
         <div class="row u-margin-top-big">
             <div class="reviews reviews--detail reviews--detail--connect reviews--detail--feed">
-               <a href="#"> <figure class="reviews__shape reviews__shape--detail reviews__shape--detail--connect">
+               <a href="{% url 'profile' uname %}"> <figure class="reviews__shape reviews__shape--detail reviews__shape--detail--connect">
                     <img src="{{image}}" alt="photo for review" class="reviews__img reviews__img--detail">
                     <figcaption class="reviews__caption">{{name}}</figcaption>
                 </figure></a>

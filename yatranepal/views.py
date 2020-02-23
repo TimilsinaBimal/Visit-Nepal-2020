@@ -1,5 +1,6 @@
 import requests
 import json
+import datetime
 from bs4 import BeautifulSoup
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
@@ -10,6 +11,7 @@ from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
 from .models import *
 from .forms import *
+from django.template.loader import render_to_string
 
 # Create your views here.
 
@@ -130,7 +132,30 @@ def logoutView(request):
     return redirect('home')
 
 
+# Currency Listing View
+def currListView(request):
+    date = datetime.date.today()
+    year = f"{date.year}"
+    month = f"{date:%m}"
+    day = f"{date:%d}"
+    my_url = f"https://www.nrb.org.np/exportForexJSON.php?YY={year}&MM={month}&DD={day}"
+    currencies = json.loads(requests.get(my_url).text)
+    my_list = currencies["Conversion"]["Currency"]
+    BaseCurrency = [i["BaseCurrency"] for i in my_list]
+    BaseValue = [i["BaseValue"] for i in my_list]
+    TargetSell = [i["TargetSell"] for i in my_list]
+    my_curr = zip(BaseCurrency, BaseValue, TargetSell)
+
+    return render(
+        request,
+        'currencyConverter.html',
+        {
+            'curr': my_curr
+        }
+    )
+
 # Listing Views
+
 
 def placeListView(request):
     places = Place.objects.all()
@@ -280,8 +305,11 @@ def connectView(request):
     status_name = [user.name.first_name + " " +
                    user.name.last_name for user in statuses]
 
+    # fetching the username for status
+    status_uname = [user.name.username for user in statuses]
+
     # Zipping for easy use
-    status_detail = zip(statuses, status_image, status_name)
+    status_detail = zip(statuses, status_image, status_name, status_uname)
 
     # updating status
     if request.method == "POST":
@@ -327,7 +355,12 @@ two_stars_review = ["checked", "checked", "", "", ""]
 one_star_review = ["checked", "", "", "", ""]
 
 
+# Weather API Call
+"api.openweathermap.org/data/2.5/weather?q=Banepa&appid=f22565e99c4ba2e70abab3885734c1"
+
 # Place Details Page View
+
+
 def placeDetailView(request, placeLink):
 
     # Getting place details from Database
