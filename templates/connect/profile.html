@@ -43,6 +43,9 @@
                     <h3 class="heading-tertiary "> Bio: </h3>
                     <p class="paragraph"> {{profile.bio}}</p>
 
+                    <a class="btn btn--green" href="{% url 'logout' %}">Logout</a>
+                    <a class="btn btn--green" href="{% url 'logout' %}">Edit Profile</a>
+
 
                     <div class="profile__img-box">
                     <img src="{{profile.profileImage.url}}" class="profile__img" alt="profile image">

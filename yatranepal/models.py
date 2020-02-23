@@ -5,6 +5,7 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 from django_currentuser.middleware import (
     get_current_user, get_current_authenticated_user)
 from django_currentuser.db.models import CurrentUserField
+import datetime
 
 # Create your models here.
 
@@ -194,6 +195,8 @@ class Testimonial(models.Model):
 class Status(models.Model):
     name = CurrentUserField()
     status = models.TextField(verbose_name="Your Status", max_length=250)
+    current_time = models.DateTimeField(
+        verbose_name="Current Date and Time", default=datetime.datetime.now())
 
     class Meta:
         verbose_name_plural = "Statuses"

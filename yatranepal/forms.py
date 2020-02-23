@@ -253,30 +253,3 @@ class StatusForm(ModelForm):
     class Meta:
         model = Status
         fields = ['status']
-
-
-class PackageSearchForm(forms.Form):
-
-    RELATION_CHOICES = (
-        (1, "Less than"),
-        (2, "Greater than")
-    )
-    query = forms.IntegerField(
-        required=True,
-        widget=forms.NumberInput(
-            attrs={
-                'class': 'form__input form__input--package',
-                'placeholder': 'Whats your budget?',
-                'id': 'search-word'
-            }
-        )
-    )
-    relation = forms.ChoiceField(
-        required=True,
-        choices=RELATION_CHOICES,
-        widget=forms.Select(
-            attrs={
-                'class': 'form__select u-margin-left-big',
-            }
-        )
-    )

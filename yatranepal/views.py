@@ -325,7 +325,7 @@ def connectView(request):
     user_profile = Profile.objects.get(user=user)
 
     # getting all statuses
-    statuses = Status.objects.all()
+    statuses = Status.objects.order_by('-current_time')
 
     # fetching users for each status
     status_users = [user for user in statuses]
@@ -348,8 +348,13 @@ def connectView(request):
     if request.method == "POST":
         form = StatusForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('connect')
+            try:
+                instance = form.save(commit=False)
+                instance.current_time = datetime.datetime.now()
+                instance.save()
+                return redirect('connect')
+            except:
+                return HttpResponse('<script>alert("Error Occured! Please Review your form and Submit again.")</script>')
         else:
             return HttpResponse('<script>alert("Error Occured! Please Review your form and Submit again.")</script>')
     form = StatusForm
