@@ -21,6 +21,7 @@
     <header class=" detail detail--4">
         {% block header_bg %}
         {% endblock header_bg %}
+        {% block nav %}
         <nav class="nav-bar">
             <div class="row">
                 <img src="{% static 'img/logo.png' %}" alt="logo" class="nav-bar__logo">
@@ -35,6 +36,7 @@
                 </ul>
             </div>
         </nav>
+        {% endblock nav %}
         {% block header_content %}
         {% endblock header_content %}
     </header>

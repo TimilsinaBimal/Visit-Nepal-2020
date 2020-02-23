@@ -49,12 +49,23 @@
         </div>
         <div class="col-1-of-3">
             <div class="u-center-text u-margin-bottom-medium u-margin-top-big">
-                <h2 class="heading-secondary heading-secondary--big"> To do List</h2>
+                <h2 class="heading-secondary heading-secondary--big"> Today's Weather</h2>
             <div class="feature-box">
-                <i class="feature-box__icon icon-weather-downpour-sun"></i>
-                <h3 class="heading-tertiary u-margin-bottom-small">18 &#8451; | &#8457;</h3>
-                <p class="feature-box__text">Budol, Dhulikhel <br> Sunday 13:00 <br> Mostly Cloudy</p>
+                <img src="{{weather_icon}}" alt="">
+                <h3 class="heading-tertiary main-temp u-margin-bottom-small">{{temperature}} &#8451;</h3>
+                <h3 class="heading-tertiary u-margin-bottom-small">MAX: {{temperature_max}} &#8451; MIN: {{temperature_min}} &#8451;</h3>
+                <p class="feature-box__text">{{detailed_status}} <br> Humidity: {{humidity}} % &nbsp;
+                Clouds: {{clouds}} %<br>  Pressure: {{pressure}} hpa &nbsp;</p>
+            <a class="btn-text" href="https://openweathermap.org/find?q={{place.placeName}},NP" target="_blank" rel="noopener noreferrer">See More &rarr;</a>
             </div>
+            <style>
+                .feature-box__text{
+                    text-transform: capitalize;
+                }
+                .main-temp{
+                    font-size: 2em;
+                }
+            </style>
         </div>
 
     </div>

@@ -1,6 +1,8 @@
 import requests
 import json
 import datetime
+import pyowm
+from geolite2 import geolite2
 from bs4 import BeautifulSoup
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
@@ -12,6 +14,7 @@ from django.contrib.auth.decorators import login_required
 from .models import *
 from .forms import *
 from django.template.loader import render_to_string
+from numpy.distutils.system_info import NotFoundError
 
 # Create your views here.
 
@@ -392,9 +395,6 @@ one_star_review = ["checked", "", "", "", ""]
 
 
 def placeDetailView(request, placeLink):
-
-    # Weather Forecase
-
     # Getting place details from Database
     placeContent = Place.objects.get(placeSlug=placeLink)
 
@@ -406,7 +406,35 @@ def placeDetailView(request, placeLink):
     images = [item for item in PlaceImage.objects.filter(
         place__placeSlug=placeLink)]
 
-    # Review Form
+    # WEATHER FORECAST
+    owm = pyowm.OWM('f22565e99c4ba2e70abab3885734c1b3')
+
+    # GET CURRENT USER LOCATION
+    # Getting IP ADDRESS
+    my_ip = requests.get('https://api.ipify.org').text
+
+    reader = geolite2.reader()
+    location = reader.get(my_ip)
+    latitude = location['location']['latitude']
+    longitude = location['location']['longitude']
+    try:
+        observation = owm.weather_at_place(placeContent.placeName+",NP")
+    except:
+        observation = owm.weather_around_coords(
+            latitude, longitude, limit=1)[0]
+
+    w = observation.get_weather()
+    temperature = w.get_temperature(unit='celsius')
+    temperature_max = temperature['temp_max']
+    temperature_min = temperature['temp_min']
+    temperature_acc = temperature['temp']
+    detailed_status = w.get_detailed_status()
+    weather_icon = w.get_weather_icon_url()
+    humidity = w.get_humidity()
+    clouds = w.get_clouds()
+    pressure = w.get_pressure()['press']
+
+   # Review Form
     if request.method == "POST":
         form = ReviewForm(request.POST)
         if form.is_valid():
@@ -441,6 +469,14 @@ def placeDetailView(request, placeLink):
             'form': ReviewForm,
             'reviews': placeReviews,
             'user': request.user,
+            'temperature': temperature_acc,
+            'temperature_max': temperature_max,
+            'temperature_min': temperature_min,
+            'detailed_status': detailed_status,
+            'weather_icon': weather_icon,
+            'humidity': humidity,
+            'clouds': clouds,
+            'pressure': pressure,
             'five_stars_review': five_stars_review,
             'four_stars_review': four_stars_review,
             'three_stars_review': three_stars_review,
