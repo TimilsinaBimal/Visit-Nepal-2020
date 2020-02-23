@@ -5,8 +5,8 @@
     <div class="header__text-box">
         <div class="header__text-box">
             <h1 class="heading-primary">
-                <span class="heading-primary--detail">Packages</span>
-                <span class="heading-primary--sub"> All available Packages</span>
+                <span class="heading-primary--detail">Search Result</span>
+                <span class="heading-primary--sub"> Results for package {% ifequal relation "1" %} Greater {% else %} Less {% endifequal %} than {{query}}  </span>
             </h1>
         </div>
     </div>
@@ -19,36 +19,17 @@
             url();
     }
 </style>
-
-<form method="GET" action=".">
- <h2 class="u-margin-top-big heading-secondary heading-secondary--big text-center">Find the Package that fits you the best</h2>
-        <style>
-            .text-center {
-                text-align: center;
-            }
-            form{
-                text-align:center;
-            }
-        </style>
-        <div class="form__group">
-            <select class="form__select u-margin-left-big" name="relation">
-                <option value="1">More than</option>
-                <option value="2">Less than</option>
-            </select>
-            <input type="number" class="form__input form__input--package" placeholder="Whats your budget?" id="search-word" required  name = "query">
-
-            <label for="search-word" class="form__label form__label--package"  >Enter Amount in Rupeess</label>
-
-
-            <input class="btn btn--package u-margin-left-big" type="submit" value="Search">
-    </div>
-</form>
-
-
 <section class="section-more-cards">
     <div class="u-center-text u-margin-bottom-big">
     </div>
     <div class="row">
+        {% if not page_obj %}
+        <div class="u-center-text u-margin-top-big">
+            <h2 class="heading-secondary"> No Results found!</h2>
+        </div>
+        <div class="u-center-text u-margin-top-big"></div>
+        <div class="u-margin-top-big"></div>
+        {% else %}
         {% for p in page_obj %}
         <style>
             .cards__picture--{{p.packageSlug}}
@@ -94,25 +75,7 @@
             </div>
         </div>
         {% endfor %}
-    </div>
-    <div class=pg>
-        <div class="u-center-text u-margin-top-medium u-padding-bottom-medium">
-            {% if page_obj.has_previous %}
-            <a href="?page=1" class="pg-no">&laquo</a>
-            <a href="?page={{ page_obj.previous_page_number }}" class="pg-no">PREV</a>
-            {% endif %}
-            {% for i in total_pages %}
-            {% ifequal i page_obj.number  %}
-            <a href="?page={{i}}" class="pg-no current">PAGE {{ i }}</a>
-            {% else %}
-            <a href="?page={{i}}" class="pg-no"> {{ i }}</a>
-            {% endifequal %}
-            {% endfor %}
-            {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}" class="pg-no">NEXT</a>
-            <a href="?page={{ page_obj.paginator.num_pages }}" class="pg-no">&raquo;</a>
-            {% endif %}
-        </div>
+        {% endif %}
     </div>
 </section>
 {% endblock content %}

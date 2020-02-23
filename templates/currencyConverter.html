@@ -1,19 +1,59 @@
-<table class="table">
-    <caption>List of users</caption>
-    <thead>
-        <tr>
-            <th scope="col">Base Currency</th>
-            <th scope="col">Base Unit</th>
-            <th scope="col">Target Sell</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for a,b,c in curr %}
-        <tr>
-            <td>{{a}}</td>
-            <td>{{b}}</td>
-            <td>{{c}}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}Exchange Rates | {% endblock title %}
+{% block header_content %}
+<div class="header__text-box">
+    <div class="header__text-box">
+        <h1 class="heading-primary">
+            <span class="heading-primary--detail">Currency</span>
+            <span class="heading-primary--sub"> Lisitng all the currency</span>
+        </h1>
+    </div>
+</div>
+{% endblock header_content %}
+{% block content %}
+
+<style>
+    .detail {
+        background-image: linear-gradient(to bottom right, rgba(126, 213, 111, 0.6), rgba(86, 67, 250, 0.6)),
+            url();
+    }
+</style>
+<section class="section-currency">
+	<div class="u-center-text u-margin-top-big">
+        <h2 class="heading-secondary"> Check Currency Rate here!</h2>
+    </div>
+	<div class="limiter">
+		<div class="container-table100">
+			<div class="wrap-table100">
+				<div class="table100">
+					<table>
+						<thead>
+							<tr class="table100-head">
+								<th class="column1">S.No</th>
+								<th class="column2">Currency</th>
+								<th class="column3">Unit</th>
+								<th class="column5">Nepali Rate</th>
+
+							</tr>
+						</thead>
+						<tbody>
+                            {% for sn,currency , base, rate in curr %}
+								<tr>
+									<td class="column1">{{sn}}</td>
+									<td class="column2">{{currency}}</td>
+									<td class="column3">{{base}}</td>
+									<td class="column5">{{rate}}</td>
+
+                                </tr>
+                                {% endfor %}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+    </div>
+
+</section>
+<div class="u-center-text u-margin-top-big"></div>
+{% endblock content %}

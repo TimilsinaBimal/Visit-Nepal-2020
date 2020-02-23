@@ -141,10 +141,11 @@ def currListView(request):
     my_url = f"https://www.nrb.org.np/exportForexJSON.php?YY={year}&MM={month}&DD={day}"
     currencies = json.loads(requests.get(my_url).text)
     my_list = currencies["Conversion"]["Currency"]
+    my_sn = [i+1 for i in range(len(my_list))]
     BaseCurrency = [i["BaseCurrency"] for i in my_list]
     BaseValue = [i["BaseValue"] for i in my_list]
     TargetSell = [i["TargetSell"] for i in my_list]
-    my_curr = zip(BaseCurrency, BaseValue, TargetSell)
+    my_curr = zip(my_sn, BaseCurrency, BaseValue, TargetSell)
 
     return render(
         request,
@@ -154,8 +155,8 @@ def currListView(request):
         }
     )
 
-# Listing Views
 
+# Listing Views
 
 def placeListView(request):
     places = Place.objects.all()
@@ -211,6 +212,35 @@ def packageListView(request):
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     pages_range = range(1, page_obj.paginator.num_pages+1)
+
+    # Get data from Form
+    if request.method == "GET":
+        query = request.GET.get("query")
+        relation = request.GET.get('relation')
+        print(query, relation)
+        if relation == "1":
+            search_result = Package.objects.filter(packagePrice__gte=query)
+            return render(
+                request,
+                'listingPages/package_search.html',
+                {
+                    'page_obj': search_result,
+                    'query': query,
+                    'relation': relation
+                }
+            )
+        elif relation == "2":
+            search_result = Package.objects.filter(packagePrice__lte=query)
+            return render(
+                request,
+                'listingPages/package_search.html',
+                {
+                    'page_obj': search_result,
+                    'query': query,
+                    'relation': relation
+                }
+            )
+
     return render(
         request,
         'listingPages/packages.html',
@@ -362,6 +392,8 @@ one_star_review = ["checked", "", "", "", ""]
 
 
 def placeDetailView(request, placeLink):
+
+    # Weather Forecase
 
     # Getting place details from Database
     placeContent = Place.objects.get(placeSlug=placeLink)
