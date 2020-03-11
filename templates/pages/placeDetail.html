@@ -87,6 +87,17 @@
         <h2 class="heading-secondary">Reviews</h2>
     </div>
     <div class="row">
+        <h3 class="heading-secondary--big">Overall Rating</h3>
+        <div class="rating-holder">
+            <div class="c-rating c-rating--big" data-rating-value="{{overallRating}}">
+                <button>1</button>
+                <button>2</button>
+                <button>3</button>
+                <button>4</button>
+                <button>5</button>
+            </div>
+        </div>
+        <div class="u-margin-bottom-big"></div>
         {% for r,p in reviews %}
         <div class="reviews reviews--detail">
             <figure class="reviews__shape reviews__shape--detail">

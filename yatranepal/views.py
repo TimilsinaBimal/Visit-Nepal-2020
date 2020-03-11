@@ -11,7 +11,7 @@ from django.contrib import messages, auth
 from django.db import IntegrityError
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
-from django.views.generic.edit import UpdateView
+from django.views.generic.edit import UpdateView, CreateView
 from .models import *
 from .forms import *
 from django.urls import reverse_lazy
@@ -90,7 +90,7 @@ def register(request):
             username = form.cleaned_data.get('username')
             messages.success(request, f"New Account Created: {username}")
             login(request, user)
-            return redirect('home')
+            return redirect(f'connect/{request.user}/create')
         else:
             for msg in form.error_messages:
                 messages.error(request, f"{msg}: {form.error_messages[msg]}")
@@ -376,14 +376,23 @@ def connectView(request):
 def profileView(request, username):
     user = User.objects.get(username=username)
     user_profile = Profile.objects.get(user=user)
+    current_user = request.user
     return render(
         request,
         'connect/profile.html',
         {
             'user': user,
-            'profile': user_profile
+            'profile': user_profile,
+            'current_user': current_user
         }
     )
+
+
+class ProfileCreateView(CreateView):
+    model = Profile
+    fields = ['user', 'bio', 'country', 'address', 'dob', 'profileImage']
+    template_name = 'connect/create_profile.html'
+    success_url = reverse_lazy('connect')
 
 
 class ProfileUpdateView(UpdateView):
@@ -424,10 +433,6 @@ four_stars_review = ["checked", "checked", "checked", "checked", ""]
 three_stars_review = ["checked", "checked", "checked", "", ""]
 two_stars_review = ["checked", "checked", "", "", ""]
 one_star_review = ["checked", "", "", "", ""]
-
-
-# Weather API Call
-"api.openweathermap.org/data/2.5/weather?q=Banepa&appid=f22565e99c4ba2e70abab3885734c1"
 
 # Place Details Page View
 
@@ -496,6 +501,12 @@ def placeDetailView(request, placeLink):
         userProfile.append(userProfileList)
 
     placeReviews = zip(reviews, userProfile)
+    sumRating = 0
+    for i in reviews:
+        sumRating = sumRating+i.rating
+
+    averageRating = sumRating / len(reviews)
+    print(averageRating)
 
     return render(
         request,
@@ -515,6 +526,7 @@ def placeDetailView(request, placeLink):
             'humidity': humidity,
             'clouds': clouds,
             'pressure': pressure,
+            'overallRating': averageRating,
             'five_stars_review': five_stars_review,
             'four_stars_review': four_stars_review,
             'three_stars_review': three_stars_review,

@@ -30,6 +30,8 @@ urlpatterns = [
     path('testimonials/', views.TestimonialListView, name="testimonials"),
     path('connect/', views.connectView, name="connect"),
     path('connect/<str:username>/', views.profileView, name="profile"),
+    path('connect/<str:username>/create',
+         views.ProfileCreateView.as_view(), name='create_profile'),
     path('connect/<int:pk>/edit',
          views.ProfileUpdateView.as_view(), name='edit_profile'),
     path('connect/<int:pk>/edit_core',

@@ -82,24 +82,24 @@ class Hotel(models.Model):
         return self.hotelFeatures.split('\n')
 
 
-class TransportationType(models.Model):
-    transportationType = models.CharField(
-        max_length=255, verbose_name="Transportation Type")
+# class TransportationType(models.Model):
+#     transportationType = models.CharField(
+#         max_length=255, verbose_name="Transportation Type")
 
-    def __str__(self):
-        return self.transportationType
+#     def __str__(self):
+#         return self.transportationType
 
 
-class Transportation(models.Model):
-    transportationType = models.ForeignKey(
-        TransportationType, on_delete=models.CASCADE, verbose_name="TransportationType")
-    placeFrom = models.CharField(max_length=200, verbose_name="Source Place")
-    placeTo = models.CharField(
-        max_length=200, verbose_name="Destination Place")
-    fare = models.IntegerField(verbose_name="Price(NRs.)")
+# class Transportation(models.Model):
+#     transportationType = models.ForeignKey(
+#         TransportationType, on_delete=models.CASCADE, verbose_name="TransportationType")
+#     placeFrom = models.CharField(max_length=200, verbose_name="Source Place")
+#     placeTo = models.CharField(
+#         max_length=200, verbose_name="Destination Place")
+#     fare = models.IntegerField(verbose_name="Price(NRs.)")
 
-    def __str__(self):
-        return self.placeFrom + " " + self.placeTo
+#     def __str__(self):
+#         return self.placeFrom + " " + self.placeTo
 
 
 class Package(models.Model):

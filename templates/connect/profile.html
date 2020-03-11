@@ -42,14 +42,13 @@
                     <p class="paragraph">{{profile.phone}}</p>
                     <h3 class="heading-tertiary "> Bio: </h3>
                     <p class="paragraph"> {{profile.bio}}</p>
-
+                    {% ifequal user.id current_user.id %}
                     <a class="btn btn--green" href="{% url 'logout' %}">Logout</a>
                     <div>
-
-
-                    <a class="btn-text" href="{% url 'edit_profile' profile.pk %}">Edit Profile</a>
-                    <a class="btn-text" href="{% url 'edit_core_profile' user.pk %}">Change Password</a>
-                            </div>
+                        <a class="btn-text" href="{% url 'edit_profile' profile.pk %}">Edit Profile</a>
+                        <a class="btn-text" href="{% url 'edit_core_profile' user.pk %}">Change Password</a>
+                    </div>
+                    {% endifequal %}
 
                     <div class="profile__img-box">
                     <img src="{{profile.profileImage.url}}" class="profile__img" alt="profile image">

@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %} Create Profile | {% endblock %}
+{% block header_content %}
+<div class="header__text-box">
+    <div class="header__text-box">
+        <h1 class="heading-primary">
+            <span class="heading-primary--detail">Create Profile</span>
+        </h1>
+    </div>
+</div>
+</header>
+{% endblock header_content%}
+{% block content %}
+<style>
+    .detail {
+        background-image: linear-gradient(to bottom right, rgba(126, 213, 111, 0.6), rgba(86, 67, 250, 0.6)),
+            url();
+    }
+</style>
+<section class="section-register">
+    <div class="u-center-text u-margin-bottom-medium">
+    </div>
+    <div class="row">
+        <div class="book">
+            <form method="post" class="book__form">{% csrf_token %}
+                <div class="form__group">
+                    {{ form.user }}
+                    <label class="form__label" for="{{ form.user.id_for_label }}">Username</label>
+                </div>
+                <div class="form__group">
+                    {{ form.bio }}
+                    <label class="form__label" for="{{ form.bio.id_for_label }}">Bio</label>
+                </div>
+                <div class="form__group">
+                    {{ form.country }}
+                    <label class="form__label" for="{{ form.country.id_for_label }}">Country</label>
+                </div>
+                <div class="form__group">
+                    {{ form.address }}
+                    <label class="form__label" for="{{ form.address.id_for_label }}">Address</label>
+                </div>
+                <div class="form__group">
+                    {{ form.dob }}
+                    <label class="form__label" for="{{ form.dob.id_for_label }}">Date of Birth</label>
+                </div>
+                <div class="form__group">
+                    {{ form.profileImage }}
+                    <label class="form__label" for="{{ form.profileImage.id_for_label }}">Profile Image</label>
+                </div>
+                <div class="form__group">
+                    <button type="submit" class=" btn btn--green">Create</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+<div class="u-center-text u-padding-bottom-huge">
+</div>
+{% endblock content %}
