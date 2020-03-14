@@ -1,3 +1,4 @@
+import math
 import requests
 import json
 import datetime
@@ -427,14 +428,49 @@ def change_password(request):
     })
 
 
+# Average Rating Calculating Function
+def average_rating(reviews):
+    sumRating = 0
+    average_rating = 0
+    for i in reviews:
+        sumRating = sumRating+i.rating
+    if(len(reviews) != 0):
+        try:
+            average_rating = round((sumRating / len(reviews)), 2)
+        except:
+            average_rating = 0
+    else:
+        average_rating = 0
+
+    frac, whole = math.modf(average_rating)
+    frac = round(frac, 2)
+    print(frac)
+    if 0.00 <= frac <= 0.13:
+        average_rating = whole + 0.0
+    elif 0.13 < frac <= 0.25:
+        average_rating = whole + 0.25
+    elif 0.25 < frac <= 0.38:
+        average_rating = whole + 0.25
+    elif 0.38 < frac <= 0.50:
+        average_rating = whole + 0.50
+    elif 0.50 < frac <= 0.63:
+        average_rating = whole + 0.50
+    elif 0.63 < frac <= 0.75:
+        average_rating = whole + 0.75
+    elif 0.75 < frac <= 0.88:
+        average_rating = whole + 0.75
+    else:
+        average_rating = whole + 1.00
+
+    return average_rating
+
+
 # Reviews Details
 five_stars_review = ["checked", "checked", "checked", "checked", "checked"]
 four_stars_review = ["checked", "checked", "checked", "checked", ""]
 three_stars_review = ["checked", "checked", "checked", "", ""]
 two_stars_review = ["checked", "checked", "", "", ""]
 one_star_review = ["checked", "", "", "", ""]
-
-# Place Details Page View
 
 
 def placeDetailView(request, placeLink):
@@ -501,12 +537,6 @@ def placeDetailView(request, placeLink):
         userProfile.append(userProfileList)
 
     placeReviews = zip(reviews, userProfile)
-    sumRating = 0
-    for i in reviews:
-        sumRating = sumRating+i.rating
-
-    averageRating = sumRating / len(reviews)
-    print(averageRating)
 
     return render(
         request,
@@ -526,7 +556,7 @@ def placeDetailView(request, placeLink):
             'humidity': humidity,
             'clouds': clouds,
             'pressure': pressure,
-            'overallRating': averageRating,
+            'overallRating': average_rating(reviews),
             'five_stars_review': five_stars_review,
             'four_stars_review': four_stars_review,
             'three_stars_review': three_stars_review,
@@ -560,7 +590,7 @@ def adventureDetailView(request, adventureLink):
             except IntegrityError as e:
                 return HttpResponseRedirect('<script>alert("You have already reviewed this Adventure.")</script>')
         else:
-            return HtpytpResponse('<script>alert("Error Occured! Please Review your form and Submit again.")</script>')
+            return HttpResponse('<script>alert("Error Occured! Please Review your form and Submit again.")</script>')
 
     # Handling Reviews Lists
     reviews = [item for item in Review.objects.filter(
@@ -583,6 +613,7 @@ def adventureDetailView(request, adventureLink):
             'form': ReviewForm,
             'reviews': adventureReview,
             'user': request.user,
+            'overallRating': average_rating(reviews),
             'five_stars_review': five_stars_review,
             'four_stars_review': four_stars_review,
             'three_stars_review': three_stars_review,
@@ -653,6 +684,7 @@ def hotelDetailView(request, hotelLink):
             'form': ReviewForm,
             'reviews': hotelReview,
             'user': request.user,
+            # 'overallRating': average_rating(reviews),
             'five_stars_review': five_stars_review,
             'four_stars_review': four_stars_review,
             'three_stars_review': three_stars_review,
@@ -702,6 +734,7 @@ def packageDetailView(request, packageLink):
             'form': ReviewForm,
             'reviews': packageReview,
             'user': request.user,
+            'overallRating': average_rating(reviews),
             'five_stars_review': five_stars_review,
             'four_stars_review': four_stars_review,
             'three_stars_review': three_stars_review,
