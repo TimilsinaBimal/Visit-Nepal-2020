@@ -21,22 +21,15 @@
         <div class="register">
             <form method="POST" class="register__form">
                 {% csrf_token %}
-                <!-- <h4>{{ error }}</h4> -->
-                {% if form.errors %}
-                {% for field in form %}
-                {% for error in field.errors %}
-                <div class="alert alert-danger">
-                    <strong>{{ error|escape }}</strong>
+                {% if error %}
+                <div class="span12">
+                    {% for e in error %}
+                    <div class="alert alert-{{ error.tags }}">
+                        {{ error|safe }}
+                    </div>
+                    {% endfor %}
                 </div>
-                {% endfor %}
-                {% endfor %}
-                {% for error in form.non_field_errors %}
-                <div class="alert alert-danger">
-                    <strong>{{ error|escape }}</strong>
-                </div>
-                {% endfor %}
                 {% endif %}
-                <p> {{ form.non_field_errors }} </p>
                 <div class="form__group">
                     {{ form.first_name.errors }}
                     {{ form.first_name }}
@@ -73,7 +66,7 @@
                 </div>
 
                 <div class="form__group">
-                    <span class="form__register-text"> ALready have Account</span><a href={% url 'home' %}
+                    <span class="form__register-text"> ALready have Account</span><a href={% url 'login' %}
                         class="btn-text">Login From Here &rarr;</a>
                 </div>
             </form>

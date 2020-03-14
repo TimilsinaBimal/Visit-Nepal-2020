@@ -23,7 +23,7 @@
     </div>
     <div class="row">
         <div class="book">
-<form method="post" class="book__form">{% csrf_token %}
+<form method="post" class="book__form" enctype="multipart/form-data">{% csrf_token %}
     <div class="form__group">
         {{ form.bio }}
         <label class="form__label" for="{{ form.bio.id_for_label }}">Bio</label>

@@ -23,11 +23,23 @@
     </div>
     <div class="row">
         <div class="book">
-            <form method="post" class="book__form">{% csrf_token %}
-                <div class="form__group">
-                    {{ form.user }}
-                    <label class="form__label" for="{{ form.user.id_for_label }}">Username</label>
+            <form method="post" class="book__form" enctype="multipart/form-data">
+
+                {% csrf_token %}
+                {% if form.errors %}
+                <!-- Error messaging -->
+                <div id="errors">
+                    <div class="inner">
+                        <p>There were some errors in the information you entered. Please correct the following:</p>
+                        <ul>
+                            {% for field in form %}
+                            {% if field.errors %}<li>{{ field.label }}: {{ field.errors|striptags }}</li>{% endif %}
+                            {% endfor %}
+                        </ul>
+                    </div>
                 </div>
+                <!-- /Error messaging -->
+                {% endif %}
                 <div class="form__group">
                     {{ form.bio }}
                     <label class="form__label" for="{{ form.bio.id_for_label }}">Bio</label>
@@ -41,12 +53,16 @@
                     <label class="form__label" for="{{ form.address.id_for_label }}">Address</label>
                 </div>
                 <div class="form__group">
+                    {{ form.phone }}
+                    <label class="form__label" for="{{ form.phone.id_for_label }}">Mobile Number</label>
+                </div>
+                <div class="form__group">
                     {{ form.dob }}
                     <label class="form__label" for="{{ form.dob.id_for_label }}">Date of Birth</label>
                 </div>
                 <div class="form__group">
                     {{ form.profileImage }}
-                    <label class="form__label" for="{{ form.profileImage.id_for_label }}">Profile Image</label>
+                    <label class="form__label" for="{{ form.dob.id_for_label }}">Profile Image</label>
                 </div>
                 <div class="form__group">
                     <button type="submit" class=" btn btn--green">Create</button>

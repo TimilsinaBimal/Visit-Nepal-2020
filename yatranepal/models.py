@@ -161,7 +161,7 @@ class Profile(models.Model):
     dob = models.DateField(verbose_name="Date of Birth")
     # profileLink = user.username
     profileImage = models.ImageField(
-        upload_to="users/", verbose_name="Profile Picture", default="")
+        upload_to="users/", verbose_name="Profile Picture", default="users/user_default.png")
 
     def __str__(self):
         return self.user.username

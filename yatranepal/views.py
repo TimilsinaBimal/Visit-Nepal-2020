@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 import math
 import requests
 import json
@@ -15,7 +16,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic.edit import UpdateView, CreateView
 from .models import *
 from .forms import *
-from django.urls import reverse_lazy
+from django.urls import reverse, reverse_lazy
 from django.contrib.auth.forms import PasswordChangeForm
 
 # Create your views here.
@@ -91,10 +92,10 @@ def register(request):
             username = form.cleaned_data.get('username')
             messages.success(request, f"New Account Created: {username}")
             login(request, user)
-            return redirect(f'connect/{request.user}/create')
+            return redirect(f'../connect/{request.user}/create/')
         else:
             for msg in form.error_messages:
-                messages.error(request, f"{msg}: {form.error_messages[msg]}")
+                messages.error(request, f"{form.error_messages[msg]}")
 
     form = SignUpForm
     return render(
@@ -102,6 +103,36 @@ def register(request):
         "register.html",
         context={"form": form, "error": form.error_messages}
     )
+
+
+@login_required
+def ProfileCreationView(request, username):
+    if request.method == "POST":
+        form = ProfileCreationForm(request.POST, request.FILES)
+        if form.is_valid():
+            try:
+                instance = form.save(commit=False)
+                instance.user = request.user
+                instance.save()
+                return redirect('connect')
+            except IntegrityError as e:
+                return HttpResponse('<script>alert("You have already reviewed this Package.")</script>')
+        else:
+            return render(
+                request,
+                "connect/create_profile.html",
+                {
+                    'form': form,
+                    'error': form.errors
+                })
+
+    form = ProfileCreationForm
+    return render(
+        request,
+        "connect/create_profile.html",
+        {
+            'form': form,
+        })
 
 
 def loginView(request):
@@ -387,13 +418,6 @@ def profileView(request, username):
             'current_user': current_user
         }
     )
-
-
-class ProfileCreateView(CreateView):
-    model = Profile
-    fields = ['user', 'bio', 'country', 'address', 'dob', 'profileImage']
-    template_name = 'connect/create_profile.html'
-    success_url = reverse_lazy('connect')
 
 
 class ProfileUpdateView(UpdateView):
