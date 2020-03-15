@@ -467,6 +467,7 @@ def average_rating(reviews):
         average_rating = 0
 
     frac, whole = math.modf(average_rating)
+ 
     frac = round(frac, 2)
     print(frac)
     if 0.00 <= frac <= 0.13:
