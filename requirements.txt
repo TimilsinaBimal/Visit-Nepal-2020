@@ -17,7 +17,7 @@ jsmin==2.2.2
 lxml==4.6.2
 maxminddb==1.5.2
 maxminddb-geolite2==2018.703
-Pillow==7.0.0
+Pillow==7.1.0
 pyowm==2.10.0
 pytz==2019.3
 requests==2.22.0
